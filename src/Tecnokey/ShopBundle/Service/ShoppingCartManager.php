@@ -11,7 +11,6 @@ use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCartItem;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Tecnokey\ShopBundle\Entity\Shop\Product;
-use Tecnokey\ShopBundle\Service\PriceManager;
 
 class ShoppingCartManager {
     
@@ -23,15 +22,8 @@ class ShoppingCartManager {
      */
     private $doctrine;
     
-    /**
-     *
-     * @var PriceManager
-     */
-    private $priceManager;
-    
-    public function __construct(RegistryInterface $doctrine, PriceManager $priceManager) {
+    public function __construct(RegistryInterface $doctrine) {
         $this->doctrine = $doctrine;
-        $this->priceManager = $priceManager;
     }
     
     /**
@@ -102,23 +94,11 @@ class ShoppingCartManager {
         if($foundItem == NULL){
             $foundItem = new ShoppingCartItem();
             $foundItem->setProduct($product);
-            
-            $priceInfo = $this->priceManager->getPriceInfo($product);
-            $foundItem->setBasePrice($priceInfo->getBasePrice());
-            $foundItem->setTotalBasePrice($priceInfo->getBasePrice());
-            
             $shoppingCart->addItem($foundItem);
         }
         
         //Update quantity
         $foundItem->setQuantity($foundItem->getQuantity() + 1);
-        
-        //Update price
-        $priceInfo = $this->priceManager->getPriceInfo($product, $foundItem->getQuantity());
-        $foundItem->setTotalBasePrice($priceInfo->getBasePrice());
-        
-        //TODO: Verify changes with price ?
-        
         return $shoppingCart;
     }
     

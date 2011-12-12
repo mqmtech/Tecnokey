@@ -43,7 +43,6 @@
         
         <service id="shoppingCartManager" class="Tecnokey\ShopBundle\Service\ShoppingCartManager" public="true">
             <argument type="service" id="doctrine" />
-            <argument type="service" id="priceManager" />
         </service>        
         
         <service id="userManager" class="Tecnokey\ShopBundle\Service\UserManager" public="true">
