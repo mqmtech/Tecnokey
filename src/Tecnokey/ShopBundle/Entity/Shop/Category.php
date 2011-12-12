@@ -87,8 +87,25 @@ class Category
      */
     private $products;
     
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="TimeOffer", cascade={"persist", "remove", "detached"})
+     * @ORM\JoinColumn(name="offerId", referencedColumnName="id", nullable=true)
+     *
+     * @var TimeOffer $offer
+     */
+    private $offer;
+    
     public function __construct(){
         $this->createdAt = new \DateTime();
+    }
+    
+    public function getOffer() {
+        return $this->offer;
+    }
+
+    public function setOffer($offer) {
+        $this->offer = $offer;
     }
     
     /**

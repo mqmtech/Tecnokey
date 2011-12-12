@@ -28,7 +28,7 @@ class ShoppingCartController extends Controller {
         );       
     }
     
-        /**
+    /**
      * Finds and displays a Shop\ShoppingCart entity.
      *
      * @Route("/{id}/show", name="TKShopFrontendShoppingCartShow")
@@ -95,6 +95,29 @@ class ShoppingCartController extends Controller {
             'entity' => $entity,
             'form'   => $form->createView()
         );
+    }
+    
+    /**
+     * Displays a form to edit an existing Shop\ShoppingCart entity.
+     *
+     * @Route("/usuario/editar", name="TKShopFrontendShoppingCartEditFromCurrentUser")
+     */
+    public function editFromCurrentUser(){
+        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+        if($shoppingCart != NULL){
+            /*$response = $this->forward($this->generateUrl("TKShopFrontendShoppingCartEdit", array(
+            'id' => $shoppingCart->getId()
+            )));*/
+            $response = $this->forward("TecnokeyShopBundle:Frontend\ShoppingCart:edit", array(
+            'id' => $shoppingCart->getId()
+            ));
+            
+            return $response;
+        }
+        else{
+            $this->get('session')->setFlash('shoppingCart_error',"Atencion: El usuario no dispone de carrito de la compra");
+            return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+        }
     }
 
     /**

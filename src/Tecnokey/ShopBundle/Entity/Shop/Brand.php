@@ -70,9 +70,27 @@ class Brand
      * @var ArrayCollection $products
      */
     private $products;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="TimeOffer", cascade={"persist", "remove", "detached"})
+     * @ORM\JoinColumn(name="offerId", referencedColumnName="id", nullable=true)
+     *
+     * @var TimeOffer $offer
+     */
+    private $offer;
 
 //>>Start get/setters<<
      
+    public function getOffer() {
+        return $this->offer;
+    }
+
+    public function setOffer($offer) {
+        $this->offer = $offer;
+    }
+
+        
     /**
     * Set products
     * @param ArrayCollection $products
