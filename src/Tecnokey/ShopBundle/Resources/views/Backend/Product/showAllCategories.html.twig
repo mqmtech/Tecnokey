@@ -1,0 +1,107 @@
+{# src/Acme/BlogBundle/Resources/views/Backend/Product/index.html.twig #}
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="text/css" href="{{ asset('bundles/tecnokey/js/jqueryui/css/ui-lightness/jquery-ui-1.8.16.custom.css') }}" rel="stylesheet" />	
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!--script src="{{ asset('bundles/tecnokey/js/jquery.js') }}"></script-->
+    <script src="{{ asset('bundles/tecnokey/js/jqueryui/js/jquery-1.6.2.min.js') }}"></script>
+    <script src="{{ asset('bundles/tecnokey/js/jqueryui/js/jquery-ui-1.8.16.custom.min.js') }}"></script>
+{% endblock javascripts%}
+    
+{% block jsfunctions %}
+    {{ parent() }}
+    <script>
+    jQuery(document).ready(function(){
+    
+        var $dialog = $('<div></div>')
+                    .html('Está seguro de que realmente quiere eliminar la categoria ?')
+                    .dialog({
+                            autoOpen: false,
+                            title: 'Confirmación de borrado',
+                            resizable: false,
+                            height:240,
+                            modal: true,
+                            buttons: {
+				"Eliminar": function() {
+                                        delform.submit();
+					$( this ).dialog( "close" );
+				},
+				Cancelar: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+                    });
+
+    
+        jQuery(".eliminar").click(function(event){
+        
+            event.preventDefault(); // now js will take full control of the category delection
+            delform = $( this ).parents("form");
+            
+            $dialog.bind( "dialogbeforeclose", function(e, ui) {
+               //alert( $(e.target)[0].tittle );
+            });
+            
+           $dialog.dialog("open");
+
+        });
+        
+     })
+     </script>
+{% endblock jsfunctions %}
+
+{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendProductsIndex') }}">Administrar Productos</a> \ Gestionar Productos{% endblock %}
+
+{% block left_content %}
+    
+    {% for key, flash in app.session.getFlashes() %}
+    <div class="error">
+        {{ flash }}
+    </div>
+    {% endfor %}
+    
+    {% for category in categories %}
+        {% set del_form = deleteForms[category.id] %}
+        <!--start lista individual -->
+        <div class="listbox_container">    
+
+            <div class="fotoprod">
+            
+            {% if (category.image!= null) %} 
+                <img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" />
+            {% else %} 
+                <img class="fotoprod" src="{{ asset('bundles/tecnokey/images/cajas_fuertes.png') }}" />
+            {% endif %}
+            
+            </div>
+            <div class="listbox">
+
+                <div class="titulo_box">
+                    {# <h1><a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id}) }} ">{{ category.name | upper }}</a></h1> #}
+                    <h1><a href="{{ path('TKShopBackendProductsShowAllSubcategories', {'id': category.id}) }} ">{{ category.name | upper }}</a></h1>
+                </div>
+
+                <div class="text_list_box">
+                    {# <h3><a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id}) }}">{{ category.description |default("Descripcion...") |truncate }}</a></h3> #}
+                    <h3><a href="{{ path('TKShopBackendProductsShowAllSubcategories', {'id': category.id}) }}">{{ category.description |default("Descripcion...") |truncate }}</a></h3>
+                </div>
+            </div>
+            <div class="action_box">
+                <div class="editar"><a href="{{ path('TKShopBackendCategoryEdit',{'id' : category.id}) }}">EDITAR</a></div>
+                <div class="duplicar"><a href="{{ path('TKShopBackendCategoryClone',{'id' : category.id}) }}">DUPLICAR</a></div>
+                <form name="{{ "del_form"~category.id }}" id="{{ "del_form"~category.id }}" action="{{ path('TKShopBackendCategoryDelete',{'id' : category.id}) }}" method="POST" {{ form_enctype(del_form) }}>
+                    <!--div class="eliminar"><a href="{{ path('TKShopBackendCategoryDelete',{'id' : category.id}) }}">ELIMINAR</a></div-->
+                    {{ form_rest(del_form) }}
+                    <input type="submit" id="form-delete" name="algo" class = "eliminar" value = "ELIMINAR"></input>
+                </form>
+            </div>
+        </div><!--end lista individual -->
+    {% else %}
+    {% endfor %}
+        
+{% endblock left_content %}

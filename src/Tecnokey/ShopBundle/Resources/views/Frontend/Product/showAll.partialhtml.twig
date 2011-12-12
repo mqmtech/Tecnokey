@@ -1,0 +1,42 @@
+{# src/Acme/BlogBundle/Resources/views/Frontend/Product/sideList.html.twig #}
+
+{#Requires:
+    -productState: state of the product with the price
+        -basePrice
+        -offer
+     -product
+#}
+<!--start lista individual -->
+{% for product in products %}
+        {% set productInfo = productsInfo[product.id]  %}
+        <div class="listbox_container">    
+
+            <!--div class="fotoprod">¡FOTO!</div-->
+            <a href="{{ path('TKShopFrontendProductShow', {'productId': product.id}) }}"><img class="fotoprod" src="{{ asset(product.image.webPath) }}" /></a>
+            <div class="listbox">
+
+                <div class="titulo_box">
+                    <h1><a href="{{ path('TKShopFrontendProductShow', {'productId': product.id}) }}">{{ product.name }}</a></h1>
+                </div>
+
+                <div class="text_list_box">
+                    <h3><a href="{{ path('TKShopFrontendProductShow', {'productId': product.id})}}">{{ product.description |truncate}}</a></h3>
+                </div>
+
+            </div>
+             <div class="precio_box">
+                    {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
+                        {% if(productInfo.isOffer is defined and productInfo.isOffer) %}
+                        <div class="precio">{{ productInfo.basePrice | roundoff | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                        <div class="iva">Sin IVA</div>
+                        <div class="descuento">{{ product.offer.discount ~ "%"}}</div>
+                        {% else %} {# else offer #}
+                            <div class="precio">{{ productInfo.basePrice | roundoff | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                            <div class="iva">Sin IVA</div>
+                        {% endif %} {# endig offer #}
+                    {% else %} {# else is_granted #}
+                            <div class="no_price_access">{{ noPriceAccess() }}</div>
+                    {% endif %} {# endif is_granted #}
+                </div>
+        </div><!--end lista individual -->
+{% endfor %}

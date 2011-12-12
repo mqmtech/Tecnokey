@@ -1,0 +1,25 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+
+    {% if shoppingCart.items is defined %}
+        <div>Carrito id: {{ shoppingCart.id }}</div>
+        {% for item in shoppingCart.items %}
+            <div>Item: id: {{ item.id }}, {{ item.product.name }}, Cantidad: {{ item.quantity }} </div>            
+        {% endfor %}
+    {% endif %}
+
+{% endblock right_content %}

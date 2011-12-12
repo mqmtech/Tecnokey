@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}| Administración |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/tecnokey/css/site.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/tecnokey/css/admin.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %} <!--start page-->
+    <div class="container_admin">
+
+    <div class="franja_admin"></div>
+
+    {% block header %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Backend:header.partialhtml.twig' %}
+    {% endblock %} <!--end header-->
+
+    {% block busqueda %}{% endblock busqueda%}
+        
+    {% block content %}
+    
+        {% block treeContainer %}
+        <!--start arbol-->
+            <div class="arbol_container">
+                <div class="arbol">
+                    <div class="arboltext">{% block contextualThree %}<a href="#">Administración</a> \{% endblock %}</div>
+                </div>
+            </div>
+        <!--end arbol-->
+        {% endblock treeContainer %}
+
+        <div class="bodycontainer">
+            {% block left %}
+            <div class=" contol_panel"><!--start left with div class control_panel-->
+                {% block left_content %}
+                {% endblock left_content %}
+                
+                {% block left_pagination %}
+                {% if (pagination is defined) %}
+                    {% include 'TecnokeyShopBundle:Default:pagination.partialhtml.twig'%}
+                {% endif %}
+            {% endblock left_pagination %}
+            </div><!--end  left with div class controlpanel-->
+            {% endblock left%}
+
+            {% block right %}<!--start right-->
+            <div class=" right_list_container"><!--star right list-->
+                {% render path('TKShopBackendProductsRecent') | toAppPath %}
+                {% render path('TKShopBackendUserClientRecent') | toAppPath %}
+                {#{% include 'TecnokeyShopBundle:Backend/User/Client:recentClients.partialhtml.twig'%}#}
+            </div><!--end  right list-->          
+            {% endblock %}<!--end right-->
+
+        </div><!--end content-->
+    {% endblock content %} {# end content #}
+
+    {% block footer %}<!--start footer-->
+    {% endblock %}<!--end footer-->
+</div><!--end page-->
+{% endblock %} {#end body#}
+

@@ -1,0 +1,24 @@
+{#Requires:
+#}    
+    
+<div class="footer">
+    <div class="otherproducts"><a href="{{ path('TKShopFrontendBrandsShowAll') }}"><span class="text_general_blue">Nuestros Proveedores:</span></a></div>
+    {% for brand in brands %}
+            <div><a href="{{ path('TKShopFrontendSearchProductsByBrand', {'id' : brand.id}) }}"><img class="img_bottom_otherp" src="{{ asset(brand.image.getWebPath) }}" alt="logo"/> </a></div>
+    {% endfor %}
+
+   <div class="bottom_menu_div">
+       <span class="text_bold">| 
+           <a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> | 
+           <a href="{{ path('TKShopFrontendCategoryIndex') }}">Productos</a> | 
+           <a href="{{ path('TKShopStatic', {'page': 'empresa'}) }}">Empresa</a> | 
+           <a href="{{ path('TKShopStatic', {'page': 'contacto'}) }}">Contacto</a> | 
+           <a href="{{ path('TKShopStatic', {'page': 'politica'}) }}">Política de uso</a> | 
+       </span>
+   </div>
+
+    <div class="Copyright">Copyright 2011 TECNOKEY. All rights reserved.</div>
+    <div class="gris_tab"></div>
+</div>
+    
+    

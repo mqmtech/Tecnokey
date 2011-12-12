@@ -1,0 +1,39 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{#Requires:
+#}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestros productos...{% endblock %}
+
+{% block right %}
+    <div class="bodyprod">
+    {% for col in 0..3 %}
+        {% if(col > 2) %}
+            <div class="prodcol2"> 
+        {% else %}
+            <div class="prodcol1"> 
+        {% endif %}
+            {% for row in 0..3 %}
+                {% set aCat = col * 4 + row %}
+                {% if(categories[aCat]) is defined %}
+                {% set category = categories[aCat] %}
+                    <div class="prod">
+                        <div class="tituloprodbox">
+                            <h2><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}">{{ category.name | upper}}</a></h2>
+                        </div>
+                            <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}"><img class="foto_prodbox" src="{{ asset(category.image.getWebPath) }}" alt="buzones" /></a></div>
+                    </div>
+                    <div class="sombraprod"></div>
+                {% else %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock right %}

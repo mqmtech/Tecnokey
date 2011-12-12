@@ -1,0 +1,16 @@
+{#Requires:
+#}
+
+{% if pagination is defined and pagination != NULL and pagination.totalItems > 0%}
+<div class="pagination_container">
+    <div class="numbers_container">
+        <div class="numbers"><a href="{{ pagination.firstPage.getUrl }}">&#60&#60</a></div>
+        <div class="numbers"><a href="{{ pagination.getPrevPage.getUrl }}">&#60</a></div>
+        {% for page in pagination.pages %}
+            <div class="numbers{% if (page.isCurrent) %} current{% endif %}"><a href="{{page.getURL}}">{{ page.id +1 }}</a></div>
+        {% endfor %}
+        <div class="numbers"><a href="{{ pagination.getNextPage.getUrl }}">&#62</a></div>
+        <div class="numbers lastnumber"><a href="{{ pagination.getLastPage.getUrl }}">&#62&#62</a></div>
+    </div>
+</div>
+{% endif %}

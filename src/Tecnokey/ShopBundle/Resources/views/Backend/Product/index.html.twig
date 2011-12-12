@@ -1,0 +1,21 @@
+{# src/Acme/BlogBundle/Resources/views/Backend/Product/index.html.twig #}
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ Administrar productos \{% endblock %}
+
+{% block left_content %}
+    <!--start 1a fila botones-->
+    <div class="icono_prod_container">
+
+        <div class=" icono_add_prod"><a href="{{ path('TKShopBackendProductNew') }}">Añadir <br /> <span style="color:#F00">NUEVO</span><br /> Producto<br /></a></div>
+        {# <div class=" icono_gestion_prod"><a href="{{ path('TKShopBackendProductsShowAll') }}">Gestionar Productos</a></div> #}
+        <div class=" icono_gestion_prod"><a href="{{ path('TKShopBackendProductsCategoriesShowAll') }}">Gestionar Productos</a></div>
+
+    </div>
+    <!--start 1a fila botones-->
+    
+    {% if (error is defined and error) %}
+    <h2> Se ha producido el siguiente error:</h2>
+    <h3>{{ error }}</h3>
+    {% endif %}
+{% endblock %}

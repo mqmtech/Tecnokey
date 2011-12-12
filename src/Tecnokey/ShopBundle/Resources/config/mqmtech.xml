@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="view.utils_class">MQMTech\ToolsBundle\Service\Utils</parameter>    
+        
+        <parameter key="view.pagination.setLength_value">10</parameter>
+        <parameter key="view.pagefactory_class">MQMTech\ToolsBundle\Service\Pagination\WebPageFactory</parameter>  
+        <parameter key="view.pagination_class">MQMTech\ToolsBundle\Service\Pagination\WebPagination</parameter>  
+        
+        <parameter key="view.orderfactory_class">MQMTech\ToolsBundle\Service\Ordering\WebOrderFactory</parameter>    
+        <parameter key="view.sort_class">MQMTech\ToolsBundle\Service\Ordering\WebOrderManager</parameter>
+        
+        <parameter key="viewmodelfactory_class">MQMTech\ViewModelBundle\ViewModel\ViewModelFactory</parameter>  
+    </parameters>
+
+    <services>
+        <service id="view.utils" class="%view.utils_class%" public="true"
+                factory-class="MQMTech\ToolsBundle\Service\Utils"
+                factory-method="getInstance"
+                >
+        </service>
+        
+        <service id="view.orderfactory" class="%view.orderfactory_class%" public="true"
+            scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+        </service>
+        
+        <service id="view.sort" class="%view.sort_class%" public="true"
+                scope="request"
+                factory-class="%view.sort_class%"
+                factory-method="buildDefaultOrderManager"
+                >
+                    
+            <argument type="service" id="request" />
+            <argument type="service" id="view.orderfactory" />
+        </service>
+        
+        <service id="view.pagefactory" class="%view.pagefactory_class%" public="true"
+            scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+        </service>
+        
+        <service id="view.pagination" class="%view.pagination_class%" public="true"
+                scope="request"
+                >
+            <argument type="service" id="request" />
+            <argument type="service" id="view.pagefactory" />    
+                
+            <call method="setPageLength">
+                <argument>%view.pagination.setLength_value%</argument>
+            </call>
+        </service>
+        
+         <service id="viewModelFactory" class="%viewmodelfactory_class%" public="true">
+        </service>  
+    </services>
+</container>

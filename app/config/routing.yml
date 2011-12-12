@@ -1,0 +1,24 @@
+MQMTechDemoBundle:
+    resource: "@MQMTechDemoBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+TKShopStatic:
+    pattern: /site/{page}
+    defaults: {_controller:TecnokeyShopBundle:Default:static}
+    requirements:
+      page:  contacto|empresa|index|productos|politica
+TKShopBundle:
+    resource: "@TecnokeyShopBundle/Controller/"
+    type:     annotation
+    prefix:   /
+#TKShopFrontend:
+#    resource: "@TecnokeyShopBundle/Controller/Frontend"
+#    type:     annotation
+#    prefix:   /tienda
+
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

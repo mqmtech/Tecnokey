@@ -1,0 +1,42 @@
+{% form_theme form 'TecnokeyShopBundle:Backend/Form:product.html.twig' %}
+   <!--titulo y referencia--> 
+
+	<div class="titulo_ref_container">
+       
+    	<div class=" float-left">
+        	<div class="legend"><span class="text_bold">Categoría:</span></div>
+        	<!--input name="Empresa" type="Empresa" class="add_categoria"/-->
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name) }}
+        </div>    
+            
+        <div class="float-left" style="padding-left:20px">    
+            <div class="legend"><span class="text_bold">Subcategoría de:</span></div>
+            <!--label for="select"></label><select name="select" id="select">
+              <option>Subcategoría.................</option>
+            </select-->        
+            {{ form_errors(form.parentCategory) }}
+            {{ form_widget(form.parentCategory) }}
+        </div>
+        
+    </div>
+
+
+<!--description e imagenes-->    
+    <div class="div_desc_imagenes_container">
+    	
+        <div class="div_descripcion">
+        	<div class="legend"> <span class="text_bold">Descripción:</span></div>
+        	<!--textarea name="descripcion" class="descripcion_form" cols="descripcion"></textarea-->
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description) }}
+    	</div>
+        
+        <div class="div_imagenes">
+        	<div class="titulo_imagenes">Añadir Imágen:</div>
+	    <!--div class="div_imagenes_loader"><span class="text_bold">#1 </span><input type="submit" name="load" id="load" value="Imágen 1" />
+                <span class=" text_general">Archivo cargado...</span></div-->
+            {{ form_errors(form.image.file) }}
+            {{ form_widget(form.image.file) }}
+        </div>
+    </div>

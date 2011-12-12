@@ -1,0 +1,59 @@
+<h1>Shop\Product list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Createdat</th>
+            <th>Modifiedat</th>
+            <th>Isfeatured</th>
+            <th>Isenabled</th>
+            <th>Stock</th>
+            <th>Weight</th>
+            <th>Sku</th>
+            <th>BasePrice</th>
+            <th>Offer start</th>
+            <th>Offer deadline</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('crud_product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
+            <td>{{ entity.description }}</td>
+            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.modifiedAt|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.isFeatured }}</td>
+            <td>{{ entity.isEnabled }}</td>
+            <td>{{ entity.stock }}</td>
+            <td>{{ entity.weight }}</td>
+            <td>{{ entity.sku }}</td>
+            <td>{{ entity.baseprice }}</td>
+            <td>{{ entity.offer.start|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.offer.deadline|date('Y-m-d H:i:s') }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('crud_product_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('crud_product_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('crud_product_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

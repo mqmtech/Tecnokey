@@ -1,0 +1,64 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{#Requires:
+#}
+
+{% block title %}| Tecnokey | Nuestra Empresa |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'empresa'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestra Empresa{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format' : 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right %}
+    <div class="right">
+    
+	  <div class="titulo_naranja">Nuestra empresa:</div>
+      
+      <div style="margin-bottom:10px"><img src="{{asset('bundles/tecnokey/images/barcelona.png') }}" alt="barcelona" /></div>
+      
+      
+		<p class="georgia_gris_14"> 
+    	José Ibáñez inicia este proyecto empresarial en 1985 junto a su mujer Montse Berdun bajo el nombre de ROID MaQ. Éste fue pionero en la fabricación de llaves de gorjas en estampación en Cataluña. La venta de maquinas duplicadoras de llaves y la venta de productos de menaje las que acababan de consolidar la actividad comercial.
+   		  <br />
+   		  <br />
+        </p>
+        
+     <div class="text_left"> <p class="text_general">
+        En 1991 constituyen la mercantil TECNO-KEY, SL con sede en  Poblenou, justo al lado de la parada de metro L-4 (Poblenou) en la ciudad de Barcelona. Dedicada des de sus inicios a ser distribuidor oficial de JMA con maquinas duplicadoras  y llaves para toda Cataluña y resto de España, planificaron una nueva manera de vender al mayor y al detalle, formando un equipo cualificado pero sobretodo humano. 
+          <br />
+          <br />
+      </p>
+      
+      <p class="georgia_blue_14">
+      Dentro de un mundo en continuo cambio, TecnoKey siempre esta.
+TecnoKey es una empresa joven, fundada en el 1992. Avalada con una gran experiencia de mas de 30 años en el sector que la envuelve.<br /><br />
+      </p></div>
+      
+      <p class="text_general">
+      <img src="{{asset('bundles/tecnokey/images/llave.png') }}" alt="llave" class="llave" />
+Desde los inicios, TECNO-KEY, SL ha querido estar a la vanguardia en el sector, disponiendo de las maquinas más avanzadas y novedosas para poder duplicar cualquier tipo de llave y mandos teniendo en disposición más de 6300 referencias entre cerraduras, mandos, buzones, cajas fuertes, manilleria, llaves, cierrapuertas, etc. Es un equipo joven pero sobradamente preparado, avalado con una gran experiencia de más de 30 años en el sector que lo envuelve.<br /><br />
+
+En 2005, abrimos un nuevo punto de venta en St.Adrià del Besòs para poder dar un mejor servicio a nuestros clientes. Actualmente, esta muy integrada a la ciudad y ya es conocida no solo en St.Adrià, si no también se desplazan desde Badalona, Sta.Coloma y poblaciones del Maresme.<br /><br /></p>
+
+<div class="tira_fotos"><img src="{{asset('bundles/tecnokey/images/tira_fotos.png') }}" width="720" height="180" alt="tira_fotos" /></div>
+
+<p class="text_general">
+En 2009, inauguramos la tercera tienda en el Barrio de Sant Gervasi, un punto estratégico de Barcelona para acabar de cubrir nuestro servicio de venta. Justo al salir de la Ronda de dalt, nos encontramos con ella.
+
+Es en el 2010 cuando el hijo de este matrimonio, Iván Ibáñez fruto del esfuerzo y de un continuo trabajo decide darle un aire innovador renombrando la empresa a POBLE9KEY, SA.
+Lo más destacable es la extraordinaria ilusión que se pone en el trabajo todos los que formamos parte de esta gran casa.<br /><br />
+      </p>
+      <p class="georgia_gris_14">
+      El éxito lo hemos conseguido con esfuerzo, ganas de salir adelante y de superarnos cada día. Este buen hacer se refleja en el contacto diario con el público, con el que mantenemos una relación estrecha y de amistad.
+      </p>
+
+        
+    </div><!--end right-->	
+{% endblock right %}
+

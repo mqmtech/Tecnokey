@@ -1,0 +1,19 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{#Requires:
+#}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestros productos...{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format' : 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right %}
+{% endblock %} {#end right#}

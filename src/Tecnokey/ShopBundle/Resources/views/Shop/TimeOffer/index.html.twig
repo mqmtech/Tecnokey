@@ -1,0 +1,47 @@
+<h1>Shop\TimeOffer list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start</th>
+            <th>Deadline</th>
+            <th>Discount</th>
+            <th>Scope</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('crud_timeoffer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.name }}</td>
+            <td>{{ entity.description }}</td>
+            <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{% if entity.deadline %}{{ entity.deadline|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{{ entity.discount }}</td>
+            <td>{{ entity.scope }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('crud_timeoffer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('crud_timeoffer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('crud_timeoffer_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

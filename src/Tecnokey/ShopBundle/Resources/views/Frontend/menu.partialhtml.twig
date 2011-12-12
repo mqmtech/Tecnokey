@@ -1,0 +1,11 @@
+{#Requires:
+#}
+<div id="menu">
+    <ul>
+        <li><a href="{{ path('TKShopFrontendIndex') }}"{% if (menu is defined and menu == 'inicio')%} class="current" {% endif %}>inicio</a></li>
+        <li><a href="{{ path('TKShopFrontendCategoryIndex') }}" {% if (menu is defined and menu == 'productos')%} class="current" {% endif %}>Productos</a></li>
+        <li><a href="{{ path('TKShopStatic', {'page': 'empresa'}) }}" {% if (menu is defined and menu == 'empresa')%} class="current" {% endif %}>Empresa</a></li>
+        {#<li><a href="{{ path('TKShopStatic', {'page': 'contacto'}) }}"{% if (menu is defined and menu == 'contacto')%} class="current" {% endif %}>Contacto</a></li>#}
+        <li><a href="{{ path('TKShopFrontendContactIndex') }}"{% if (menu is defined and menu == 'contacto')%} class="current" {% endif %}>Contacto</a></li>
+    </ul>
+</div><!--end menu--> 

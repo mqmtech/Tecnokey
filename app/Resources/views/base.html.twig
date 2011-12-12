@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block contenttype %}
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        {% endblock %}
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        {% block javascripts %}
+            <script src="{{ asset('bundles/tecnokey/js/jqueryui/js/jquery-1.6.2.min.js') }}"></script>
+            <script src="{{ asset('bundles/tecnokey/js/jqueryui/js/jquery-ui-1.8.16.custom.min.js') }}"></script>
+        {% endblock javascripts %}
+        {% block jsfunctions %}{% endblock jsfunctions %}
+        <!--Desarrollado por:
+Diseño grafico y maquetación: Amar Bouchekioua.
+Programación de la aplicacion: Mario Quesada.
+Agradecimiento:
+Javier Vidal Moreno-->
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block bodyjavascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<?php
+
+namespace Tecnokey\ShopBundle\Controller\Frontend;
+
+use Symfony\Component\HttpFoundation\Request;
+use Tecnokey\ShopBundle\Entity\Shop\Product;
+use Tecnokey\ShopBundle\Entity\Shop\Category;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Exception;
+
+/**
+ * Frontend\Default controller.
+ *
+ * @Route("/tienda/busqueda")
+ */
+class SearchController extends Controller {
+    
+    /**
+     * Frontend demo
+     *
+     * @Route("/", name="TKShopFrontendSearchIndex")
+     * @Template()
+     */
+    public function indexAction() {
+        //Grab categories from db
+        $em = $this->getDoctrine()->getEntityManager();
+        $categories = $em->getRepository('TecnokeyShopBundle:Shop\Category')->findAll();
+        //End grabbing cats from db
+        
+        //Grab products from db
+        $em = $this->getDoctrine()->getEntityManager();
+        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAll();
+        //End grabbing cats from db
+        
+        return array(
+            'categories' => $categories,
+            'products' => $products
+        );
+    }    
+    
+    /**
+     * @Route("/productos/por_marca/{id}", name="TKShopFrontendSearchProductsByBrand")
+     */
+    public function searchProductByBrand($id){
+        
+        $errors = NULL;
+        
+        $orderBy = $this->get('view.sort');
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $brand = $em->getRepository('TecnokeyShopBundle:Shop\Brand')->find($id);
+        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findByBrandId($id, $orderBy->getValues());
+        $productsInfo = NULL;
+        $pagination = NULL;
+        if($products == NULL){
+            $errors = array('404' => "There's no brand with the id: " . $id);
+            //TODO: Lanzar pagina de errror?
+        }
+        else{
+            //Set Pagination
+            $pagination = NULL;
+            if($products != NULL){
+                $totalItemsLength = count($products);
+                $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
+                $products = $pagination->sliceArray($products);
+            }
+            //End Setting Pagination
+            
+            $productsInfo = $this->get('productManager')->getProductsPriceInfo($products);
+        }
+        
+        return $this->render('TecnokeyShopBundle:Frontend/Search:products.html.twig', 
+                array('products' => $products,
+                    'productsInfo' => $productsInfo,
+                    'orderBy' => $orderBy->switchMode(),
+                    'search' => array('name' => $brand->getName()),
+                    'pagination' => $pagination
+                    ));
+        
+    }   
+    
+    
+    /**
+     * TODO: Change it to POST for security!
+     * @Route("/productos/por_multi_filtro/", name="TKShopFrontendSearchProductsByMultiQuery")
+     */
+    public function searchProductByMultiQuery(){
+
+        $request = Request::createFromGlobals();
+        $method = $request->getMethod();
+        $query = NULL;
+        if($method == 'POST'){
+            $query = $request->request;
+        }
+        else{
+            //TODO: Send Error msg
+            $query = $request->query;
+        }
+        
+        $name = $query->get('name');
+        
+        $orderBy = $this->get('view.sort');
+        
+        //Access to database
+        $em = $this->getDoctrine()->getEntityManager();
+        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFull($name, "OR", $orderBy->getValues());
+        $productsInfo = NULL;
+        $pagination = NULL;
+        if($products == NULL){
+            //TODO: Lanzar pagina de errror?
+        }
+        else{
+            //Set Pagination
+            $pagination = NULL;
+            if($products != NULL){
+                $totalItemsLength = count($products);
+                $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
+                $products = $pagination->sliceArray($products);
+            }
+            //End Setting Pagination
+            $productsInfo = $this->get('productManager')->getProductsPriceInfo($products);
+        }
+
+        return $this->render('TecnokeyShopBundle:Frontend/Search:products.html.twig', 
+                array('products' => $products, 
+                      'productsInfo' => $productsInfo,
+                      'pagination' => $pagination,
+                      'search' => array('name' => $name),
+                      'orderBy' => $orderBy->switchMode(),
+            ));
+    }
+}

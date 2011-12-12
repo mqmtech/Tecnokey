@@ -1,0 +1,128 @@
+{# src/Acme/BlogBundle/Resources/views/Frontend/Product/sideList.html.twig #}
+
+{#Requires:
+    -productsInfo: state of the product with the price
+        -basePrice
+        -offer
+    -products
+#}
+
+<script>
+   jQuery(document).ready(function(){
+    
+        var runningEffect = false;
+        // run the currently selected effect
+		function runEffect(target) {
+			// get effect type from 
+			var selectedEffect = "blind";
+
+			// most effect types need no options passed by default
+			var options = {};
+			// some effects have required parameters
+			if ( selectedEffect === "scale" ) {
+				options = { percent: 100 };
+			} else if ( selectedEffect === "size" ) {
+				options = { to: { width: 270, height: auto } };
+			}
+
+			// run the effect
+			target.show( selectedEffect, options, 500, callback );
+		};
+
+		//callback function to bring a hidden box back
+		function callback() {
+			/*setTimeout(function() {
+				$( "#effect:visible" ).removeAttr( "style" ).fadeOut();
+			}, 1000 );*/
+		};
+
+		$("[name=tooltip]" ).hide();
+        
+        
+        var tooltipTimeout;
+        
+        $("[name=prod_relacionado]").hover(function(){
+            var scope = this;
+            tooltipTimeout = setTimeout(function(){showTooltip(scope)}, 500);
+            }, hideTooltip);
+        function showTooltip(el)
+            {
+            var tooltip =  $("[name=tooltip]", el);
+            //var tooltip = $("<div id='tooltip' class='tooltip' style='z-index: +1;'>I'm the tooltip!</div>");
+            //tooltip.appendTo(el);
+            runEffect($(tooltip));
+            }
+        
+        function hideTooltip()
+            {
+            clearTimeout(tooltipTimeout);
+            $("#tooltip").fadeOut().remove();
+            
+            $("[name=tooltip]" ).hide();
+            }
+
+     
+     });
+</script>
+
+<div class="prods_relacionados_container_ficha">
+
+    <div class="titulo_prods_relacionados_ficha">Productos relacionados:</div>
+
+    {% for product in products %}
+        {% set productInfo = productsInfo[product.id] %}
+        <div class="prods_relacionados_ficha">
+
+            {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
+                {% if(productInfo.isOffer) %}
+                <div class="titulo_prods_relacionados" name="prod_relacionado">
+                    <a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | truncate(30) }}</a>
+                    
+                    <div name="tooltip" class="tooltip_ficha_container">
+                        <div class="titulo_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | firstLetterCapital }}</a></div>
+                        <div class="texto_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.description | firstLetterCapital | truncate(190) }}</a></div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff ~ currencySymbol() }}</div>
+                <div class="dto_relacionados_ficha">{{ product.offer.discount }}%</div>
+                {% else %}
+                <div class="titulo_prods_relacionados" name="prod_relacionado">
+                    <a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name |  truncate(30) }}</a>
+                    
+                    <div name="tooltip" class="tooltip_ficha_container">
+                        <div class="titulo_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | firstLetterCapital }}</a></div>
+                        <div class="texto_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.description | firstLetterCapital | truncate(190) }}</a></div>
+                    </div>
+                
+                </div>
+                
+                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff ~ currencySymbol() }}</div>
+                <div class="dto_relacionados_ficha"></div>
+                {% endif %} {# end offer #}
+            {% else %}
+                <div class="titulo_prods_relacionados" name="prod_relacionado">
+                    <a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | truncate(30) }}</a>
+                    
+                    <div name="tooltip" class="tooltip_ficha_container">
+                        <div class="titulo_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | firstLetterCapital }}</a></div>
+                        <div class="texto_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.description | firstLetterCapital | truncate(190) }}</a></div>
+                    </div>
+                    
+                </div> 
+                <div class="precio_relacionados_ficha">{{ "Consultar" }}</div>
+                <div class="dto_relacionados_ficha"></div>
+            {% endif %} {# end is_authenticated #}
+
+        </div>
+    {% endfor %}
+    
+   {# {% for product in products %}
+         <div name="tooltip_{{ product.id }}" class="tooltip_ficha_container">
+            <div class="titulo_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.name | firstLetterCapital }}</a></div>
+            <div class="texto_tooltip_ficha"><a href="{{ path('TKShopFrontendProductShow',{'productId' : product.id})  }}">{{ product.description | firstLetterCapital | truncate(190) }}</a></div>
+        </div>
+    {% endfor %} #}
+
+</div><!--end productos relaciodos-->

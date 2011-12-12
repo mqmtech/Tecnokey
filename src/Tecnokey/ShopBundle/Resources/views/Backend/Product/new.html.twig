@@ -1,0 +1,27 @@
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% form_theme form 'TecnokeyShopBundle:Backend/Form:product.html.twig' %}
+
+{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendProductsIndex') }}">Administrar Productos</a> \ Añadir nuevo Producto{% endblock %}
+
+{% block left_content %}
+<form action="{{ path('TKShopBackendProductCreate') }}" method="post" {{ form_enctype(form) }}>
+    {#{{ form_widget(form) }}#}
+        
+{% include 'TecnokeyShopBundle:Backend/Product:formBody.partialhtml.twig' %}
+
+    <!--botones guardar salir--> 
+    <div class="btn_container_form"> 
+            <div class="btn_guardar">
+                <!--a href="{{ path('TKShopBackendProductCreate') }}">Guardar</a-->
+                <input type="submit" name="Guardar"/>
+            </div>
+            <div class="btn_sin_guardar "><a href="{{ path('TKShopBackendProductsShowAll') }}">Salir SIN Guardar</a></div>
+    </div>
+
+    {{ form_rest(form) }}
+    
+    </div><!--end  div border-->      
+</form>
+
+{% endblock %}

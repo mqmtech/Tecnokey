@@ -1,0 +1,13 @@
+{# src/Acme/BlogBundle/Resources/views/Frontend/Product/sideList.html.twig #}
+
+{#Requires:
+    - categories: array of categories without hierarchy
+#}
+
+<div class="bodycontainer">
+    <div class="left">
+        <div class="titulo_todos_prod"><span>TODOS LOS PRODUCTOS</span></div>
+        {% for category in categories %}
+        <div class="leftnav"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id }) }}">{{ category.name | upper }}</a></div>
+        {% endfor %}
+    </div><!--end left-->

@@ -1,0 +1,75 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{#Requires:
+#}
+
+{% block title %}| Tecnokey | Nuestra Empresa |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'politica'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Politica de uso{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format' : 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right %}
+<div class="right">
+   	<div class="div_politica">
+    <p class=" font18"> <strong>Política de uso:</strong></p><br />
+        
+    <p class="bold">Aviso Legal</p>
+
+<p>Bienvenidos a <span class="bold">www.tecno-key.com</span>. Por medio de nuestra política de privacidad le ponemos al tanto de las debidas condiciones de uso y funcionamiento de los servicios de <span class="bold">www.tecno-key.com</span> y definen sus derechos y obligaciones como cliente de los mismos. La utilización de estos implica su aceptación plena y sin reservas a todas y cada una de las disposiciones incluidas en este Aviso Legal, por lo que si usted no está de acuerdo con cualquiera de las condiciones aquí establecidas, no deberá usar u/o acceder a este sitio.</p><br />
+
+
+<p class="italic">Las presentes Condiciones Generales se sujetan y rigen por las leyes de España. Para la resolución de cualquier controversia serán competentes los juzgados y tribunales de la ciudad de Madrid. </p><br />
+
+
+<p>Todos los contenidos de nuestra páginas <span class="bold">www.tecno-key.com</span>, tales como textos, gráficos, fotografías, logos, iconos, imágenes, así como el diseño gráfico y software de esta Página Web, tanto tomados individualmente como formando un conjunto estético homogéneo, son de la exclusiva propiedad de Tecnokey o de sus colaboradores, estando sujetos a derechos de propiedad intelectual e industrial protegidos por la legislación nacional e internacional. TODAS LAS MARCAS RESTANTES SON PROPIEDAD DE SUS RESPECTIVOS PROPIETARIOS.</p><br />
+
+<p>Cualquier uso no autorizado en relación con la totalidad o parte de tales obras o prestaciones puede constituir una vulneración de las disposiciones anteriores, así como un delito castigado de conformidad con lo previsto por los Artículos 270 y siguientes del vigente Código Penal. Queda prohibida su utilización, reproducción, modificación, distribución, transmisión, manipulación, así como cualquier uso que exceda de una utilización normal y necesaria para la visita de la página y la utilización de los Servicios ofrecidos en ella.</p><br />
+
+<p>El acceso a nuestra Página Web <span class="bold">www.tecno-key.com</span> no implica ningún tipo de renuncia, transmisión o cesión total o parcial de dichos derechos de propiedad intelectual e industrial, ni confiere ningún derecho de utilización, alteración, explotación, reproducción, distribución, comunicación pública sobre dichos contenidos sin la previa y expresa autorización por escrito de los respectivos titulares de dichos derechos, a salvo del derecho de visualización y obtención de copia privada de seguridad de tales contenidos, siempre que dicho derecho se ejercite según los principio de buena fe y siempre que, en todo caso, se mantenga inalterada la propiedad intelectual e industrial, se utilice sin fines comerciales y exclusivamente para información personal del usuario.</p><br />
+
+<p>La responsabilidad derivada del uso de materiales protegidos por los derechos de propiedad intelectual e industrial contenidos en <span class="bold">www.tecno-key.com</span> corresponderá exclusivamente al usuario.</p><br />
+
+<p>Tecnokey declina cualquier responsabilidad respecto a la información o el acceso a páginas que se hallen fuera de la página web <span class="bold">www.tecno-key.com</span> y no gestionada directamente por Tecnokey.</p><br />
+
+<p class="bold">Politica de privacidad</p>
+<p>Cómo principio general, Tecnokey no comparte ni revela información de sus clientes. Deberá estar consciente de que si usted voluntariamente revela información personal en línea en un área pública, esa información puede ser recogida y usada por otros. Nosotros no controlamos las acciones de nuestros visitantes y usuarios.
+</p><br />
+
+<p>Tecnokey garantiza el uso adecuado de los datos de sus clientes. Nosotros utilizaremos estos datos solo para mejorar la utilización de nuestro sitio web, para informarles de nuestras novedades y actualizaciones y sobre todo mejorar nuestro servicio. 
+Compraventa de productos</p><br />
+
+<p>Todos los productos que están disponibles en <span class="bold">www.tecno-key.com</span> aparecen en pantalla, y van acompañados de una descripción sobre sus características y del precio de los mismos, así como de otra información de interés.</p><br />
+
+<p class="bold">Precios</p>
+<p>Los precios y ofertas solo son visibles para clientes cuya autorización ha sido aprobada por Tecnokey. Los clientes autorizados a acceder a nuestras ofertas  y precios están sujetos a nuestra política de uso de <span class="bold">www.tecno-key.com</span>.
+Los precios aplicables a los productos son los que figuran en el momento del pedido, no incluyen el IVA (18%) y vienen expresados en Euros. Corren por cuenta del comprador todos los impuestos, cánones, tasas u otros análogos, vigentes o de nueva creación, estatales, autonómicos o locales que genere la operación de venta.</p><br />
+
+<p class="bold">Obligaciones y responsabilidad de los clientes y usuarios.</p>
+
+<p>El usuario se obliga :</p>
+<p>(1) a no utilizar <span class="bold">www.tecno-key.com</span> para realizar o sugerir actividades prohibidas por la ley;</p>
+
+<p>(2) a abstenerse de llevar a cabo cualquier conducta que atente contra los derechos de propiedad intelectual o industrial de <span class="bold">www.tecno-key.com</span> o de terceros, o que vulnere o transgreda el honor, la intimidad personal o familiar o la imagen de terceros, o que sean ilícitos o atenten a la moralidad;</p> 
+
+<p>(3) a abstenerse de llevar a cabo cualquier destrucción, alteración, inutilización o daños de los datos, programas o documentos electrónicos pertenecientes a <span class="bold">www.tecno-key.com</span> o a cualquier tercero.</p><br />
+
+<p>En todo caso, el usuario mantendrá a <span class="bold">www.tecno-key.com</span> indemne frente a cualquier reclamación, judicial o extrajudicial, que nos sea presentada como consecuencia de las acciones u omisiones anteriores. El usuario será responsable de la seguridad y uso de su contraseña. Asimismo, deberá informarnos, tan pronto como sea posible, de la pérdida o uso no autorizado de su contraseña, en cuyo caso, estaremos facultados para anular su registro a <span class="bold">www.tecno-key.com</span>. El usuario se abstendrá de reproducir, copiar, vender o explotar de cualquier modo todo o parte de los contenidos y funcionalidades de www.tecno-key.com la utilización o derecho de acceso al mismo. Cualquier fraude o abuso cometido en el marco de <span class="bold">www.tecno-key.com</span> podrá ser objeto de persecución administrativa o judicial.
+</p><br />
+
+
+<p class="bold">Actualizaciones:</p><p>
+Nos reservamos el derecho a modificar este documento "Declaración de Privacidad y política de uso" y el contenido del aviso legal en cualquier momento. Su uso continuo de cualquier porción de este sitio tras la notificación o anuncio de tales modificaciones constituirá su aceptación de tales cambios. Para Cualquier información, póngase en contacto con nosotros para aclararle cualquier duda.</p>
+</p><br />
+
+</div>       
+</div>
+<!--end right-->	
+{% endblock right %}
+

@@ -1,0 +1,31 @@
+<h1>Shop\Brand</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>                <td>{{ entity.id }}</td>        </tr>
+        <tr>
+            <th>Nombre</th>                <td>{{ entity.name }}</td>        </tr>
+        <tr>
+            <th>Descripción</th>                <td>{{ entity.description }}</td>        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('TKShopBackendBrandsIndex') }}">
+            Volver a la lista
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('TKShopBackendBrandEdit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('TKShopBackendBrandDelete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Eliminar</button>
+        </form>
+    </li>
+</ul>

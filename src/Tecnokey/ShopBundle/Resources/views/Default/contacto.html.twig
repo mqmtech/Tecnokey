@@ -1,0 +1,135 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{#Requires:
+#}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'contacto'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Contacto{% endblock %}
+
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format' : 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block jsfunctions %}
+    {{ parent()  }}
+<script>
+jQuery(document).ready(function(){
+    /*jQuery(".form_container").find("input").add("textarea").click(function(){
+        jQuery(this).attr("value", "");
+    });
+    
+    jQuery(".form_container").find("input").add("textarea").focusout(function(){
+        var value = jQuery(this).attr("value");
+        if(value == ""){
+            var name = jQuery(this).attr("name");
+            var nameValMap = new Array();
+            nameValMap["company"] = "Empresa";
+            nameValMap["email"] = "Correo";
+            nameValMap["message"] = "Mensaje";
+
+            value = nameValMap[name];
+            jQuery(this).attr("value", value);
+        }
+    });*/
+});
+</script>
+{% endblock jsfunctions %}
+
+{% block right %}
+    <div class="right">
+	  <div class="titulo_naranja">Contactar con Tecnokey</div>
+          {% for key, flash in app.session.getFlashes() %}
+              {% if(flash.success == true) %}
+                <div class="exito">¡Su mensaje ha sido enviado con éxito!</div>
+                <script>
+                    setTimeout(function(){window.location = "{{ path('TKShopFrontendIndex') }}";}, 3000);
+                </script>
+              {% endif %}
+
+              {% if(flash.success == NULL) %}
+                {#<div class="form_incompleto">{{ flash.title }} </div>#}
+                {% set fields = "Formulario incompleto! Rellene los campos " %}
+                {% for field, error in flash.fields %}
+                    {% if(loop.first) %}
+                        {% set fields = fields ~ "'" ~ field ~ "'" %}
+                    {% else %}
+                        {% if(loop.last) %}
+                            {% set fields = fields ~ " y '" ~ field ~ "' " %}
+                        {% else %}
+                            {% set fields = fields ~ ", '" ~ field ~ "'" %}
+                        {% endif %}
+                    {% endif %}
+                    
+                {% endfor %}
+                {% set fields = fields ~ "antes de enviar" %}
+                <div class="form_incompleto">{{ fields }} </div>
+                
+              {% endif %}
+          {% endfor %}
+          
+          
+        
+<div class="form_container">
+    <form action="{{ path('TKShopFrontendContactSendEmailHosting') }}" method="POST">
+            <p class="text_general">Empresa:</p>
+            <input name="company" type="Empresa" class="correo_form" value="" />
+            <p class="text_general">Correo electrónico:</p>
+            <input name="email" type="Correo" class="correo_form" value="" />
+            <p class="text_general">Su mensaje:</p>
+            <textarea name="message" class="mensaje_form" cols="mensaje"></textarea>
+            <!--div class="enviar_btn"><a href="#">Enviar</a></div-->
+            <input type="submit" class="enviar_btn" value= "Enviar"></div-->
+    </form>
+   	  </div>
+          
+	  <p><span class="text_general_blue">Como llegar:<br />
+  		</span><span class="text_bold">Metro:</span><span class="text_general"> a menos de 75 metros se encuentra la boca de metro POBLENOU de la linea 4. <br />
+	    <br />
+  		</span><span class="text_bold">Autobuses:</span><span class="text_general"> Frente a nuestra tienda esta la parada de las lineas 36, 71 y 141 dirección Barcelona centro, en la calle Llull a 100 mts.
+	    los mismos autobuses que vienen del centro.</span></p>
+       	
+        <span class="titulo_naranja">Nuestra dirección:</span> <span class="text_general_blue">CENTRAL:</span><span class="text_general"> <br />
+        </span><span class="text_bold">POBLENOU</span><span class="text_general"><br />
+        C/Pujades, 233 - 08005 – Barcelona - Tel.:93.307.27.67 - Fax: 93.266.18.30 - Correo: <a href="mailto:info@tecno-key.com">info@tecno-key.com</a><br />
+        
+        <!--mapa-->
+        <div style=" margin-top:10px; margin-bottom:10px">
+        <iframe width="720" height="195" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=C%2FPujades,+233+-+08005+%E2%80%93+Barcelona&amp;aq=&amp;sll=40.396764,-3.713379&amp;sspn=13.578915,14.80957&amp;ie=UTF8&amp;hq=&amp;hnear=Carrer+de+Pujades,+233,+08005+Barcelona,+Catalu%C3%B1a&amp;z=14&amp;ll=41.403978,2.203594&amp;output=embed"></iframe><br /><small><a href="http://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=C%2FPujades,+233+-+08005+%E2%80%93+Barcelona&amp;aq=&amp;sll=40.396764,-3.713379&amp;sspn=13.578915,14.80957&amp;ie=UTF8&amp;hq=&amp;hnear=Carrer+de+Pujades,+233,+08005+Barcelona,+Catalu%C3%B1a&amp;z=14&amp;ll=41.403978,2.203594" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+        </div>
+        <!--mapa-->
+        
+        
+        <br />
+        </span><span class="text_general_blue">SUCURSALES:<br />
+        </span><span class="text_bold">SANT ADRIÀ</span><span class="text_general"><br /> 
+        Av. Pi i Margall, 18 - 08930 – Sant Adrià del Besos - Tel.: 93.462.69.53 - <a href="mailto:sta@tecno-key.com">sta@tecno-key.com</a><br />
+        
+        
+        <!--mapa-->
+        <div style=" margin-top:10px; margin-bottom:10px">
+       	<iframe width="720" height="195" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Av.+Pi+i+Margall,+18+-+08930+%E2%80%93+Sant+Adri%C3%A0+del+Besos&amp;aq=&amp;sll=41.432689,2.215977&amp;sspn=0.104505,0.1157&amp;ie=UTF8&amp;hq=&amp;hnear=Avinguda+de+Pi+i+Margall,+18,+08930+Sant+Adri%C3%A0+de+Bes%C3%B2s,+Barcelona,+Catalu%C3%B1a&amp;ll=41.432676,2.215848&amp;spn=0.006532,0.011351&amp;z=14&amp;output=embed"></iframe><br /><small><a href="http://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=Av.+Pi+i+Margall,+18+-+08930+%E2%80%93+Sant+Adri%C3%A0+del+Besos&amp;aq=&amp;sll=41.432689,2.215977&amp;sspn=0.104505,0.1157&amp;ie=UTF8&amp;hq=&amp;hnear=Avinguda+de+Pi+i+Margall,+18,+08930+Sant+Adri%C3%A0+de+Bes%C3%B2s,+Barcelona,+Catalu%C3%B1a&amp;ll=41.432676,2.215848&amp;spn=0.006532,0.011351&amp;z=14" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+       
+       	</div>
+        <!--mapa-->
+        
+                
+        </span><span class="text_bold">SANT GERVASI</span><span class="text_general"> <br />
+        Pg. Sant Gervasi, 70 - 08022 – Barcelona - Tel.:93.418.65.66 - <a href="mailto:psg@tecno-key.com">
+psg@tecno-key.com</a><br />
+        </span>
+        
+        <!--mapa-->
+        <div style=" margin-top:10px; margin-bottom:10px">
+       <iframe width="720" height="190" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.es/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Pg.+Sant+Gervasi,+70+-+08022+%E2%80%93+Barcelona&amp;aq=&amp;sll=41.432672,2.217908&amp;sspn=0.006532,0.011351&amp;ie=UTF8&amp;hq=&amp;hnear=Passeig+de+Sant+Gervasi,+70,+08022+Barcelona,+Catalu%C3%B1a&amp;z=14&amp;ll=41.412135,2.138212&amp;output=embed"></iframe><br /><small><a href="http://maps.google.es/maps?f=q&amp;source=embed&amp;hl=es&amp;geocode=&amp;q=Pg.+Sant+Gervasi,+70+-+08022+%E2%80%93+Barcelona&amp;aq=&amp;sll=41.432672,2.217908&amp;sspn=0.006532,0.011351&amp;ie=UTF8&amp;hq=&amp;hnear=Passeig+de+Sant+Gervasi,+70,+08022+Barcelona,+Catalu%C3%B1a&amp;z=14&amp;ll=41.412135,2.138212" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
+       
+       	</div>
+       	<!--mapa--> 
+        
+    </div><!--end right-->
+{% endblock %} {#end right#}

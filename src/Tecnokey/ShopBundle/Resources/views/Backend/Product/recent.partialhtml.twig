@@ -1,0 +1,13 @@
+{#Requires:
+    - recentProducts: Recent Products
+#}
+
+<div class="recent_prod_container"><!--recent prod-->
+    
+  <div class="div_titulo_recent_prod">Prodcutos recientes</div>
+  {% for product in products %}
+    <div class="recent_list"><a href="{{ path('TKShopBackendProductEdit', {'productId' : product.id}) }}">{{ product.name  }}</a></div>
+          {% else %}
+      <div class="recent_list"><a href="#">Todavía no existen productos registrados</a></div>
+  {% endfor %}
+</div><!--end prod-->          

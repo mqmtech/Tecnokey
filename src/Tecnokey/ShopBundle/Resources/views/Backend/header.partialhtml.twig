@@ -1,0 +1,29 @@
+{#Requires:    
+#}
+
+<div class="headercontainer_admin">
+
+    <div class="logo"><img src="{{asset('bundles/tecnokey/images/logo.png') }}" alt="logo" /></div>
+        <div class="header_admin">
+            <div class="div_admin">Administración</div>
+
+            {% if(is_granted('ROLE_SUPER_ADMIN')) %}
+            <div class="div_bienvenido">Bienvenido: {{ app.user.username}}</div>
+            {% endif %}
+        </div>
+    <!--Start buscar_logout container--> 
+    <!--cerrar sesión-->
+    <div class="buscar_logout_container">
+        
+        <div class="logout_container">
+            <div class="logout"><a href="{{ path('TKShopSecurityLogout') }}">Cerrar sesión</a></div>
+            <div class="preview"><a href="{{ path('TKShopFrontendIndex') }}">Ir al sitio</a></div>                
+        </div> <!--cerrar sesión-->
+        
+        <!--start buscar-->                
+        {% include 'TecnokeyShopBundle:Default:buscar.partialhtml.twig' with {'targetController' : 'TKShopBackendSearchProductsByMultiQuery'} %}            
+        <!--end buscar--> 
+    
+    </div><!--end buscar_logout container--> 
+
+</div><!--end header-->     

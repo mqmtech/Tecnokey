@@ -1,0 +1,48 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Marcas |{% endblock %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestras Marcas \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+
+    <div class="titulo_naranja">Nuestros Proveedores:</div>
+    
+    {% set columns = 7 %}
+    {% if brands is defined and brands != NULL %}
+        {% set brandsLength = ((brands | length)/columns) -1 %}
+        {% set brandsLength = brandsLength | floor %}
+
+        {% if brandsLength < 0 %}
+        {% set brandsLength = 0 %}
+        {% endif %}
+        {% set count = 0 %}
+        
+        {% for i in 0..brandsLength  %} {# group of 7 #}
+            <div class="marcas_fila">
+            {% for j in 0..6  %} {# every brand #}
+                {% if brands[count] is defined %}
+                    {% set brand = brands[count] %}
+                    <div class="marcas">
+                        <a href="{{ path('TKShopFrontendSearchProductsByBrand', {'id' : brand.id}) }}"><img src="{{ asset(brand.image.getWebPath) }}" /></a></h1>                        
+                    </div>                    
+                {% endif %}
+                {% set count = count +1 %}
+            {% endfor %}
+
+            {% set count = count + 1 %}
+            </div>
+        {% endfor %} {# end group of 7 #}
+        
+    {% endif %}
+
+{% endblock right_content %}

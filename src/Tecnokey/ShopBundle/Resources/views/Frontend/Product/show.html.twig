@@ -1,0 +1,175 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="text/css" href="{{ asset('bundles/tecnokey/js/jqueryui/css/ui-lightness/jquery-ui-1.8.16.custom.css') }}" rel="stylesheet" />	
+    
+    <style>
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/tecnokey/js/utils/image_tools.js') }}"></script>
+{% endblock javascripts%}
+    
+{% block jsfunctions %}
+    {{ parent()  }}
+    <script>
+        jQuery(window).load(function(){
+        
+        //run 1
+        $(".imagenes_container").find("img").click(function(event){
+            var imagen_actual = $(this);
+            var attr_imagen_actual = $(this).attr("src");
+            
+            var imagen_principal = $(".imagen_principal").find("img");
+            var attr_imagen_principal = $(".imagen_principal").find("img").attr("src");
+           
+           //switch attributes
+           var name_current_image = $(this).attr("name");
+           if( name_current_image != "" ){
+               
+               var width_imagen_actual = $(imagen_actual).width();//$(imagen_actual).attr("width");
+               var height_imagen_actual = $(imagen_actual).height();//$(imagen_actual).attr("height");
+               
+               $(".imagen_principal").find("img").attr("src", attr_imagen_actual).load(function(){
+                   tecnokey.utils.ajustarImagen(this,  width_imagen_actual, height_imagen_actual);
+            });
+               //$(this).attr("src", attr_imagen_principal);
+           }
+        });
+        
+        //Run 2
+        //tecnokey.utils.imagePreview($(".imagen_principal"));
+        
+        //run 3
+        $(".imagen_principal").find("img").click(function(event){
+            var src_imagen_actual = $(this).attr("src");
+            tecnokey.utils.abrirVentana(src_imagen_actual);
+            
+        });
+    });
+
+     </script>
+{% endblock jsfunctions %}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ <a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': product.category.parentCategory.id}) 
+}}">{{ product.category.parentCategory.name | firstLetterCapital }}</a> \ <a href="{{ path('TKShopFrontendProductsShowByCategory', {'categoryId': product.category.id}) }}"> {{ product.category.name | firstLetterCapital}}</a> \ 
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right %}
+<!--start right-->
+<div class="right">
+
+    <!--start ficha-->
+    <div class="div_detail_fecha"><span class="text_bold"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': product.category.parentCategory.id }) }}">{{ product.category.parentCategory.name }}</a></span> / <span class="text_bold"><a href="{{ path('TKShopFrontendSearchProductsByBrand', {'id' : product.brand.id}) }}">{{ product.brand.name|truncate }}</a></span></div>
+    <div class="titulo_prod_ficha"><h1>{{ product.name }}</h1></div>
+
+    <!--start imagenes cesta-->
+    <div class="imagenes_cesta_container">
+
+        <div class="imagenes_container">
+                <div class="imagen_principal">
+                {% if (product.image!= null) %} 
+                    {% set imageSizeInfo =  product.image.getImageSize("298", "260") %}
+                        <img src="{{ asset(product.image.webPath) }}" name="{{ product.image.name }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"/>
+                {% else %} 
+                    <img src="" />
+                {% endif %}
+                </div>
+                <div class="div_otros_angulos">Otros angulos</div>
+                <div class="angulos" >
+                {% if (product.secondImage!= null) %} 
+                        {% set imageSizeInfo =  product.image.getImageSize("98", "98") %}
+                        <img src="{{ asset(product.image.webPath) }}" name="{{ product.image.name }}"  style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"/>
+                {% else %} 
+                    <img src="" />
+                {% endif %}
+                </div>
+                
+                <div class="angulos" >
+                {% if (product.thirdImage!= null) %} 
+                    {% set imageSizeInfo =  product.secondImage.getImageSize("98", "98") %}
+                    <img src="{{ asset(product.secondImage.webPath) }}"  name="{{ product.secondImage.name }}"  style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"/>
+                {% else %} 
+                    <img src="" />
+                {% endif %}
+                </div>
+                <div class="angulos" >
+                {% if (product.fourthImage!= null) %} 
+                    {% set imageSizeInfo =  product.thirdImage.getImageSize("98", "98") %}
+                    <img src="{{ asset(product.thirdImage.webPath) }}" name="{{ product.thirdImage.name }}"  style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"/>
+                {% else %} 
+                    <img src="" />
+                {% endif %}
+                </div>
+        </div>
+
+        <!--start  cesta-->
+        <div class="cesta_container">
+
+            <div class="precio_cesta_container">
+                {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
+                    {% if(productInfo.isOffer is defined and productInfo.isOffer) %}
+                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff ~ "" ~ currencySymbol() | default(noPriceAccess())}}</div>
+                        <div class="text_bold">REF: {{productInfo.product.sku}}</div>
+
+                        <div class="descuento_container_ficha">
+                            <div class="precio_tachado_ficha">{{ product.basePrice | roundoff | default(noPriceAccess())}} {% if(product.basePrice) %} {{currencySymbol()}} {% endif %}</div>
+                            <div class="descuento_ficha">{{ product.offer.discount ~ "%"}}</div>
+                            <div class="ahorro_ficha">Ahorra {{ ( product.basePrice - productInfo.basePrice )| roundoff ~ currencySymbol() }}</div>
+                        </div>
+                        <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                        <div class="oferta">
+                        	<p class="text_bold">Oferta valida hasta:</p>
+                        	<p class="validez">{{ product.offer.deadline |date("d/m/Y") }}</p>
+                    	</div> 
+                        {% else %} {# else offer #}
+                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff | default(noPriceAccess())}} {% if(productInfo.basePrice) %} {{currencySymbol()}} {% endif %}</div>
+                        <div class="text_bold">REF: {{productInfo.product.sku}}</div>
+                        <div class="add_cesta_ficha"><a href="#"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                    {% endif %} {# endif offer #}
+                    
+                    {% else %} {# else is_granted #}
+                    <div class="no_price_access_ficha">{{ noPriceAccess() }} </div>
+                    <div class="text_bold">REF: {{productInfo.product.sku}}</div>
+                    <div class="add_cesta_ficha"><a href="#"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                {% endif %} {# endif is_granted #}
+                
+            </div>
+
+
+            <!--productos relaciodos-->
+            {% render path('TKShopBundleFrontendProductRelatedProducts', {'productId' : product.id}) | toAppPath %}
+            <!--end productos relaciodos-->
+
+
+        </div><!--end  cesta-->
+
+    </div><!--end imagenes cesta-->
+
+
+
+    <!--start info procuto-->
+    <div class="titulo_info">Información sobre el producto:</div>
+    <div class="description_ficha">
+        <h5>{{ product.description }}</h5>
+    </div>
+
+    <!--end info procuto-->
+
+    <!--end ficha-->  
+</div>
+<!--end right-->
+{% endblock %}

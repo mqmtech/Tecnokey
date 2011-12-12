@@ -1,0 +1,35 @@
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% set form = edit_form %}
+
+{% form_theme form 'TecnokeyShopBundle:Backend/Form:product.html.twig' %}
+
+{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendCategoriesIndex') }}">Administrar Categorias</a> \ Editar Categoria{% endblock %}
+
+{% block left_content %}
+<!--star body leftnavbar resultado-->
+<div class="bodycontainer">
+
+<!--star panel de control-->
+<div class=" contol_panel">
+<div class="div_border">
+    
+<form action="{{ path('TKShopBackendCategoryUpdate', {'id': entity.id}) }}" method="post" {{ form_enctype(form) }}>
+{% include 'TecnokeyShopBundle:Backend/Category:formBody.partialhtml.twig' %}
+    
+<!--precios y promociones--><!--botones guardar salir--> 
+    <div class="btn_container_form"> 
+            <div class="btn_guardar">
+                <!--a href="{{ path('TKShopBackendCategoryCreate') }}">Guardar</a-->
+                <input type="submit" name="Guardar"/>
+            </div>
+            <div class="btn_sin_guardar "><a href="{{ path('TKShopBackendCategoriesShowAll') }}">Salir SIN Guardar</a></div>
+    </div>
+
+
+{{ form_rest(form) }}
+ </form>
+    
+</div>
+<!--end  div border-->
+{% endblock %}

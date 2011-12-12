@@ -1,0 +1,1606 @@
+@charset "UTF-8";
+
+/* @group norms */
+
+<style type="text/css">
+
+
+
+
+/* CSS
+Desarrollado por:
+Diseño grafico y maquetación: Amar Bouchekioua.
+Programación: Mario Quesada.
+Agradecimiento:
+Javier Vidal Moreno
+
+
+Creado: 2011
+*/
+
+
+
+
+
+/* Global Defaults
+=====================================================================*/
+/* imagenes hover */
+
+a:img{
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	filter:alpha(opacity=100);
+	-moz-opacity:1.0;
+	opacity: 1.0;
+	-khtml-opacity: 1.0;
+}
+
+a:hover img {
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+	filter:alpha(opacity=80);
+	-moz-opacity:0.9;
+	opacity: 0.9;
+	-khtml-opacity: 0.9;
+}
+
+/* ======================== */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,table,tr,th,td,embed,object {
+	margin: 0;
+	padding: 0;
+}
+
+span{
+	padding: 0;
+	margin: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset,img,abbr {
+	border: 0;
+}
+
+address,caption,cite,code,dfn,em,h1,h2,h3,h4,h5,h6,strong,th,var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ul {
+	list-style: none;
+}
+
+caption,th {
+	text-align: left;
+}
+
+div {
+	text-align: left;
+	vertical-align: top;
+}
+
+q:before,q:after {
+	content: '';
+}
+
+a,ins {
+	text-decoration: none;
+}
+
+strong {
+	font-weight: bold;
+}
+
+cite {
+	display: block;
+	font-size: 0.9em;
+	font-style: italic;
+	text-align: right;
+}
+
+/* Global Classes
+=====================================================================*/
+
+.distext {
+	display: none;
+}
+
+.clearboth {
+	clear: both;
+}
+
+.clearleft {
+	clear: left;
+}
+
+.clearright {
+	clear: right;
+}
+
+/* Library
+=====================================================================*/
+
+.l {
+	float: left;
+	width: 49%;
+}
+
+.r {
+	float: right;
+	width: 49%;
+}
+
+.r:after {
+	display: block;
+	content: '';
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.justify {
+	text-align: justify;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.clear-both {
+	clear: both;
+	float: none;
+}
+
+.clear-right {
+	clear: right;
+	float: none;
+}
+
+.hide {
+	display: none;
+}
+
+.clear-both {
+	clear: left;
+	float: none;
+}
+
+.inline {
+	display: inline;
+}
+
+.block {
+	display: block;
+}
+
+.noborder {
+	border: 0px none;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.normal {
+	font-weight: normal;
+}
+
+.nomargin {
+	margin: 0;
+}
+
+.nopadding {
+	padding: 0;
+}
+
+.visible {
+	display: block;
+}
+
+.top10 {
+	margin-top: 10px;
+}
+
+.top20 {
+	margin-top: 20px;
+}
+
+.border5 {
+	border: solid 5px #c7c7c7;
+}
+
+.border10 {
+	border: solid 10px #c7c7c7;
+}
+
+.border20 {
+	border: solid 20px #c7c7c7;
+}
+
+.font36 {
+	font-size: 36px;
+}
+
+.font24 {
+	font-size: 24px;
+}
+
+.font18 {
+	font-size: 18px;
+}
+
+div.hidden, a.hidden {
+	display: none;
+	margin: 0;
+}
+
+/* Typographic Elements
+=====================================================================*/
+
+h1, h2, h3, h4, h5, h6, body {
+	margin: 0;
+	padding: 0;
+	color: 333;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+/* @end */
+
+/* Empieza el diseño
+=====================================================================*/
+
+/* texto general
+=====================================================================*/
+p{
+	padding: 0;
+	margin: 0;
+	color: #333;
+}
+.text_general {
+	color: #000000;
+	font: 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.text_general a {
+	color: #000000;
+	font-family: Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	text-decoration: underline;
+}
+
+.text_general a:hover {
+	color: #258cdb;
+	font-family: Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.text_general_blue {
+	color: #258cdb;
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.text_general_blue a {
+	color: #258cdb;
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.text_general_blue a:hover {
+	color: #f87e15;
+font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	text-decoration: underline;
+}
+
+.text_bold {
+	color: #000000;
+	font: bold 0.8em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.text_bold a {
+	font: bold Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #000000;
+}
+
+.text_bold a:hover {
+	font: bold Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #258cdb;
+}
+
+h1 {
+	color: #258cdb;
+	font: bold 1em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+h1 a {
+	color: #258cdb;
+}
+
+h1 a:hover {
+	text-decoration: underline;
+}
+
+h2 {
+	font: bold 0.688em Verdana, "Lucida Grande", Lucida, sans-serif;
+	color: #fff;
+	text-shadow: #1d598f 1px 1px 0;
+}
+
+h2 a {
+	font: bold Verdana, "Lucida Grande", Lucida, sans-serif;
+	color: #fff;
+	text-shadow: #1d598f 1px 1px 0;
+}
+
+h2 a:hover{
+	text-decoration: underline;
+}
+h3 {
+	color: #000;
+	padding: 0;
+	margin: 0;
+	font: 0.75em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+h3 a {
+		font: "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #848484;
+	padding: 0;
+	margin: 0;
+}
+
+h3 a:hover{
+	text-decoration: underline;
+}
+
+h4 {
+	font: 0.75em "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #848484;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin: 0;
+}
+
+.text_bold_red {
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #ff0000;
+}
+
+.text_bold_red a {
+	font: bold Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #ff0000;
+}
+
+.text_bold_red a:hover {
+	font: bold Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #258cdb;
+}
+
+.georgia_gris_14 {
+	font: italic bold 0.850em Georgia, "Times New Roman", Times, serif;
+	color: #555;
+}
+.georgia_blue_14 {
+	font: italic bold 0.850em Georgia, "Times New Roman", Times, serif;
+	color: #258cdb;
+}
+
+
+/* texto general
+=====================================================================*/
+body {
+	background: url(../images/fondo_body.png) repeat-x scroll right top;
+}
+
+.container {
+	width: 990px;
+	height: auto;
+	margin: 20px auto;
+}
+
+/* header - menu principal - banner - arbol
+=====================================================================*/
+
+.arbol_container {
+	height: 25px;
+	width: 978px;
+	margin: 10px 0 10px 0;
+	padding: 0 0 0 10px;
+	background: #fff url(../images/fondo_arbol.png);
+	border: 1px solid #ccc;
+	color: #646464;
+	float: left;
+	
+}
+.arbol{
+	height: 25px;
+	width: 755px;
+	color: #646464;
+	font: 11px/26px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	float: left;
+}
+
+.arboltext a {
+	text-decoration: none;
+	color: #3e3e3e;
+	font-weight: bold;
+}
+.arboltext a:hover {
+	text-decoration: underline;
+}
+
+/* organizar precios productos
+=====================================================================*/
+.organizar_container{
+	height: 25px;
+	width: 200px;
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+#organizar {
+	position: relative;
+	display: block;
+	height: 25px;
+	width: auto;
+	font: 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	float: right;
+	margin: 0;
+	padding: 0;
+	
+}
+
+#organizar ul {
+	margin: 0 -10px 0 0;
+	padding: 0;
+	list-style-type: none;
+	width: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #646464;
+}
+
+#organizar ul li {
+	display: block;
+	float: left;
+	height: 25px;
+	line-height: 25px;
+	border-left: 1px solid #ccc;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #646464;
+
+}
+
+#organizar ul li a {
+	display: block;
+	float: left;
+	height: 25px;
+	line-height: 25px;
+	color: #646464;
+
+}
+
+#organizar ul li a.current {
+    font-weight: bold;
+}
+
+#organizar ul li a:hover {
+	text-decoration: underline;
+}
+
+
+/* login y cesta
+=====================================================================*/
+
+.cestalogin{
+	float: right;
+	height: 66px;
+	width: 350px;
+	padding-right: 16px;
+
+}
+
+.login {
+	width: 96px;
+	height: 29px;
+	background: url(../images/login.png) no-repeat center top;
+	float: right;
+}
+
+.micuenta a {
+	font: 0.750em/28px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #000;
+	margin: 0 0 0 30px;
+	
+}
+
+.micuenta a:hover {
+	text-decoration: underline;
+}
+
+.cesta {
+	width: 350px;
+	height: 25px;
+	color: #000;
+	text-align: right;
+	background-repeat: no-repeat;
+	background-position: 69px center;
+	float: right;
+	margin-top: 10px;
+}
+
+/* login y cesta
+=====================================================================*/
+
+.headercontainer {
+	width: 988px;
+	height: auto;
+	margin: 0;
+}
+
+.logo {
+	height: 38px;
+	width: 188px;
+	float: left;
+	padding: 0;
+	margin: 11px 20px 0 10px;
+	border: 3px solid #4e4e4e;
+}
+
+.logologincontainer {
+	width: 988px;
+	height: 68px;
+	margin: 0;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	background-color: #e8e8e8;
+}
+
+
+/* menu
+=====================================================================*/
+.menucontainer {
+	width: 988px;
+	height: 40px;
+	margin: 0;
+	border: 1px solid #4e4e4e;
+	background-color: #848484;
+}
+
+#menu {
+	position: relative;
+	display: block;
+	height: 40px;
+	width: 370px;
+	font-size: 0.875em;
+	font-weight: bold;
+	font-family: Arial,Verdana,Helvitica,sans-serif;
+	float: left;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	width: auto;
+}
+
+#menu ul li {
+	display: block;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	border-right: 1px solid #646464;
+}
+
+#menu ul li a {
+	display: block;
+	height: 40px;
+	color: #ffffff;
+	text-decoration: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0px auto;
+	text-align: center;
+	text-shadow: #333 1px 1px 0;
+	letter-spacing: 1px;
+}
+
+#menu ul li a:hover {
+	padding-top: 1px;
+	display: block;
+	height: 39px;
+	color: #ffffff;
+	text-decoration: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0px auto;
+	text-align: center;
+	text-shadow: #333 1px 1px 0px;
+	background-color: #3c404b;
+}
+
+#menu ul li a.current, #menu ul li a.current:hover {
+	text-shadow: #366565 1px -1px 0;
+	background-color: #258cdb;
+}
+
+
+/* buscar forms
+=====================================================================*/
+
+.buscarcontainer {
+	width: 340px;
+	float: right;
+	margin-top: 10px;
+	padding-right: 20px;
+	height: auto;
+}
+
+.buscarform {
+	height: 19px;
+	width: 242px;
+	float: left;
+	border: 1px solid #646464;
+	margin-left: 8px;
+	font: bold 0.688em/19px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	text-align: left;
+	color: #000;
+	padding-left: 28px;
+	background: #fff url(../images/lupa.png) no-repeat 1px;
+}
+.buscarbtn a:hover {
+	text-decoration: underline;
+	border: 1px solid #656565;
+}
+
+
+/* banner
+=====================================================================*/
+.banner {
+	width: 988px;
+	height: 300px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+.sombrabanner {
+	width: 990px;
+	height: 20px;
+	background: url(../images/sombra_banner.png);
+}
+
+
+/* contenido productos
+=====================================================================*/
+.bodycontainer {
+	width: 990px;
+	height: auto;
+	float: left;
+	margin: 0 0 10px;
+}
+
+.left {
+	width: 240px;
+	height: auto;
+	background-color: #fff;
+	float: left;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	margin-bottom: 20px;
+}
+
+.right{
+	width: 728px;
+	height: auto;
+	float: right;
+	margin: 0 0 0 20px;
+
+}
+
+.leftnav a {
+	width: 213px;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ffffff;
+	margin: 0px;
+	padding: 5px 10px 5px 17px;
+	font: bold 10px arial;
+	text-decoration: none;
+	text-align: left;
+	color: #666;
+	display: block;
+	background-color: #fff;
+}
+
+.leftnav a:hover {
+	background: #ddd url(../images/arow_anim.gif) no-repeat scroll 213px center;
+}
+
+.leftnav a:active {
+	
+	color: black;
+	background: #ccc url(../images/arow_anim.gif) no-repeat scroll 213px center;
+}
+
+.titulo_todos_prod{
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #fff;
+	width: 213px;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 10px 5px 17px;
+	background: #f87e15 url(../images/fondo_franja_naranja.png) repeat-x;
+}
+
+/* navbar pages bottom
+=====================================================================*/
+.pagination_container{
+	height: 25px;
+	width: 726px;
+	background: #fff url(../images/fondo_arbol.png);
+	border: 1px solid #ccc;
+	color: #646464;
+	float: left;
+	margin: 5px 0 0 0;
+}
+
+.numbers_container {
+	height: 25px;
+	width: 270px;
+//	border-right: 1px solid #ccc;
+	line-height: 25px;
+	text-align: center;
+	float: left;
+	margin-left: 229px;
+}
+
+.numbers a{
+	height: 25px;
+	width: 15px;
+	float: left;
+	display: block;
+	font-size: 0.875em;
+	font-weight: bold;
+	font-family: Arial,Verdana,Helvitica,sans-serif;
+	padding-right: 5px;
+	padding-left: 5px;
+	color: #646464;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #fff;
+	text-align: center;
+}
+
+.lastnumber a{
+    border-right: 1px solid #ccc;    
+}
+
+.numbers_container .current a{
+    float: left;
+	display: block;
+	background-color: #f87e15;
+    color: #fff;
+}
+
+.numbers a:hover{
+	float: left;
+	display: block;
+	background-color: #f87e15;
+    color: #fff;    
+}
+
+/* resultados de busqueda y lista de productos nivel 2
+=====================================================================*/
+.listbox_container{
+	height: 70px;
+	width: 721px;
+	border: 1px solid #ccc;
+	float: left;
+	padding: 5px 0 5px 5px;
+	background: #fff url(../images/fondo_lisbox.png) repeat-x;
+	margin: 0 0 5px;
+}
+
+.fotoprod{
+	height: 68px;
+	width: 68px;
+	border: 1px solid #ccc;
+	float: left;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	line-height: 68px;
+	background-color: #fff;
+}
+
+.listbox{
+	height: 70px;
+	width: 550px;
+	float: left;
+	padding: 0;
+	margin: 0 0 0 10px;
+}
+
+/* !important */
+
+.titulo_box{
+	height: auto !important;
+	width: 550px;
+	float: left;
+}
+/* !important */
+
+
+.text_list_box{
+	width: 550px;
+	height: auto;
+	float: left;
+}
+
+/* Precios====================*/
+.precio_box {
+	height: 65px;
+	width: 70px;
+	float: right;
+	border-left: 1px solid #ccc;
+	text-align: right;
+	padding-top: 5px;
+	padding-right: 10px;
+}
+.precio {
+	width: 70px;
+	height: 20px;
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #ff0000;
+	float: right;
+	text-align: right;
+}
+
+/* no_price_access */
+
+.no_price_access{
+	width: 70px;
+	height: auto;
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #ff0000;
+	float: right;
+	text-align: right;
+}
+
+.iva {
+	width: 70px;
+	height: 20px;
+	font: bold 0.750em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #000;
+	float: right;
+	text-align: right;
+}
+
+.descuento {
+	width: 70px;
+	height: 20px;
+	color: #090;
+	float: right;
+	text-align: right;
+	font: bold 0.75em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+/* productos y columnas 
+=====================================================================*/
+
+.prodcol1 {
+	float: left;
+	height: auto;
+	width: 240px;
+	margin: 0 10px 5px 0;
+}
+
+.prodcol2 {
+	float: left;
+	height: auto;
+	width: 240px;
+	margin: 0 0 5px;
+}
+
+.prod {
+	height: 127px;
+	width: 238px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	float: left;
+	margin: 0;
+}
+
+.tituloprodbox {
+	height: 20px;
+	width: 228px;
+	float: left;
+	text-align: left;
+	background: #258cdb;
+	border-bottom: 2px solid;
+	border-color: #ccc;
+	padding-left: 10px;
+	margin: 0;
+	padding-top: 6px;
+	
+}
+.foto_prodbox {
+	height: 99px;
+	width: 238px;
+	float: left;
+	margin: 0;
+	padding:0;
+	background: #ccc;
+}
+
+
+.textbox {
+	float: left;
+	height: 87px;
+	width: 240px;
+	padding: 0;
+	margin: 0;
+}
+
+.sombraprod {
+	height: 8px;
+	width: 240px;
+	margin-bottom: 5px;
+	float: left;
+	background: url(../images/sombra_prod.png) no-repeat center top;
+}
+
+.masinfo a {
+	height: 16px;
+	width: auto;
+	float: left;
+	border: 1px solid;
+	border-bottom: 3px solid;
+	border-color: #ccc;
+	margin-left: 6px;
+	margin-bottom: 5px;
+}
+
+.masinfo a:hover {
+	border: 1px solid;
+	border-bottom: 3px solid;
+	border-color: #258cdb;
+}
+
+
+
+/* footer=================== */
+
+.footer {
+	width: 989px;
+	height: auto;
+	float: left;
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	margin: 5px 0 20px;
+}
+
+.otherproducts {
+	width: 970px;
+	height: 15px;
+	padding: 5px 10px;
+	margin: 0 0 10px 0;
+	float: left;
+	background-color: #d9d9d9;
+	text-shadow: #fff 1px 1px 0;
+}
+
+.img_bottom_otherp {
+	width: 88px;
+	float: left;
+	margin-left: 8px;
+	border: 1px solid #ccc;
+	height: 25px;
+}
+
+.img_bottom_div {
+	width: 990px;
+	height: auto;
+	margin: 0 auto;
+	float: left;
+}
+
+.bottom_menu_div {
+	width: 990px;
+	height: 20px;
+	float: left;
+	background-color: #d9d9d9;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	line-height: 20px;
+	padding-top: 8px;
+	margin: 10px 0 0;
+}
+
+.Copyright {
+	width: 989px;
+	height: 20px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #333;
+	padding-top: 0;
+	font: 10px/20px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #ffffff;
+	float: left;
+	border-top: 1px solid #ccc;
+}
+
+.gris_tab {
+	width: 990px;
+	height: 10px;
+	margin: 0 auto;
+	line-height: 10px;
+	background-color: #ccc;
+	float: left;
+	border-top: 1px solid #ccc;
+}
+
+.marcas_fila{
+	height: auto;
+	width: 720px;
+	float: left;
+}
+
+.marcas{
+	width: 88px;
+	float: left;
+	margin-right: 8px;
+	border: 1px solid #ccc;
+	height: 25px;
+	margin-bottom: 8px;
+}
+
+.marcas img{
+	width: 88px;
+	height: 25px;
+}
+
+/* politica de uso=================== */
+.div_politica{
+	font: 12px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	padding: 10px;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+
+/* formulario de contacto=================== */
+.titulo_naranja {
+	font-size: 1em;
+	font-weight: bold;
+	color: #f87e15;
+	text-shadow: #fff 1px 1px 0;
+	margin-bottom: 10px;
+	display: block;
+}
+.form_container{
+	height: auto;
+	width: 365px;
+	float: left;
+	margin-right: 355px;
+	margin-bottom: 10px;
+}
+
+.correo_form {
+	width: 350px;
+	float: left;
+	border: 1px solid #ccc;
+	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
+	height: 20px;
+	margin-bottom: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.mensaje_form {
+	height: 200px;
+	width: 350px;
+	float: left;
+	border: 1px solid #ccc;
+	font: bold 0.750em "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_mensaje.png) repeat-x left top;
+	padding: 5px;
+	margin-top: 5px;
+}
+.enviar_btn a{
+	height: 26px;
+	width: auto;
+	float: left;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	background-image: url(../images/fondo_arbol.png);
+	font: bold 0.750em/24px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #555;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.enviar_btn a:hover{
+	text-decoration: underline;
+}
+
+/* Fihca individual */
+.div_detail_fecha {
+	height: 20px;
+	width:718px ;
+	font-weight: bold;
+	color: #777;
+	text-shadow: #fff 1px 1px 0;
+	float: left;
+	margin-bottom: 9px;
+	display: block;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding-left: 8px;
+}
+
+.titulo_prod_ficha{
+	height: 25px;
+	width: 728px;
+	float: left;
+	margin-bottom:5px;
+}
+
+/* imagenes y cesta*/
+/* imagenes*/
+
+
+.imagenes_container div img.hover {
+        background:url(thumb_bg.png) no-repeat center center;  /* Image used as background on hover effect
+        border: none; /* Get rid of border on hover */
+}
+
+.imagenes_cesta_container {
+	width: 728px;
+	height: auto;
+	float: left;
+	margin-bottom: 10px;
+
+}
+
+.imagenes_container {
+	width: 300px;
+	height: 393px;
+	float: left;
+}
+
+.imagen_principal{
+	width: 298px;
+	height: 260px;
+	float: left;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.imagen_principal img{
+	width: auto;
+	height: 260px;
+        
+}
+
+.imagen_principal:hover{
+    cursor: pointer;
+}
+
+.angulos{
+	height: 98px;
+	width: 98px;
+	float: left;
+	border: 1px solid #ccc;
+	background-color: #eee;
+}
+
+.angulos img{
+	width: auto;
+	height: 98px;
+        
+}
+
+.angulos:hover{
+    cursor: pointer;
+}
+
+.div_otros_angulos{
+	height: 25px;
+	width: 298px;
+	float: left;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	text-align: center;
+	background-image: url(../images/fondo_arbol.png);
+	color: #555;
+	text-shadow: #fff 1px 1px 0;
+	margin-top: 5px;
+	font-size: 0.80em;
+	line-height: 25px;
+}
+
+.titulo_info {
+	height: 25px;
+	width: 718px;
+	float: left;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	font-size: 0.80em;
+	line-height: 25px;
+	color: #fff;
+	background: #258cdb;
+	padding-left: 10px;
+}
+
+.description_ficha {
+	height: auto;
+	width: 708px;
+	float: left;
+	color: #000;
+	margin-bottom: 10px;
+	font: 0.8em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding: 10px;
+	background-color: #e5f3fe;
+}
+
+/* cesta precio y descuentos*/
+.cesta_container {
+	width: 406px;
+	height: 392px;
+	float: right;
+	margin-left: 20px;
+}
+
+.precio_cesta_container{
+	height: 250px;
+	width: 200px;
+	float: left;
+
+}
+
+.precio_ficha{
+	width: auto;
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	color: #f10;
+	font-weight: bold;
+	text-align: left;
+	direction: ltr;
+	font-size: 1.5em;
+	padding-left: 0;
+	padding-right: 10px;
+	margin-bottom: 5px;
+}
+
+.descuento_container_ficha{
+	width: auto;
+	height: auto;
+	float: left;
+	padding: 0;
+	border: 1px solid #258cdb;
+	margin: 5px 0;
+}
+
+.precio_tachado_ficha{
+	height: 18px;
+	background: #fff;
+	line-height: 20px;
+	text-decoration: line-through;
+	display: block;
+	text-align: center;
+	color: #888;
+	direction: ltr;
+	padding: 2px 10px;
+}
+
+.descuento_ficha{
+	width: auto;
+	height: 20px;
+	background: #258cdb;
+	line-height: 22px;
+	padding: 5px 10px;
+	display: block;
+	text-align: center;
+	color: #fff;
+	font-size: 1.5em;
+	direction: ltr;
+}
+
+.ahorro_ficha{
+	font-size: 0.75em;
+	text-align: center;
+	padding: 5px 10px;
+	display: block;
+	text-align: center;
+	direction: ltr;
+	height: 13px;
+}
+
+.add_cesta_ficha{
+	height: 30px;
+	width: 190px;
+	float: left;
+	line-height: 35px;
+	text-align: left;
+	margin-top: 7px;
+}
+.oferta{
+	height: auto;
+	width: 200px;
+	margin: 10px 0 0 0;
+	float: left;
+}
+.validez{
+	color: #090;
+	font: bold 0.8em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: left;
+}
+/* Productos relacionados ficha */
+
+.prods_relacionados_container_ficha{
+	height: auto;
+	width: 404px;
+	float: left;
+	margin-top: 16px;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	background-color: #fff;
+}
+
+.titulo_prods_relacionados_ficha{
+	height: 20px;
+	width: 394px;
+	float: left;
+	border-bottom: 1px solid #ccc;
+	background-image: url(../images/fondo_franja_verde.png);
+	color: #fff;
+	text-shadow: #447843 1px 1px 0;
+	font-size: 0.88em;
+	line-height: 20px;
+	padding-left: 10px;
+}
+
+
+.prods_relacionados_ficha {
+	width: 394px;
+	height: 20px;
+	float: left;
+	border-bottom: 1px solid #ccc;
+	padding: 0 0 0 10px;
+	line-height: 20px;
+	font-size: 0.75em;
+	
+}
+
+
+.titulo_prods_relacionados{
+       width: 273px;
+       height: auto;
+       float: left;
+       color: #333;
+       font-weight: normal;
+       font-style: normal;
+       z-index: 999;
+}
+
+.titulo_prods_relacionados a{
+	/*width: 273px;
+	height: auto;
+	float: left;*/
+	color: #333;
+}
+
+.titulo_prods_relacionados a:hover{
+	text-decoration: underline;
+}
+
+.dto_relacionados_ficha {
+	float: right;
+	width: 30px;
+	height: auto;
+	line-height: 20px;
+	color: #090;
+	padding-right: 7px;
+	font-weight: bold;
+	direction: rtl;
+	text-align: right;
+	border-left: 1px solid #ccc;
+	padding-left: 9px;
+}
+.precio_relacionados_ficha {
+	float: right;
+	width: 55px;
+	height: auto;
+	line-height: 20px;
+	color: #f10;
+	padding-right: 6px;
+	font-weight: bold;
+	direction: rtl;
+	text-align: right;
+	border-left: 1px solid #ccc;
+	padding-left: 10px;
+}
+
+/* Empresa */
+.text_left{
+	float: right;
+	font-size: inherit;
+	width: 598px;
+}
+
+.llave {
+	width: 100px;
+	float: left;
+	margin-right: 15px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+}
+
+.no_price_access_ficha{
+       width: 197px;
+       height: auto;
+       color: #ff0000;
+       float: left;
+       text-align: left;
+       font: bold 1em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+}
+
+.exito{
+	background-color: #def8fe;
+	color: #266faf;
+	font: bold 0.8em/40px Verdana, "Lucida Grande", Lucida, sans-serif;
+	height: 40px;
+	padding-left: 15px;
+	border: 2px dotted #266faf;
+	margin-bottom: 10px;
+}
+
+.form_incompleto{
+	background-color: #fde6e2;
+	color: #e51230;
+	font: bold 0.8em/40px Verdana, "Lucida Grande", Lucida, sans-serif;
+	height: 40px;
+	padding-left: 15px;
+	border: 2px dotted #e51230;
+	margin-bottom: 10px;
+}
+
+/**start mqmtech mods***/
+.description_ficha {
+    /*font-size: 1em;*/
+}
+
+input.buscarbtn{
+	height: 22px;
+	width: 50px;
+	float: right;
+	margin-left: 0;
+	border: 1px solid #b64905;
+	font: bold 0.688em/18px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	text-align: center;
+	background-image: url(../images/buscar_btn.png);
+	color: #fff;
+}
+
+.buscarbtn a{
+	height: 19px;
+	width: 50px;
+	float: right;
+	margin-left: 0;
+	border: 1px solid #b64905;
+	font: bold 0.688em/18px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	text-align: center;
+	background-image: url(../images/buscar_btn.png);
+	color: #fff;
+}
+
+.enviar_btn{
+	height: 26px;
+	width: auto;
+	float: left;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	background-image: url(../images/fondo_arbol.png);
+	font: bold 0.750em/24px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #555;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.enviar_btn:hover{
+	text-decoration: underline;
+}
+
+.tooltip_ficha_container{
+        position: absolute;
+	height: auto;
+	width: 270px;
+	float: left;
+	background: #fff;
+	border: 1px solid #1e5b91;
+}
+
+.titulo_tooltip_ficha {
+	display: block;
+	padding: 6px;
+	border-top: 1px solid #87b9fd;
+	border-bottom: 1px solid #3899ef;
+	border-right: 1px solid #6b95cd;
+	border-left: 1px solid #3ca3fd;
+	background: #258cdb;
+	font: bold 12px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #fff;
+	text-shadow: #1a5385 1px 1px 0;
+}
+
+.titulo_tooltip_ficha a{
+	text-decoration: none;
+	color: #fff;
+
+}
+
+.texto_tooltip_ficha{
+	display: block;
+	padding: 6px;
+	font: 12px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	border-top: 1px solid #1e5b91;
+
+}
+
+.texto_tooltip_ficha a{
+	text-decoration: none;
+	color: #000;
+}
+
+.titulo_tooltip_ficha a:hover, .texto_tooltip_ficha a:hover{
+	text-decoration: underline;
+	
+}
+
+
+
+/*.page input{
+    float: left;
+    height: 16px;
+    width: 16px;
+    border: 1px solid #87b9fd;
+    margin-left: 5px;
+    font: bold 0.688em/10px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+    text-align: center;
+        
+    padding: 0;
+    background-color: transparent;
+    
+    cursor: pointer;
+
+}
+
+.page input.current{
+    background-color: #258cdb;
+    color: #fff;
+}*/
+
+
+

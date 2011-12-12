@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>| Administración | Añadir nuevo Producto |</title>
+<link href="../css/site.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+
+<!--Desarrollado por:
+Diseño grafico y maquetación: Amar Bouchekioua.
+Programación de la aplicacion: Mario Quesada.
+Agradecimiento:
+Javier Vidal Moreno-->
+</head>
+
+<body>
+<!--start page-->
+<div class="container_admin">
+
+<div class="franja_admin"></div>
+
+<!--start header-->
+<div class="headercontainer_admin">
+
+		<div class="logo"><img src="../images/logo.png" alt="logo" /></div>
+				<div class="header_admin">
+                	<div class="div_admin">Administración</div>
+                	<div class="div_bienvenido">Bienvenido: Iván</div>
+                </div>
+				
+                <!--cerrar sesión-->
+                <div class="logout_container">
+                
+                	<div class="logout"><a href="#">Cerrar sesión</a></div>
+                    <div class="preview"><a href="#">Ir al sitio</a></div>                
+                
+                </div>
+                <!--cerrar sesión-->
+                
+
+</div><!--end header-->
+
+<!--start arbol-->
+<div class="arbol_container">
+        <div class="arbol">
+			<div class="arboltext"><a href="#">Panel de control</a> \ Administrar Productos \ Añadir nuevo Producto \</div>
+         </div>
+</div>
+<!--end arbol-->
+
+<!--star body leftnavbar resultado-->
+<div class="bodycontainer">
+
+<!--star panel de control-->
+<div class=" contol_panel">
+<div class="div_border">
+
+<!--categorias y marcas-->	
+    <div class="div_categ_marca_container">
+    	<div class="categorias_list">
+        <label for="select"></label><select name="select" id="select"><option>Categorías...</option></select></div>
+    	
+        <div class="marcas_list">
+        <label for="select"></label><select name="select" id="select"><option>Marcas...</option></select></div>
+    </div>
+
+<!--titulo y referencia--> 
+
+	<div class="titulo_ref_container">
+       
+    	<div class=" float-left">
+        	<div class="legend"><span class="text_bold">Titulo:</span></div>
+        	<input name="Empresa" type="Empresa" class="add_titulo"/>
+        </div>    
+            
+        <div class="float-right">    
+            <div class="legend"><span class="text_bold">Referencia:</span></div>
+            <input name="Empresa" type="Empresa" class="add_ref"/>
+        
+        </div>
+        
+    </div>
+    
+<!--description e imagenes-->    
+    <div class="div_desc_imagenes_container">
+    	
+        <div class="div_descripcion">
+        	<div class="legend"> <span class="text_bold">Descripción del producto:</span></div>
+        	<textarea name="descripcion" class="descripcion_form" cols="descripcion"></textarea>
+    	</div>
+        
+        <div class="div_imagenes">
+        	<div class="titulo_imagenes">Añadir Imágenes:</div>
+	    <div class="div_imagenes_loader"><span class="text_bold">#1 </span><input type="submit" name="load" id="load" value="Imágen 1" />
+                <span class=" text_general">Archivo cargado...</span></div>
+        		
+        <div class="div_imagenes_loader"><span class="text_bold">#2 </span><input type="submit" name="load" id="load" value="Imágen 2" />
+                <span class=" text_general">Archivo cargado...</span></div>
+                
+	    <div class="div_imagenes_loader"><span class="text_bold">#3 </span><input type="submit" name="load" id="load" value="Imágen 3" />
+        		<span class=" text_general">Archivo cargado...</span></div>
+                
+        <div class="div_imagenes_loader"><span class="text_bold">#4 </span><input type="submit" name="load" id="load" value="Imágen 4" />
+       			<span class=" text_general">Archivo cargado...</span></div>
+                                
+        </div>
+        
+    </div>
+    
+<!--precios y promociones-->    
+    <div class="promociones_container">
+    
+          <div class="titulo_promo">Precios y  promociones:</div>
+          
+          <div class="promo_container">
+              <div class="legend"><span class="text_bold">Precio €</span></div>
+              <input name="Empresa" onclick="this.value='';" type="Empresa" class="add_precio" value="00,00"/>
+          </div>
+          
+          <div class="promo_container">
+              <div class="legend"><span class="text_bold">Descuento %</span></div>
+              <input name="Empresa" onclick="this.value='';" type="Empresa" class="add_descuento" value="00"/>
+          </div>
+          
+          <div class="promo_container">
+              <div class="legend"><span class="text_bold">Fecha: Alta promoción</span></div>
+              <input name="Empresa" onclick="this.value='';" type="Empresa" class="add_fecha" value="DD/MM/AAAA"/>
+          </div>
+          
+          <div class="promo_container">
+              <div class="legend"><span class="text_bold">Fecha: Baja promoción</span></div>
+              <input name="Empresa" onclick="this.value='';" type="Empresa" class="add_fecha" value="DD/MM/AAAA"/>
+          </div>
+    </div>
+ 
+<!--botones guardar salir--> 
+<div class="btn_container_form"> 
+	<div class="btn_guardar"><a href="#">Guardar</a></div>
+	<div class="btn_sin_guardar "><a href="#">Salir SIN Guardar</a></div>
+</div>
+ 
+
+</div>
+<!--end  div border-->       
+
+</div>
+<!--end  panel de control-->
+            
+          <!--star right list-->
+                  <div class=" right_list_container">
+                  		
+                        <!--recent prod-->
+						<div class="recent_prod_container">
+                        
+                          <div class="div_titulo_recent_prod">Prodcutos recientes</div>
+                          <div class="recent_list"><a href="#">Prodcutos nuemero 1</a></div>
+                          <div class="recent_list"><a href="#">Prodcutos nuemero 2</a></div>
+                          <div class="recent_list"><a href="#">Prodcutos nuemero 3</a></div>
+                          <div class="recent_list"><a href="#">Prodcutos nuemero 4</a></div>
+                          <div class="recent_list"><a href="#">Prodcutos nuemero 5</a></div>
+                  		
+                        </div>
+                        <!--end prod-->
+
+						<!--recent lientes-->
+						<div class="recent_prod_container">
+                        
+                          <div class="div_titulo_recent_clientes">Clientes recientes</div>
+                          <div class="recent_list"><a href="#">Cliente nuemero 1</a></div>
+                          <div class="recent_list"><a href="#">Cliente nuemero 2</a></div>
+                          <div class="recent_list"><a href="#">Cliente nuemero 3</a></div>
+                          <div class="recent_list"><a href="#">Cliente nuemero 4</a></div>
+                          <div class="recent_list"><a href="#">Cliente nuemero 5</a></div>
+                  		
+                        </div>
+                        <!--end clientes-->                  
+                  </div>
+          <!--end  right list-->
+
+</div>
+<!--end body leftnavbar resultado-->
+
+
+
+</div><!--end page-->
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% block title %}| Administración | Panel de control |{% endblock %}
+
+{% block contextualThree %}<a href="#">Panel de control</a> \{% endblock %}
+
+{% block left_content %}
+    <div class="icono_prod_container"><!--start 1a fila botones-->
+      <div class=" icono_admin_prod"><a href="{{ path('TKShopBackendProductsIndex') }}">Administrar Productos</a></div>
+      <div class=" icono_admin_users"><a href="{{ path('TKShopBackendUserStaffIndex') }}">Administrar Usuarios</a></div>
+      <div class=" icono_admin_clientes"><a href="{{ path('TKShopBackendUserClientIndex') }}">Administrar Clientes</a></div>
+      <div class=" icono_admin_categorias"><a href="{{ path('TKShopBackendCategoriesIndex') }}">Administrar Categorías</a></div>
+      <div class=" icono_admin_marcas"><a href="{{ path('TKShopBackendBrandsIndex') }}">Administrar Marcas</a></div>
+    </div><!--end 1a fila botones-->
+{% endblock %}

@@ -1,0 +1,13 @@
+{# src/Acme/BlogBundle/Resources/views/Frontend/Product/sideList.html.twig #}
+
+{#Requires:
+    - recentClients: Recent Clients
+#}
+<div class="recent_prod_container"> <!--Clientes recientes-->
+      <div class="div_titulo_recent_clientes">Clientes recientes</div>
+      {% for client in clients %}
+      <div class="recent_list"><a href="#">{{ client.username }}</a></div>
+      {% else %}
+      <div class="recent_list"><a href="#">Todavía no existen clientes registrados</a></div>
+      {% endfor %}
+</div><!--end clientes-->                  

@@ -1,0 +1,3 @@
+[18-Nov-2011 15:00:57] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298
+[18-Nov-2011 15:01:26] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298
+[18-Nov-2011 15:01:32] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298

@@ -1,0 +1,31 @@
+{#Requires:
+#}
+
+
+<script>
+jQuery(document).ready(function(){
+    jQuery("#buscar").click(function(){
+        jQuery(this).attr("value", "");
+    });
+    
+    jQuery("[name=form_buscar]").focusout(function(){
+        var buscar_field = jQuery(this).find("#buscar");
+        var value = jQuery(buscar_field).attr("value");
+        if(value == ""){
+            //jQuery(buscar_field).attr("value", "Buscar");
+        }
+    });
+});
+</script>
+
+<!--star buscar--> 	
+{% if targetController is defined %}
+<form name="form_buscar" action="{{ path(targetController)}}" method="GET">
+{% else %}    
+<form name="form_buscar" action="{{ path('TKShopFrontendSearchProductsByMultiQuery')}}" method="GET">
+{% endif %}    
+    <div class="buscarcontainer">
+        <input id="buscar" name="name" type="text" class="buscarform" value="Buscar" />
+        <input type="submit" class="buscarbtn" value="Buscar"></input>
+    </div><!--end buscar--> 
+</form>

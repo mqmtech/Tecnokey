@@ -1,0 +1,34 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block menu %}<!--start header-->
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block treeContainer %}
+    <!--start arbol-->
+    <div class="arbol_container">
+        <div class="arbol">
+            <div class="arboltext">
+                {% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> {% if search is defined %} \ Resultado de la busqueda: "{{ search.name }}" {% endif %}\
+                {% endblock %}
+            </div>
+        </div>
+            
+            {% include 'TecnokeyShopBundle:Frontend:orderBy.partialhtml.twig'%}
+    </div>
+    <!--end arbol-->
+{% endblock treeContainer %}
+
+
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+{#<div class="right">#}
+        {% include 'TecnokeyShopBundle:Frontend/Product:showAll.partialhtml.twig'%}
+{#</div>#}
+{% endblock right_content %}
