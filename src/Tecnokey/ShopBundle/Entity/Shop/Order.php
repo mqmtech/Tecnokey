@@ -21,6 +21,12 @@ use \DateTime;
  */
 class Order {
 
+    const STATUS_0_NOT_SAVED = "NOT_SAVED";                             //order not saved in database
+    const STATUS_1_SAVED = "SAVED";                                     //order saved in database
+    const STATUS_2_PENDING_CLIENT_ACTION = "PENDING_CLIENT_ACTION";     //order pending for some client action (ex.: to pay the shopping)
+    const STATUS_3_READY_TO_DELIVERY = "READY_TO_DELIVERY";             //order ready to be delivered
+    const STATUS_4_DELIVERED= "DELIVERED";                              //order delivered
+    
     /**
      * @var integer $id
      *
@@ -133,6 +139,13 @@ class Order {
      */
     private $orderState;
     
+    /**
+     *
+     * @var string
+     * @ORM\Column(name="status", type="string", nullable=true)
+     */
+    private $status;
+    
    
     /**
      *
@@ -156,6 +169,8 @@ class Order {
         $this->createdAt = new DateTime('now');
         
         $this->items = new ArrayCollection();
+        
+        $this->setStatus(self::STATUS_0_NOT_SAVED);
     }
     
     public function getItems() {
@@ -185,7 +200,16 @@ class Order {
     public function setId($id) {
         $this->id = $id;
     }
+    
+    public function getStatus() {
+        return $this->status;
+    }
 
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    
     public function getName() {
         return $this->name;
     }

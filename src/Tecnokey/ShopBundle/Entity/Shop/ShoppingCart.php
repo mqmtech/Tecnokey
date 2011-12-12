@@ -54,6 +54,65 @@ class ShoppingCart {
      * @ORM\Column(name="modifiedAt", type="datetime", nullable=true)
      */
     private $modifiedAt;
+    
+    /**
+     *
+     * @var float $shippingBasePrice
+     * 
+     * @ORM\Column(name="shippingBasePrice", type="float", nullable=true)
+     */
+    private $shippingBasePrice;
+
+    /**
+     *
+     * @var float $totalProductsBasePrice
+     * 
+     * @ORM\Column(name="totalProductsBasePrice", type="float", nullable=true)
+     */
+    private $totalProductsBasePrice;
+    
+    /**
+     * Result of ProductsBasePrice + ShippingBasePrice
+     * 
+     * @var float $totalBasePrice
+     * 
+     * @ORM\Column(name="totalBasePrice", type="float", nullable=true)
+     */
+    private $totalBasePrice;
+    
+    /**
+     * Per unitary tax that must be applied to the totalBasePrice
+     *
+     * @var float $tax
+     * 
+     * @ORM\Column(name="tax", type="float", nullable=true)
+     */
+    private $tax;
+    
+    /**
+     * Result of totalBasePrice * tax
+     * @var float $taxPrice 
+     * 
+     * @ORM\Column(name="taxPrice", type="float", nullable=true)
+     */
+    private $taxPrice;
+
+    /**
+     * Result of totalBasePrice + taxPrice
+     * 
+     * @var float $totalPrice
+     * 
+     * @ORM\Column(name="totalPrice", type="float", nullable=true)
+     */
+    private $totalPrice;
+
+    /**
+     *
+     * @var string $shippingMethod
+     * 
+     * @ORM\Column(name="shippingMethod", type="string", length=255, nullable=true)
+     */
+    private $shippingMethod;
 
     /**
      *
@@ -79,6 +138,62 @@ class ShoppingCart {
         $this->items = new ArrayCollection();
     }
     
+    public function getShippingBasePrice() {
+        return $this->shippingBasePrice;
+    }
+
+    public function setShippingBasePrice($shippingBasePrice) {
+        $this->shippingBasePrice = $shippingBasePrice;
+    }
+
+    public function getTotalProductsBasePrice() {
+        return $this->totalProductsBasePrice;
+    }
+
+    public function setTotalProductsBasePrice($totalProductsBasePrice) {
+        $this->totalProductsBasePrice = $totalProductsBasePrice;
+    }
+
+    public function getTotalBasePrice() {
+        return $this->totalBasePrice;
+    }
+
+    public function setTotalBasePrice($totalBasePrice) {
+        $this->totalBasePrice = $totalBasePrice;
+    }
+
+    public function getTax() {
+        return $this->tax;
+    }
+
+    public function setTax($tax) {
+        $this->tax = $tax;
+    }
+
+    public function getTaxPrice() {
+        return $this->taxPrice;
+    }
+
+    public function setTaxPrice($taxPrice) {
+        $this->taxPrice = $taxPrice;
+    }
+
+    public function getTotalPrice() {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice($totalPrice) {
+        $this->totalPrice = $totalPrice;
+    }
+
+    public function getShippingMethod() {
+        return $this->shippingMethod;
+    }
+
+    public function setShippingMethod($shippingMethod) {
+        $this->shippingMethod = $shippingMethod;
+    }
+
     public function getId() {
         return $this->id;
     }
