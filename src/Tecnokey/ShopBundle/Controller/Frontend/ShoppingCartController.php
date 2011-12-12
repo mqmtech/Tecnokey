@@ -113,12 +113,12 @@ class ShoppingCartController extends Controller {
             throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
         }
 
-        //testing
-        $viewModelFactory = $this->get('viewModelFactory');
-        $shoppingCartViewModel = $viewModelFactory->create(new \Tecnokey\ShopBundle\ViewModel\Shop\ShoppingCartViewModelType(), $entity, array('entity' => $entity ));
-        //end testing
+        // Fill Shopping Cart with the current last Market/Offer Info
+        $checkoutManager = $this->get('checkoutManager');
+        $entity = $checkoutManager->checkout($entity);
+        // End filling Shopping Cart
         
-        $editForm = $this->createForm(new ShoppingCartType(), $shoppingCartViewModel);
+        $editForm = $this->createForm(new ShoppingCartType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -144,13 +144,8 @@ class ShoppingCartController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
         }
-
-        //testing
-        $viewModelFactory = $this->get('viewModelFactory');
-        $shoppingCartViewModel = $viewModelFactory->create(new \Tecnokey\ShopBundle\ViewModel\Shop\ShoppingCartViewModelType(), $entity, array('entity' => $entity ));
-        //end testing
         
-        $editForm   = $this->createForm(new ShoppingCartType(), $shoppingCartViewModel);
+        $editForm   = $this->createForm(new ShoppingCartType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();

@@ -23,9 +23,6 @@ class PriceManager {
      * @return PriceInfo
      */
     public function getItemCollectionPriceInfo(array $itemsCollection){
-        if($itemsCollection == NULL){
-            return NULL;
-        }
         
         $priceInfo = new PriceInfo();
         $totalBasePrice = 0.0;

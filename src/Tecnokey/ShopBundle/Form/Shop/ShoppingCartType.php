@@ -19,10 +19,10 @@ class ShoppingCartType extends AbstractType
                 'type' => new ShoppingCartItemType()
             ))
             ->add('totalBasePrice')
-            ->add('iva', 'number', array(
+            ->add('tax', 'number', array(
                 'read_only' => true
             ))
-            ->add('ivaPrice')
+            ->add('taxPrice')
             ->add('totalPrice')
         ;
     }

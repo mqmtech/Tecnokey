@@ -9,7 +9,6 @@ namespace Tecnokey\ShopBundle\Service;
 
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCartItem;
-use Tecnokey\ShopBundle\ViewModel\Shop\ShoppingCartViewModel;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Tecnokey\ShopBundle\Entity\Shop\Product;
 use Tecnokey\ShopBundle\Service\PriceManager;

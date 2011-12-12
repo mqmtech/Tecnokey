@@ -35,6 +35,12 @@
                 >
         </service>
         
+        <service id="checkoutManager" class="Tecnokey\ShopBundle\Service\CheckoutManager" public="true"
+                >
+            <argument type="service" id="priceManager" />
+            <argument type="service" id="marketManager" />
+        </service>
+        
         <service id="shoppingCartManager" class="Tecnokey\ShopBundle\Service\ShoppingCartManager" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="priceManager" />
