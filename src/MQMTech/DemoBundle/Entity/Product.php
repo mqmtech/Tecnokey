@@ -9,7 +9,7 @@ use MQMTech\DemoBundle\Entity\Image;
 /**
  * MQMTech\DemoBundle\Entity\Product
  *
- * @ORM\Table(name="ProductDemoTable")
+ * @ORM\Table(name="mqmtech_demo_product")
  * @ORM\Entity
  */
 class Product

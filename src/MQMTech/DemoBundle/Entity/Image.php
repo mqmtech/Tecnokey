@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MQMTech\DemoBundle\Entity\Image
  *
- * @ORM\Table(name="ImageDemoTable")
+ * @ORM\Table(name="mqmtech_demo_image")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
