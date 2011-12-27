@@ -114,32 +114,15 @@ class ProductController extends Controller {
             throw $this->createNotFoundException('Unable to find Shop\Product entity.');
         }
         
-        //FIX image VIRTUAL file field
-        /*$image = $entity->getImage();
-        if($image != null){
-            $image->setFile($image->getId().'.'.$image->getPath());
-        }
-        
-        $image = $entity->getSecondImage();
-        if($image != null){
-            $image->setFile($image->getId().'.'.$image->getPath());
-        }
-        
-        $image = $entity->getThirdImage();
-        if($image != null){
-            $image->setFile($image->getId().'.'.$image->getPath());
-        }
-        
-        $image = $entity->getFourthImage();
-        if($image != null){
-            $image->setFile($image->getId().'.'.$image->getPath());
-        }*/     
-        //End FIX image VIRTUAL file field
-        
-        //test
-        $categories = $em->getRepository('TecnokeyShopBundle:Shop\Category')->findAll();
-        //endtest
-        
+        /**
+         * TODO: Create service Layer to guarantee data integrity
+         * example: Verify that a product has an offer ( or create a void offer ) before load the form )
+         */
+         
+         if($entity->getOffer() == NULL){
+             $entity->setOffer(new \Tecnokey\ShopBundle\Entity\Shop\TimeOffer());
+         }
+                
         $productType = $this->get('form.type.product');
         $editForm   = $this->createForm($productType, $entity);
         $deleteForm = $this->createDeleteForm($productId);
@@ -148,11 +131,10 @@ class ProductController extends Controller {
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView()
-        );
-        
+        );        
     }
     
-        /**
+    /**
      * Displays a form to edit an existing Shop\Product entity.
      *
      * @Route("/{productId}/clonar", name="TKShopBackendProductClone")
@@ -237,7 +219,7 @@ class ProductController extends Controller {
 
         $editForm->bindRequest($request);
 
-        if (false || $editForm->isValid()) {//// TRUE value is a  TEMPORAL SOLUTION OF DATETIME PROBLEM-> SOLVE SOON  ////
+        if ($editForm->isValid()) {//// TRUE value is a  TEMPORAL SOLUTION OF DATETIME PROBLEM-> SOLVE SOON  ////
             
             //FIX VIRTUAL file update in Image
             $image = $entity->getImage();
@@ -281,7 +263,7 @@ class ProductController extends Controller {
                 }
             }
             //End FIX VIRTUAL file update in Image
-            
+
             $em->persist($entity);
             $em->flush();
 

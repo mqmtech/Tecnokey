@@ -251,12 +251,19 @@ class Product {
         //end reseting the images
     }
     
-    
+    /**
+     *
+     * @return TimeOffer 
+     */
     public function getOffer() {
         return $this->offer;
     }
 
-    public function setOffer($offer) {
+    /**
+     *
+     * @param TimeOffer $offer 
+     */
+    public function setOffer(TimeOffer $offer) {
         $this->offer = $offer;
     }
 

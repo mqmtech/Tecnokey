@@ -31,4 +31,11 @@ class ShoppingCartType extends AbstractType
     {
         return 'tecnokey_shopbundle_shop_shoppingcarttype';
     }
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Tecnokey\ShopBundle\Entity\Shop\ShoppingCart',
+        );
+    }
 }
