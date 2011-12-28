@@ -120,6 +120,7 @@ class ShopExtension extends \Twig_Extension {
      * @return string
      */
     public function toAppPath($path){
+        try{
         $baseUrl = $this->container->get('request')->getBaseUrl();
         
         $basePos = strpos($path, $baseUrl);
@@ -133,6 +134,10 @@ class ShopExtension extends \Twig_Extension {
         $lenPath = strlen($path);
         
         $path = substr($path, $lenBase, $lenPath -1);
+        }
+       catch (\Exception $e){
+           
+       }
         return $path;
     }
 
