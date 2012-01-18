@@ -12,6 +12,7 @@
 {% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestros productos...{% endblock %}
 
 {% block jsfunctions %}
+    {% set TITLE_MAX_LENGTH = 25 %}
     <script>
     jQuery(window).load(function(){
          
@@ -32,7 +33,11 @@
 
         function showTooltip(target)
         {
-            $(target).parent().parent().find(".category_tooltip").fadeIn().show();
+            var title = $(target).parent().parent().find(".category_tooltip").find("a").html();
+            if(title && title.length > {{ TITLE_MAX_LENGTH }}){
+                
+                $(target).parent().parent().find(".category_tooltip").fadeIn().show();
+            }
         }
 
         function hideTooltip(target)
