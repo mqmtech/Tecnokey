@@ -1610,7 +1610,12 @@ input.buscarbtn{
 }
 
 
-
+.zoom_lista{
+    
+    position: absolute;
+    margin-left: 79px;
+    //float: left;
+}
 
 .zoom_lista img{
     height: 160px; /* el alto manda, es imprescindible */ 
@@ -1619,11 +1624,7 @@ input.buscarbtn{
 
     border: 1px solid #ccc; 
 
-    background-color: #f87e15; 
-    
-
-    position: absolute;
-
+    background-color: #f87e15;        
 }
 
 

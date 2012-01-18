@@ -33,8 +33,8 @@ class ProductType extends AbstractType
             ->add('sku', null, array(
                 'label' => 'add_ref'
             ))
-            //->add('basePrice', null, array(
-            ->add('basePrice', 'prettyPrice', array(
+            ->add('basePrice', null, array(
+            //->add('basePrice', 'prettyPrice', array(
                 'label' => 'add_precio'
             ))
             ->add('offer', new TimeOfferType())

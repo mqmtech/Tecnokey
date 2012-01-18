@@ -49,7 +49,7 @@
         {% set productInfo = productsInfo[product.id]  %}
         <div class="listbox_container" name="test">    
             
-            <div class="fotoprodcontainer" name = "test">
+            <div class="fotoprodcontainer">
                 <!--div class="fotoprod">¡FOTO!</div-->
                 {% set imageSizeInfo =  product.image.getImageSize("68", "68") %}
                 <a href="{{ path('TKShopFrontendProductShow', {'productId': product.id}) }}"><img class="fotoprod" src="{{ asset(product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" /></a>
