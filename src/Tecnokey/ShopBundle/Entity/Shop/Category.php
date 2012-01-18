@@ -331,6 +331,26 @@ class Category
        return $contentStart . "  " . $name . "  " . $contentEnd;
     }
     
+    /**
+     *
+     * @param array $ancestors
+     * @return array 
+     */
+    public function getAncestors(){
+        if($this->getParentCategory() == NULL){
+            return array();
+        }
+        else{
+            $ancestors = $this->getParentCategory()->getAncestors();
+            $ancestor = $this->getParentCategory();     
+            $ancestors[] = $ancestor;
+            
+            return $ancestors;
+        }
+        
+        //return array($this, $this, $this);
+    }
+    
     function __clone(){
         // If the entity has an identity, proceed as normal.
         if ($this->id) {

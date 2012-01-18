@@ -7,7 +7,7 @@
         <div class="header_admin">
             <div class="div_admin">Administración</div>
 
-            {% if(is_granted('ROLE_SUPER_ADMIN')) %}
+            {% if(is_granted('ROLE_BASIC_STAFF')) %}
             <div class="div_bienvenido">Bienvenido: {{ app.user.username}}</div>
             {% endif %}
         </div>

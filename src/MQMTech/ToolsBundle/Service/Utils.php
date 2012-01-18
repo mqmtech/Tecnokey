@@ -198,5 +198,40 @@ class Utils{
         
         return $parameters;
     }
+    
+    /**
+     *
+     * @param string|float $price
+     * @return string 
+     */
+    public function prettyPrice($price) {
+
+        if($price == NULL) {
+            return $price;
+        }
+        
+        $price .=  ""; //convert to string
+        
+        $priceArray = explode(".", $price);
+        
+        $integerPart = $priceArray[0];
+        $floatingPart = NULL;
+        if(count($priceArray) > 1){
+            $floatingPart = $priceArray[1];
+        }
+
+        $length = strlen($integerPart);
+        $prettyPrice = "";
+        for ($dotCount=0, $index = $length -1; $index >= 0; $index--, $dotCount++) {
+            if($dotCount > 0 && $dotCount % 3 == 0){
+                $prettyPrice.= '.';
+            }
+            $prettyPrice.= $integerPart[$index];                        
+        }
+        $prettyPrice = strrev($prettyPrice);
+        $prettyPrice.= $floatingPart != NULL ? "," . $floatingPart : "";
+        
+        return $prettyPrice;
+    }
 
 }

@@ -20,7 +20,12 @@
     <div class="listbox_container">    
 
         <!--div class="fotoprod">¡FOTO!</div-->
-        <a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id}) }}"><img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" /></a>
+        {#<a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id}) }}"><img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" /></a>#}
+        <div class="fotoprodcontainer">
+            <!--div class="fotoprod">¡FOTO!</div-->
+            {% set imageSizeInfo =  category.image.getImageSize("68", "68") %}
+            <a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': category.id}) }}"><img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" /></a>
+        </div> <!-- end fotoprod -->
         <div class="listbox">
             {# modded:  again try to show the inner categories, if there is NO more categories then it will redirect to the ProductsByCategory #}
             <div class="titulo_box">

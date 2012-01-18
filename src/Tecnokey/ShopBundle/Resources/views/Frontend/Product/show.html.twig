@@ -3,9 +3,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <link type="text/css" href="{{ asset('bundles/tecnokey/js/jqueryui/css/ui-lightness/jquery-ui-1.8.16.custom.css') }}" rel="stylesheet" />	
-    
-    <style>
-    </style>
 {% endblock %}
 
 {% block javascripts %}
@@ -122,13 +119,13 @@
             <div class="precio_cesta_container">
                 {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
                     {% if(productInfo.isOffer is defined and productInfo.isOffer) %}
-                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff ~ "" ~ currencySymbol() | default(noPriceAccess())}}</div>
+                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff | prettyPrice ~ "" ~ currencySymbol() | default(noPriceAccess())}}</div>
                         <div class="text_bold">REF: {{productInfo.product.sku}}</div>
 
                         <div class="descuento_container_ficha">
-                            <div class="precio_tachado_ficha">{{ product.basePrice | roundoff | default(noPriceAccess())}} {% if(product.basePrice) %} {{currencySymbol()}} {% endif %}</div>
+                            <div class="precio_tachado_ficha">{{ product.basePrice | roundoff | prettyPrice  | default(noPriceAccess())}} {% if(product.basePrice) %} {{currencySymbol()}} {% endif %}</div>
                             <div class="descuento_ficha">{{ product.offer.discount ~ "%"}}</div>
-                            <div class="ahorro_ficha">Ahorra {{ ( product.basePrice - productInfo.basePrice )| roundoff ~ currencySymbol() }}</div>
+                            <div class="ahorro_ficha">Ahorra {{ ( product.basePrice - productInfo.basePrice )| roundoff | prettyPrice  ~ currencySymbol() }}</div>
                         </div>
                         <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
                         <div class="oferta">
@@ -136,7 +133,7 @@
                         	<p class="validez">{{ product.offer.deadline |date("d/m/Y") }}</p>
                     	</div> 
                         {% else %} {# else offer #}
-                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff | default(noPriceAccess())}} {% if(productInfo.basePrice) %} {{currencySymbol()}} {% endif %}</div>
+                        <div class="precio_ficha">{{ productInfo.basePrice | roundoff | prettyPrice | default(noPriceAccess())}} {% if(productInfo.basePrice) %} {{currencySymbol()}} {% endif %}</div>
                         <div class="text_bold">REF: {{productInfo.product.sku}}</div>
                         <div class="add_cesta_ficha"><a href="#"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
                     {% endif %} {# endif offer #}

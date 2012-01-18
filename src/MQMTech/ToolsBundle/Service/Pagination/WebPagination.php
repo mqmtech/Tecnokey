@@ -20,6 +20,7 @@ class WebPagination implements IPagination {
     const DEF_CURRENT_PAGE= 0;
     const DEF_CURRENT_OFFSET= 0;
     const REQUEST_QUERY_PARAM= 'page';
+    const DEF_RANGE_PAGINATION = 3; //+ - 3
     
     /**
      *
@@ -220,6 +221,37 @@ class WebPagination implements IPagination {
     public function getLastPage(){
        $length = count($this->pages);
        return $this->pages[$length -1];
+    }
+    
+    public function getStartRange(){
+        // start page
+        $start = $this->getCurrentPage() - self::DEF_RANGE_PAGINATION;
+        if($start < 0 ) {
+            $start = 0;
+        }
+        return $start;
+    }
+    
+    public function getEndRange(){
+        $start = $this->getStartRange();
+        
+        $length = count($this->pages);
+        $end = $start + (self::DEF_RANGE_PAGINATION * 2);
+        if($end >= $length){
+            $end = $length - 1;
+        }
+        return $end;
+    }
+    
+    public function getCurrentRange(){
+        $currentPageIndex = $this->getCurrentPage();
+        $currentPage = $this->pages[$currentPageIndex];
+        
+        return array(
+            'offset' => $currentPage->getOffset(),
+            'limit' => $currentPage->getLimit(),
+            'lenght' => ( $currentPage->getLimit() - $currentPage->getOffset() )
+        );
     }
     
     public function getResponsePath() {

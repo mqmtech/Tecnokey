@@ -14,6 +14,11 @@ use Doctrine\DBAL\Types\BooleanType;
  * @ORM\HasLifecycleCallbacks
  */
 class Image {
+    
+    const DEF_WIDTH = 68;
+    const DEF_HEIGHT = 68;
+    const DEF_H_PADDING = 0;
+    const DEF_V_PADDING = 0;
 
     /**
      * @var integer $id
@@ -89,6 +94,21 @@ class Image {
         $this->createdAt = new \DateTime();
     }
     
+    function __clone(){
+        
+        //generate new file
+        $path = uniqid().'.jpg';//.$this->file->guessExtension());
+        copy($this->getAbsolutePath(), $this->getUploadRootDir() . '/' . $path);
+        $this->setPath($path);
+        // end generating new file
+        
+        //Set the default name
+        if ($this->getName() == null) {
+            $this->setName($this->getPath());
+        }
+        //end setting the default name
+    }
+    
     //** End Factory
     
     //** Functions
@@ -122,7 +142,7 @@ class Image {
         return __DIR__ . '/../../../../../web/' . $this->getPrivateDir();
     }
 
-    protected function getUploadRootDir() {
+    public function getUploadRootDir() {
         // the absolute directory path where uploaded documents should be saved
         return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
@@ -176,7 +196,12 @@ class Image {
         $absolutePath = $this->getFile();
         
         if($absolutePath != NULL){
-            unlink($absolutePath);
+            try{
+                unlink($absolutePath);
+            }
+            catch(\Exception $e){
+                
+            }
         }
     }
 
@@ -246,7 +271,17 @@ class Image {
      */
     public function getImageSize($maxWidth=NULL, $maxHeight=NULL){
         $path = $this->getAbsolutePath();
+        try{
         list($width, $height, $type, $attr)= getimagesize($path);
+        }
+        catch(\Exception $e){
+            return array(
+            'width' => self::DEF_WIDTH,
+            'height' => self::DEF_HEIGHT,
+            'hPadding' => self::DEF_H_PADDING,
+            'vPadding' => self::DEF_V_PADDING,
+            );
+        }
         
         $width += 0.0;
         $height += 0.0;

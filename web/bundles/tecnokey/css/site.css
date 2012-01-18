@@ -765,7 +765,7 @@ body {
 
 .numbers_container {
 	height: 25px;
-	width: 270px;
+	width: 400px;
 //	border-right: 1px solid #ccc;
 	line-height: 25px;
 	text-align: center;
@@ -810,16 +810,28 @@ body {
 /* resultados de busqueda y lista de productos nivel 2
 =====================================================================*/
 .listbox_container{
-	height: 70px;
+	height: auto;
 	width: 721px;
 	border: 1px solid #ccc;
 	float: left;
 	padding: 5px 0 5px 5px;
 	background: #fff url(../images/fondo_lisbox.png) repeat-x;
-	margin: 0 0 5px;
+	margin: 0 0 10px;
 }
 
 .fotoprod{
+	height: 68px;
+	width: 68px;
+	//border: 1px solid #ccc;
+	float: left;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	line-height: 68px;
+	background-color: #fff;
+}
+
+.fotoprodcontainer{
 	height: 68px;
 	width: 68px;
 	border: 1px solid #ccc;
@@ -832,7 +844,7 @@ body {
 }
 
 .listbox{
-	height: 70px;
+	min-height: 70px;
 	width: 550px;
 	float: left;
 	padding: 0;
@@ -853,6 +865,24 @@ body {
 	width: 550px;
 	height: auto;
 	float: left;
+}
+
+.ref_lista{
+	width: 550px;
+	height: 16px;
+	color: #444;
+	font: bold 0.7em/18px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	float: left;
+	display: block;
+	margin-top: 4px;
+}
+
+.ref{
+	float: left;
+	display: block;
+	margin-right: 5px;
+	padding-right: 5px;
+	border-right: 1px solid #ccc;
 }
 
 /* Precios====================*/
@@ -1581,26 +1611,50 @@ input.buscarbtn{
 
 
 
-/*.page input{
-    float: left;
-    height: 16px;
-    width: 16px;
-    border: 1px solid #87b9fd;
-    margin-left: 5px;
-    font: bold 0.688em/10px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
-    text-align: center;
-        
-    padding: 0;
-    background-color: transparent;
+
+.zoom_lista img{
+    height: 160px; /* el alto manda, es imprescindible */ 
+
+    width: auto; 
+
+    border: 1px solid #ccc; 
+
+    background-color: #f87e15; 
     
-    cursor: pointer;
+
+    position: absolute;
 
 }
 
-.page input.current{
-    background-color: #258cdb;
-    color: #fff;
+
+
+.category_tooltip {
+    display: block;
+    position: absolute;
+    background-color: #848484;
+    padding: 10px;
+}
+
+.timeline_fondo{
+	height: auto;
+	width: auto;
+	background: url(../images/Empresa_timeLine_fondo.png) repeat-y 0 -61px;
+}
+
+.div_fecha_empresa{
+	width: auto;
+	height: 40px;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+.flash_container_empresa{
+	width: 720px;
+	height: 155px;
+	margin-bottom: 10px;
+}
+
+
+/*.tooltip_category_tittle_overloaded{
+    z-index: 10
 }*/
-
-
-

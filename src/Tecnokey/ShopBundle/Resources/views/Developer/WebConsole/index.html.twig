@@ -1,0 +1,27 @@
+{# src/Acme/BlogBundle/Resources/views/Backend/Product/index.html.twig #}
+{% extends 'TecnokeyShopBundle:Backend:layout.html.twig' %}
+
+{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ Developer \{% endblock %}
+
+{% block left_content %}
+    
+    <form action="{{ path('TKShopDeveloperExec') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+    
+        <input type="submit" style="display: inline;"/>
+    </form>
+    
+    {% set commands = app.session.get('console.commands') %}
+    {% if commands != NULL %}
+        {% for command in commands %}
+            <div style="color: gray;">{{ command.input }}</div>
+             
+             <p style="color: navy; font-size: small;">
+            {% for item in command.output %}
+                {{ item }}
+            {% endfor %}
+            </p>
+        {% endfor %}
+    {% endif %} 
+    
+{% endblock %}

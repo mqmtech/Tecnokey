@@ -8,7 +8,7 @@
 
         <parameter key="view.utils_class">MQMTech\ToolsBundle\Service\Utils</parameter>    
         
-        <parameter key="view.pagination.setLength_value">10</parameter>
+        <parameter key="view.pagination.setLength_value">6</parameter>
         <parameter key="view.pagefactory_class">MQMTech\ToolsBundle\Service\Pagination\WebPageFactory</parameter>  
         <parameter key="view.pagination_class">MQMTech\ToolsBundle\Service\Pagination\WebPagination</parameter>  
         

@@ -405,6 +405,8 @@ class User implements UserInterface, \Serializable
         
         $roles = array(
             'ROLE_USER'=>'ROLE_USER',
+            'ROLE_BASIC_STAFF'=>'ROLE_BASIC_STAFF',
+            'ROLE_STAFF'=>'ROLE_STAFF',
             'ROLE_ADMIN'=>'ROLE_ADMIN',
             'ROLE_SUPER_ADMIN'=>'ROLE_SUPER_ADMIN',
         );

@@ -11,6 +11,41 @@
 
 {% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Nuestros productos...{% endblock %}
 
+{% block jsfunctions %}
+    <script>
+    jQuery(window).load(function(){
+         
+        var tooltipTimeout;
+        
+
+        $(".category_title > a").hover(
+        function(){
+           var target = $(this);
+           tooltipTimeout = setTimeout(function(){
+               showTooltip(target);
+           }, 50);
+        }, function(){
+            var target = $(this);
+            hideTooltip(target);
+          }
+        );
+
+        function showTooltip(target)
+        {
+            $(target).parent().parent().find(".category_tooltip").fadeIn().show();
+        }
+
+        function hideTooltip(target)
+        {
+            clearTimeout(tooltipTimeout);
+            $(target).parent().parent().find(".category_tooltip").fadeIn().hide();
+        }
+
+    });
+
+    </script>
+{% endblock jsfunctions %}
+
 {% block right %}
     <div class="bodyprod">
     {% for col in 0..3 %}
@@ -25,7 +60,9 @@
                 {% set category = categories[aCat] %}
                     <div class="prod">
                         <div class="tituloprodbox">
-                            <h2><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}">{{ category.name | upper}}</a></h2>
+                            <h2 class="category_title"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}">{{ category.name | upper | truncate(25)}}</a></h2>
+                            <h2 class="category_tooltip" style="display: none"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}">{{ category.name | upper }}</a></h2>
+                            {#<div class="category_tooltip" style="display: none">{{ category.name }}</div>#}
                         </div>
                             <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : category.id}) }}"><img class="foto_prodbox" src="{{ asset(category.image.getWebPath) }}" alt="buzones" /></a></div>
                     </div>

@@ -7,7 +7,9 @@ security:
             encode_as_base64: false
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_BASIC_STAFF:       ROLE_USER
+        ROLE_STAFF:       [ROLE_USER, ROLE_BASIC_STAFF]    
+        ROLE_ADMIN:       [ROLE_USER, ROLE_STAFF]                
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -16,8 +18,10 @@ security:
         in_memory:
             users:
                 user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                staff: { password: staffpass, roles: [ 'ROLE_ADMIN' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
+                basicstaff: { password: basicstaffpass, roles: [ 'ROLE_BASIC_STAFF' ] }
+                staff: { password: staffpass, roles: [ 'ROLE_STAFF' ] }
+                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                superadmin: { password: superadminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
         user_db:
             entity: { class: Tecnokey\ShopBundle\Entity\Shop\User, property: username }
 
@@ -54,8 +58,17 @@ security:
     access_control:
         - { path: ^/tienda/pedido/, roles: ROLE_USER}
         #- { path: ^/tienda/usuarios/, roles: ROLE_USER}
-        - { path: ^/admin/productos/$, roles: ROLE_ADMIN}
-        - { path: ^/admin/productos/([0-9]+)|(~)/, roles: ROLE_SUPER_ADMIN}
-        - { path: ^/admin/, roles: ROLE_SUPER_ADMIN }
+        
+        - { path: ^/admin/productos/, roles: ROLE_BASIC_STAFF}
+        - { path: ^/admin/productos/([0-9]+)|(~)/eliminar, roles: ROLE_BASIC_STAFF}        
+        
+        - { path: ^/admin/categorias/$, roles: ROLE_STAFF}
+        - { path: ^/admin/marcas/$, roles: ROLE_STAFF}
+        
+        - { path: ^/admin/$, roles: ROLE_BASIC_STAFF }
+        - { path: ^/admin/panelControl/$, roles: ROLE_BASIC_STAFF }
+                
+        - { path: ^/admin/, roles: ROLE_STAFF }
+        
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

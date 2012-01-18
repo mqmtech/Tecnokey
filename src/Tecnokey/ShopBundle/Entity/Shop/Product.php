@@ -230,25 +230,35 @@ class Product {
         // otherwise do nothing, do NOT throw an exception!
         
         //reset images
-        if($this->image){
-            $this->image = NULL;
+        $image = $this->image;
+        if($image){
+            $this->image = clone ($image);
         }
         
         //reset images
-        if($this->secondImage){
-            $this->secondImage = NULL;
+        $image = $this->secondImage;
+        if($image){
+            $this->secondImage = clone ($image);
         }
         
         //reset images
-        if($this->thirdImage){
-            $this->image = NULL;
+        $image = $this->thirdImage;
+        if($image){
+            $this->thirdImage = clone ($image);
         }
         
         //reset images
-        if($this->fourthImage){
-            $this->image = NULL;
+        $image = $this->fourthImage;
+        if($image){
+            $this->fourthImage = clone ($image);
         }
         //end reseting the images
+        
+        //reset offert
+        if($this->offer != NULL){
+            $this->offer = clone ($this->offer);
+        }
+        
     }
     
     /**

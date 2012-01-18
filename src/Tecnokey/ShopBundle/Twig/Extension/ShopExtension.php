@@ -78,6 +78,7 @@ class ShopExtension extends \Twig_Extension {
             'toAppPath' => new \Twig_Filter_Method($this, 'toAppPath'),
             'floor' => new \Twig_Filter_Method($this, 'floor'),
             'displace' => new \Twig_Filter_Method($this, 'replace'),
+            'prettyPrice' => new \Twig_Filter_Method($this, 'prettyPrice'),
         );
     }
 
@@ -209,6 +210,15 @@ class ShopExtension extends \Twig_Extension {
      */
     public function floor($number){
         return floor($number);
+    }
+    
+    /**
+     *
+     * @param float $subject
+     * @return string
+     */
+    public function prettyPrice($price) {
+        return $this->utils->prettyPrice($price);
     }
 
 }

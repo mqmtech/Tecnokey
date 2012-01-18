@@ -4,7 +4,7 @@
 
 <div class="recent_prod_container"><!--recent prod-->
     
-  <div class="div_titulo_recent_prod">Prodcutos recientes</div>
+  <div class="div_titulo_recent_prod">Productos recientes</div>
   {% for product in products %}
     <div class="recent_list"><a href="{{ path('TKShopBackendProductEdit', {'productId' : product.id}) }}">{{ product.name  }}</a></div>
           {% else %}

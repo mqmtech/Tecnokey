@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tecnokey\ShopBundle\Form\Shop\ProductType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Exception;
 
 use MQMTech\ToolsBundle\Service\Pagination;
@@ -210,6 +211,13 @@ class ProductController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\Product entity.');
         }
+        
+        //save old offer
+        $oldOffer = $entity->getOffer();
+        $oldOffer = clone ($oldOffer);
+        
+        $oldBasePrice = $entity->getBasePrice();
+        //end saving old offer
 
         $productType = $this->get('form.type.product');
         $editForm   = $this->createForm($productType, $entity);
@@ -263,6 +271,22 @@ class ProductController extends Controller {
                 }
             }
             //End FIX VIRTUAL file update in Image
+            
+            // Verify what is modified and permission
+                $data = $editForm->getData();
+                
+                $offer = $data->getOffer();
+                $basePrice = $data->getBasePrice();
+                
+                if($offer->getDiscount() != $oldOffer->getDiscount() || $oldBasePrice != $basePrice
+                || $oldOffer->getStart() != $offer->getStart() || $oldOffer->getDeadline() != $offer->getDeadline()
+                ){
+                    if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+                        throw new AccessDeniedException();
+                    }
+                }
+                
+            // end verigy what is modified and permissions
 
             $em->persist($entity);
             $em->flush();
@@ -370,14 +394,15 @@ class ProductController extends Controller {
         
         //set the delete form for every product
         $deleteForms = array();
-        foreach ($categories as $category) {
-            $form = $this->createDeleteForm($category->getId());
-            $deleteForms[$category->getId()] = $form->createView();
+        foreach ($categories as $subCategory) {
+            $form = $this->createDeleteForm($subCategory->getId());
+            $deleteForms[$subCategory->getId()] = $form->createView();
         }
 
         //end setting the delete form for every product
         
         return array(
+            'category' => $category,
             'categories' => $categories,
             'deleteForms' => $deleteForms,
         );      
@@ -415,6 +440,7 @@ class ProductController extends Controller {
         
         
         return array(
+            'category' => $category,
             'products' => $products,
             'deleteForms' => $deleteForms,
             'pagination' => $pagination,

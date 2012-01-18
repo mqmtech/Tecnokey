@@ -43,7 +43,7 @@
         
         $("[name=prod_relacionado]").hover(function(){
             var scope = this;
-            tooltipTimeout = setTimeout(function(){showTooltip(scope)}, 500);
+            tooltipTimeout = setTimeout(function(){showTooltip(scope)}, 50);
             }, hideTooltip);
         function showTooltip(el)
             {
@@ -85,7 +85,7 @@
                     
                     
                 </div>
-                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff ~ currencySymbol() }}</div>
+                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff | prettyPrice ~ currencySymbol() }}</div>
                 <div class="dto_relacionados_ficha">{{ product.offer.discount }}%</div>
                 {% else %}
                 <div class="titulo_prods_relacionados" name="prod_relacionado">
@@ -98,7 +98,7 @@
                 
                 </div>
                 
-                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff ~ currencySymbol() }}</div>
+                <div class="precio_relacionados_ficha">{{ productInfo.basePrice | roundoff | prettyPrice  ~ currencySymbol() }}</div>
                 <div class="dto_relacionados_ficha"></div>
                 {% endif %} {# end offer #}
             {% else %}

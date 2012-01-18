@@ -52,7 +52,17 @@
      </script>
 {% endblock jsfunctions %}
 
-{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendProductsIndex') }}">Administrar Productos</a> \ Gestionar Productos{% endblock %}
+{% block contextualThree %}
+     <a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendProductsIndex') }}">Administrar Productos</a> \ Gestionar Productos
+     
+    {% if category is defined %}
+        {% set ancestors = category.ancestors %}     
+        {% for ancestor in ancestors %}
+         \ <a href="{{ path('TKShopBackendProductsShowAllSubcategories', {'id': ancestor.id}) }} ">{{ ancestor.name }}</a>
+         {% endfor %}
+        \ Productos en {{ category.name }}
+        {% endif %}
+{% endblock %}
 
 {% block left_content %}
     {% for product in products %}
@@ -63,9 +73,11 @@
             <div class="fotoprod">
             
             {% if (product.image!= null) %} 
-                <img class="fotoprod" src="{{ asset(product.image.webPath) }}" />
+                {% set imageSizeInfo =  product.image.getImageSize("68", "68") %}
+                <img class="fotoprod" src="{{ asset(product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" />
+                {#<img class="fotoprod" src="{{ asset(product.image.webPath) }}" />#}
             {% else %} 
-                <img class="fotoprod" src="{{ asset('bundles/tecnokey/images/cajas_fuertes.png') }}" />
+                <img class="fotoprod" src="" />
             {% endif %}
             
             </div>

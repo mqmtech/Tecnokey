@@ -16,7 +16,7 @@ class ImageType extends AbstractType
             //->add('createdAt')
             //->add('modifiedAt')
             //->add('size')
-            //->add('path')
+            ->add('path', 'hidden') //push the path (this way we can set the path before uploading an image)
             ->add('file', null, array(
                 'label' => ' ',
                 'data' => ' ',

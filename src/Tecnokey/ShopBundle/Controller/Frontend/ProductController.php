@@ -71,6 +71,8 @@ class ProductController extends Controller {
             $totalItemsLength = count($products);
             $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
             $products = $pagination->sliceArray($products);
+            
+            //$range = $pagination->getCurrentRange();
         }
         //End Setting Pagination
         

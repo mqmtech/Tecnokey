@@ -55,7 +55,17 @@
      </script>
 {% endblock jsfunctions %}
 
-{% block contextualThree %}<a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendCategoriesIndex') }}">Administrar Categorias</a> \ Gestionar Categorias{% endblock %}
+{% block contextualThree %}
+     <a href="{{ path('TKShopBackendPanelControlIndex') }}">Panel de control</a> \ <a href="{{ path('TKShopBackendCategoriesIndex') }}">Administrar Categorias</a> \ Gestionar Categorias
+     
+    {% if category is defined %}
+    {% set ancestors = category.ancestors %}     
+    {% for ancestor in ancestors %}
+     \ <a href="{{ path('TKShopBackendCategoriesShowAllSubcategories', {'id': ancestor.id}) }} ">{{ ancestor.name }}</a>
+     {% endfor %}
+     \ {{ category.name }}
+    {% endif %}
+{% endblock %}
 
 {% block left_content %}
     
@@ -70,12 +80,14 @@
         <!--start lista individual -->
         <div class="listbox_container">    
 
-            <div class="fotoprod">
+            <div class="fotoprodcontainer">
             
-            {% if (category.image!= null) %} 
-                <img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" />
+            {% if (category.image!= null) %}
+                {% set imageSizeInfo =  category.image.getImageSize("68", "68") %}
+                <img class="fotoprod" src="{{ asset(category.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" />
+                {#<img class="fotoprod" src="{{ asset(category.image.getWebPath) }}" />#}
             {% else %} 
-                <img class="fotoprod" src="{{ asset('bundles/tecnokey/images/cajas_fuertes.png') }}" />
+                <img class="fotoprod" src="" />
             {% endif %}
             
             </div>

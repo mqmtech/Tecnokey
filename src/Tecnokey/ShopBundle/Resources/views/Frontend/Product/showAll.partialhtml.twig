@@ -6,13 +6,55 @@
         -offer
      -product
 #}
+
+{% block jsfunctions %}
+    <script>
+    jQuery(window).load(function(){
+         
+        var tooltipTimeout;
+
+        $(".fotoprodcontainer").hover(function()
+        {
+           var target = $(this);
+           tooltipTimeout = setTimeout(function(){
+               showTooltip(target);
+           }, 50);
+        }, function(){
+            hideTooltip();
+          }
+        );
+
+        function showTooltip(target)
+        {
+            var img_src = $(target).find(".fotoprod").attr("src");
+            var tooltip = $("<div id='tooltip' class='zoom_lista'><img src='" + img_src + "'></img></div>");
+            tooltip.appendTo($(target));
+            //alert($(target).attr("name"));
+            //alert(img_src);
+        }
+
+        function hideTooltip()
+        {
+            clearTimeout(tooltipTimeout);
+            $("#tooltip").fadeOut().remove();
+        }
+
+    });
+
+    </script>
+{% endblock jsfunctions %}
+
 <!--start lista individual -->
 {% for product in products %}
         {% set productInfo = productsInfo[product.id]  %}
-        <div class="listbox_container">    
-
-            <!--div class="fotoprod">¡FOTO!</div-->
-            <a href="{{ path('TKShopFrontendProductShow', {'productId': product.id}) }}"><img class="fotoprod" src="{{ asset(product.image.webPath) }}" /></a>
+        <div class="listbox_container" name="test">    
+            
+            <div class="fotoprodcontainer" name = "test">
+                <!--div class="fotoprod">¡FOTO!</div-->
+                {% set imageSizeInfo =  product.image.getImageSize("68", "68") %}
+                <a href="{{ path('TKShopFrontendProductShow', {'productId': product.id}) }}"><img class="fotoprod" src="{{ asset(product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" /></a>
+            </div> <!-- end fotoprod -->
+            
             <div class="listbox">
 
                 <div class="titulo_box">
@@ -22,16 +64,22 @@
                 <div class="text_list_box">
                     <h3><a href="{{ path('TKShopFrontendProductShow', {'productId': product.id})}}">{{ product.description |truncate}}</a></h3>
                 </div>
+                <div class="ref_lista">
+                    <div class="ref">REF: {{ product.sku }}</div>
+                    {#<div class="ref">Rojo</div>
+                    <div class="ref">23cm X 4cm</div>
+                    <div class="ref">Madera</div>#}
+                </div>
 
             </div>
              <div class="precio_box">
                     {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
                         {% if(productInfo.isOffer is defined and productInfo.isOffer) %}
-                        <div class="precio">{{ productInfo.basePrice | roundoff | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                        <div class="precio">{{ productInfo.basePrice | roundoff | prettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
                         <div class="iva">Sin IVA</div>
                         <div class="descuento">{{ product.offer.discount ~ "%"}}</div>
                         {% else %} {# else offer #}
-                            <div class="precio">{{ productInfo.basePrice | roundoff | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                            <div class="precio">{{ productInfo.basePrice | roundoff | prettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
                             <div class="iva">Sin IVA</div>
                         {% endif %} {# endig offer #}
                     {% else %} {# else is_granted #}

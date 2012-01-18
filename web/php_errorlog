@@ -1,3 +1,26 @@
 [18-Nov-2011 15:00:57] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298
 [18-Nov-2011 15:01:26] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298
 [18-Nov-2011 15:01:32] PHP Fatal error:  Call to undefined method Tecnokey\ShopBundle\Entity\Shop\Category::get() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Category.php on line 298
+[03-Jan-2012 12:12:26] PHP Parse error:  syntax error, unexpected $end in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Product.php on line 240
+[03-Jan-2012 13:21:14] PHP Fatal error:  Call to a member function getData() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 268
+[03-Jan-2012 13:22:08] PHP Fatal error:  Cannot use object of type Tecnokey\ShopBundle\Entity\Shop\Product as array in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 269
+[03-Jan-2012 13:26:31] PHP Fatal error:  Class 'Tecnokey\ShopBundle\Controller\Backend\AccessDeniedException' not found in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 273
+[03-Jan-2012 13:36:57] PHP Fatal error:  __clone method called on non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 217
+[03-Jan-2012 13:38:54] PHP Fatal error:  Call to undefined method Proxies\TecnokeyShopBundleEntityShopTimeOfferProxy::getBasePrice() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 276
+[03-Jan-2012 13:39:50] PHP Fatal error:  Call to undefined method Proxies\TecnokeyShopBundleEntityShopTimeOfferProxy::getBasePrice() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 276
+[03-Jan-2012 13:40:08] PHP Fatal error:  Call to undefined method Proxies\TecnokeyShopBundleEntityShopTimeOfferProxy::getBasePrice() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Backend/ProductController.php on line 276
+[04-Jan-2012 08:07:12] PHP Fatal error:  Class 'AppCache' not found in /home/mqmtech/public_html/Tecnokey/web/app.php on line 12
+[04-Jan-2012 08:08:15] PHP Fatal error:  Class 'AppCache' not found in /home/mqmtech/public_html/Tecnokey/web/app.php on line 12
+[04-Jan-2012 08:08:17] PHP Fatal error:  Class 'AppCache' not found in /home/mqmtech/public_html/Tecnokey/web/app.php on line 12
+[05-Jan-2012 05:55:12] PHP Fatal error:  Call to a member function createView() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 27
+[05-Jan-2012 06:16:37] PHP Fatal error:  Call to undefined method Symfony\Component\HttpFoundation\Session::setAttribute() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 51
+[05-Jan-2012 06:16:43] PHP Fatal error:  Call to undefined method Symfony\Component\HttpFoundation\Session::setAttribute() in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 51
+[05-Jan-2012 08:51:46] PHP Fatal error:  Call to a member function clear() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 50
+[05-Jan-2012 08:54:57] PHP Fatal error:  Call to a member function clear() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 50
+[05-Jan-2012 08:56:05] PHP Fatal error:  Call to a member function clear() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 51
+[05-Jan-2012 09:11:01] PHP Fatal error:  Call to a member function clear() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 51
+[05-Jan-2012 09:11:35] PHP Fatal error:  Call to a member function clear() on a non-object in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Controller/Developer/WebConsoleController.php on line 51
+[05-Jan-2012 10:26:39] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Image.php on line 95
+[05-Jan-2012 10:27:26] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Image.php on line 95
+[05-Jan-2012 10:27:28] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Image.php on line 95
+[05-Jan-2012 10:27:31] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home/mqmtech/public_html/Tecnokey/src/Tecnokey/ShopBundle/Entity/Shop/Image.php on line 95

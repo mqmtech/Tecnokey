@@ -19,15 +19,15 @@
     
     {% set columns = 7 %}
     {% if brands is defined and brands != NULL %}
-        {% set brandsLength = ((brands | length)/columns) -1 %}
-        {% set brandsLength = brandsLength | floor %}
+        {% set rows = ((brands | length)/columns) -1 %}
+        {% set rows = (rows + 0.999) | floor %} {# +0.5 to guarantee that we'll have enough rows even though it's not a full row#}
 
-        {% if brandsLength < 0 %}
-        {% set brandsLength = 0 %}
+        {% if rows < 0 %}
+        {% set rows = 0 %}
         {% endif %}
         {% set count = 0 %}
         
-        {% for i in 0..brandsLength  %} {# group of 7 #}
+        {% for i in 0..rows  %} {# group of 7 #}
             <div class="marcas_fila">
             {% for j in 0..6  %} {# every brand #}
                 {% if brands[count] is defined %}

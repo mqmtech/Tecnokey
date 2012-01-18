@@ -276,13 +276,14 @@ class CategoryController extends Controller
         
         //set the delete form for every product
         $deleteForms = array();
-        foreach ($categories as $category) {
-            $form = $this->createDeleteForm($category->getId());
-            $deleteForms[$category->getId()] = $form->createView();
+        foreach ($categories as $subCategory) {
+            $form = $this->createDeleteForm($subCategory->getId());
+            $deleteForms[$subCategory->getId()] = $form->createView();
         }
         //end setting the delete form for every product
         
         return array(
+            'category' => $category,
             'categories' => $categories,
             'deleteForms' => $deleteForms,
             'pagination' => $pagination,
