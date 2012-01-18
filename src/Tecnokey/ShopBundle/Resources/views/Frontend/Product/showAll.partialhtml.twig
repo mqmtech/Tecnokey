@@ -75,11 +75,11 @@
              <div class="precio_box">
                     {% if(is_granted('IS_AUTHENTICATED_FULLY')) %}
                         {% if(productInfo.isOffer is defined and productInfo.isOffer) %}
-                        <div class="precio">{{ productInfo.basePrice | roundoff | prettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                        <div class="precio">{{ productInfo.basePrice | roundoff | toPrettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
                         <div class="iva">Sin IVA</div>
                         <div class="descuento">{{ product.offer.discount ~ "%"}}</div>
                         {% else %} {# else offer #}
-                            <div class="precio">{{ productInfo.basePrice | roundoff | prettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
+                            <div class="precio">{{ productInfo.basePrice | roundoff | toPrettyPrice  | default("n/a")}} {% if(productInfo.basePrice) %} {{ currencySymbol() }} {% endif %}</div>
                             <div class="iva">Sin IVA</div>
                         {% endif %} {# endig offer #}
                     {% else %} {# else is_granted #}

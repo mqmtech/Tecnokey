@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Bundle\DoctrineBundle\Registry;
 
+use Tecnokey\ShopBundle\Form\DataTransformer\PriceToPrettyPriceTransformer;
+
 class ProductType extends AbstractType
 {
 
@@ -19,6 +21,8 @@ class ProductType extends AbstractType
     
     public function buildForm(FormBuilder $builder, array $options)
     {
+        $priceToPrettyPriceTransformer = new PriceToPrettyPriceTransformer(new \MQMTech\ToolsBundle\Service\Utils());
+        
         $builder
             ->add('id', 'hidden')
             ->add('name', null, array(
@@ -29,10 +33,10 @@ class ProductType extends AbstractType
             ->add('sku', null, array(
                 'label' => 'add_ref'
             ))
-            ->add('basePrice', null, array(
+            //->add('basePrice', null, array(
+            ->add('basePrice', 'prettyPrice', array(
                 'label' => 'add_precio'
             ))
-
             ->add('offer', new TimeOfferType())
             ->add('category', 'entity', array(
              'class' => 'Tecnokey\\ShopBundle\\Entity\\Shop\\Category',

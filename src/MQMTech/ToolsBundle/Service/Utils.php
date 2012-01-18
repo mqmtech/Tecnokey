@@ -204,7 +204,7 @@ class Utils{
      * @param string|float $price
      * @return string 
      */
-    public function prettyPrice($price) {
+    public function floatToPrettyFloat($price, $thousandSeparator = '.', $decimalSeparator=',') {
 
         if($price == NULL) {
             return $price;
@@ -224,14 +224,41 @@ class Utils{
         $prettyPrice = "";
         for ($dotCount=0, $index = $length -1; $index >= 0; $index--, $dotCount++) {
             if($dotCount > 0 && $dotCount % 3 == 0){
-                $prettyPrice.= '.';
+                $prettyPrice.= $thousandSeparator;
             }
             $prettyPrice.= $integerPart[$index];                        
         }
         $prettyPrice = strrev($prettyPrice);
-        $prettyPrice.= $floatingPart != NULL ? "," . $floatingPart : "";
+        $prettyPrice.= $floatingPart != NULL ? $decimalSeparator . $floatingPart : "";
         
         return $prettyPrice;
+    }
+    
+    /**
+     *
+     * @param string $prettyFloat
+     * @return float
+     */
+    public function prettyFloatToFloat($prettyFloat, $thousandSeparator = '.', $decimalSeparator=','){
+        if($prettyFloat == NULL){
+            return $prettyFloat;
+        }
+        
+        $length = strlen($prettyFloat);
+        $float = "";
+        for ($index = 0; $index < $length; $index++) {
+            if($prettyFloat[$index] != $thousandSeparator){
+                $float .= $prettyFloat[$index];                
+            }
+        }
+        
+        
+        $float = str_replace($decimalSeparator, '.', $float);
+        
+        $float = (float) $float;
+        $float += 0.0;
+        
+        return $float;
     }
 
 }

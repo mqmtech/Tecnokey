@@ -50,5 +50,10 @@
             <argument type="service" id="security.context" />
         </service>
         
+        <service id="prettyPriceType" class="Tecnokey\ShopBundle\Form\Shop\PrettyPriceType" public="true">
+            <argument type="service" id="view.utils" />
+            <tag name="form.type" alias="prettyPrice" />
+        </service>
+        
     </services>
 </container>
