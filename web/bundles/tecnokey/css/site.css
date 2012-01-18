@@ -1614,6 +1614,7 @@ input.buscarbtn{
     
     position: absolute;
     margin-left: 79px;
+    margin-top: -1px;
     //float: left;
 }
 
@@ -1622,7 +1623,7 @@ input.buscarbtn{
 
     width: auto; 
 
-    border: 1px solid #ccc; 
+    border: 1px solid #f87e15
 
     background-color: #f87e15;        
 }
