@@ -41,30 +41,31 @@
 <div class="bodyprod">
     {% set count = 0 %}
     {% for entity in entities %}
-    {% if(count == 3) %} <div class="prodcol2">
-    {% else %}
-    <div class="prodcol1">
-    {% set count = count +1 %}
-    {% endif %}         
-        <div class="prod">
-            <div class="tituloprodbox">
-                <h2><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}">{{ entity.name| upper }}</a></h2></div>
-            {% if (entity.image!= null) %} 
-            {#<div class="foto_prodbox"><img class="foto_prodbox" src="{{ path('TKShopFrontendImageShowData', {'imageId': entity.image.id}) }}" /></div>#}
-                <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img class="foto_prodbox" src="{{ asset(entity.image.getWebPath) }}" /></a></div>
+        {% if(count == 3) %} 
+            <div class="prodcol2">
+            {% else %}
+                <div class="prodcol1">
+                {% set count = count +1 %}
+        {% endif %}         
+            <div class="prod">
+                <div class="tituloprodbox">
+                    <h2><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}">{{ entity.name | upper | truncate(25) }}</a></h2></div>
+        {% if (entity.image!= null) %} 
+                {#<div class="foto_prodbox"><img class="foto_prodbox" src="{{ path('TKShopFrontendImageShowData', {'imageId': entity.image.id}) }}" /></div>#}
+                    <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img class="foto_prodbox" src="{{ asset(entity.image.getWebPath) }}" /></a></div>
             {% else %} 
-            <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img class="foto_prodbox" src="{{ asset('bundles/tecnokey/images/cajas_fuertes.png') }}" /></a></div>
-            {% endif %}
+                <div class="foto_prodbox"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img class="foto_prodbox" src="{{ asset('bundles/tecnokey/images/cajas_fuertes.png') }}" /></a></div>
+        {% endif %}
+            </div>
+            <div class="sombraprod"></div>
+
+
+            <div class="textbox">
+                <h4>{{ entity.description | truncate() }}</h4>
+            </div>            
+
+            <div class="masinfo"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img src="{{ asset('bundles/tecnokey/images/masinfo.png') }}" alt="masinfo" /></a></div>
         </div>
-        <div class="sombraprod"></div>
-
-
-        <div class="textbox">
-            <h4>{{ entity.description | truncate() }}</h4>
-        </div>            
-
-        <div class="masinfo"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories',{'id' : entity.id}) }}"><img src="{{ asset('bundles/tecnokey/images/masinfo.png') }}" alt="masinfo" /></a></div>
-    </div>
         {% endfor %}
 
 
