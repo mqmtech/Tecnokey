@@ -18,12 +18,12 @@ class ShoppingCartType extends AbstractType
             ->add('items', 'collection', array(
                 'type' => new ShoppingCartItemType()
             ))
-            ->add('totalBasePrice')
-            ->add('tax', 'number', array(
-                'read_only' => true
-            ))
-            ->add('taxPrice')
-            ->add('totalPrice')
+            //->add('totalBasePrice')
+            //->add('tax', 'number', array(
+             //   'read_only' => true
+            //))
+            //->add('taxPrice')
+            //->add('totalPrice')
         ;
     }
 

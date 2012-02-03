@@ -31,7 +31,6 @@ class PriceToPrettyPriceTransformer implements DataTransformerInterface{
         }
 
         return $this->utils->floatToPrettyFloat($val);
-        //return array("yeah");
     }
 
     // transforms the issue number into an Issue object
@@ -41,6 +40,7 @@ class PriceToPrettyPriceTransformer implements DataTransformerInterface{
             return null;
         }
 
+        $val = substr($val, 0, count($val)-2);
         $float = $this->utils->prettyFloatToFloat($val);
 
         if (null === $float) {

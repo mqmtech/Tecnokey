@@ -1,0 +1,61 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Login |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+<!--start right-->
+<div class="right">
+    <!--start area privada-->
+    <div class="titulo_area_privada_container">
+        <p class=" text_general_blue">Área Privada:</p>
+        <p class="text_bold">Identificarse</p>
+    </div>
+
+    <form action="{{ path("TKShopFrontendSecurityLoginCheck") }}" method="post" id="login">
+        <div class="login_user_container">
+            <div class="tiulo_login_user">Cliente de TecnoKey, introduzca:</div>
+
+            <div class="input_container_user">
+                <p class="text_bold">Su dirección de correo electrónico:</p>
+                {#<input name="buscar" type="buscar" class="input_user"/>#}
+                <input id="username" name="_username" type="text" class="input_user" value="{{ last_username }}"/>
+                <p class="text_bold">Contraseña:</p>
+                {#<input name="buscar" type="buscar" class="input_user"/>#}
+                <input id="password" name="_password" type="password" class="input_user"/>
+                <p class="text_general"><a href="#">¿Ha olvidado su contraseña? Haga click aquí</a></p>
+
+                {#<div class="float-right"><input type="submit" class="enviar_btn" value= "Acceder"></div>#}
+                <div class="float-right"><input type="submit" name= "login" class="enviar_btn" value="Acceder"/></div>
+            </div>
+        </div>
+    </form>
+
+    <div class="nuevo_user_container">
+        <div class="tiulo_login_user">¿NUEVO cliente?</div>
+
+        <div class="input_container_user">
+            <p class="text_bold">Para proceder a la apertura de una nueva cuenta, póngase en contacto con nosotros haciendo click en el siguiente enlace :</p><br />
+            <p class="text_general"><a href="#">Solicitud de una nueva cuenta de usuario</a></p>
+        </div>
+
+    </div>
+    <!--start area privada-->   
+
+</div><!--end right-->
+{% endblock right_content %}

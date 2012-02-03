@@ -112,6 +112,11 @@ class UserTest extends \Symfony\Bundle\DoctrineBundle\Tests\TestCase {
         
     }
     
+      
+   /**
+     * testRetrieveUser
+     * @depends testCreateUser
+     */
     public function testRetrieveUser(){
         //Get user from DB
         $entity = $this->em->getRepository('TecnokeyShopBundle:Shop\User')->findOneBy(array('username' => 'tclient3'));
@@ -125,6 +130,10 @@ class UserTest extends \Symfony\Bundle\DoctrineBundle\Tests\TestCase {
         //End Verifing shopping cart
     }
     
+    /**
+     * testRetrieveUser
+     * @depends testRetrieveUser
+     */
     public function testAddShoppingItems(){
         //Get user from DB
         $entity = $this->em->getRepository('TecnokeyShopBundle:Shop\User')->findOneBy(array('username' => 'tclient3'));
@@ -142,6 +151,10 @@ class UserTest extends \Symfony\Bundle\DoctrineBundle\Tests\TestCase {
         $shCart->addItem($item);
     }
     
+    /**
+     * testRetrieveUser
+     * @depends testAddShoppingItems
+     */
     public function testAddOrderItems(){
         //Get user from DB
         $entity = $this->em->getRepository('TecnokeyShopBundle:Shop\User')->findOneBy(array('username' => 'tclient3'));

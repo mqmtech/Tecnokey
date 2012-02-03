@@ -108,7 +108,7 @@ class User implements UserInterface, \Serializable
     
     /**
      *
-     * @var Order $orders
+     * @var array $orders
      * @ORM\OneToMany(targetEntity="Order",  mappedBy="user", cascade={"persist", "remove"})
      */
     private $orders;

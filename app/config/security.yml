@@ -45,20 +45,28 @@ security:
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
-        shop_area:
-          pattern: ^/
+        admin_area:
+          pattern: ^/admin
           anonymous: ~
           form_login:
-            login_path: /seguridad/login
-            check_path: /seguridad/login_check
+            login_path: /admin/seguridad/login
+            check_path: /admin/seguridad/login_check
           logout:
-            path:   /seguridad/logout
+            path:   /admin/seguridad/logout
+            target: /tienda
+            
+        shopping_area:
+          pattern: ^/tienda
+          anonymous: ~
+          form_login:
+            login_path: /tienda/seguridad/login
+            check_path: /tienda/seguridad/login_check
+          logout:
+            path:   /tienda/seguridad/logout
             target: /tienda
 
     access_control:
-        - { path: ^/tienda/pedido/, roles: ROLE_USER}
-        #- { path: ^/tienda/usuarios/, roles: ROLE_USER}
-        
+        # ------ admin_area ------
         - { path: ^/admin/productos/, roles: ROLE_BASIC_STAFF}
         - { path: ^/admin/productos/([0-9]+)|(~)/eliminar, roles: ROLE_BASIC_STAFF}        
         
@@ -67,8 +75,12 @@ security:
         
         - { path: ^/admin/$, roles: ROLE_BASIC_STAFF }
         - { path: ^/admin/panelControl/$, roles: ROLE_BASIC_STAFF }
-                
-        - { path: ^/admin/, roles: ROLE_STAFF }
+        #- { path: ^/admin/, roles: ROLE_STAFF }        
+        # ------ End admin_area ------
+        
+        # ------ shopping_area ------
+        - { path: ^/tienda/usuario, roles: ROLE_USER }
+        # ------ End shopping_area ------
         
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

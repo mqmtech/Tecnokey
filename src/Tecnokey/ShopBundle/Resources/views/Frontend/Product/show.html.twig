@@ -127,7 +127,7 @@
                             <div class="descuento_ficha">{{ product.offer.discount ~ "%"}}</div>
                             <div class="ahorro_ficha">Ahorra {{ ( product.basePrice - productInfo.basePrice )| roundoff | toPrettyPrice  ~ currencySymbol() }}</div>
                         </div>
-                        <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                        <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendUserShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
                         <div class="oferta">
                         	<p class="text_bold">Oferta valida hasta:</p>
                         	<p class="validez">{{ product.offer.deadline |date("d/m/Y") }}</p>
@@ -135,13 +135,13 @@
                         {% else %} {# else offer #}
                         <div class="precio_ficha">{{ productInfo.basePrice | roundoff | toPrettyPrice | default(noPriceAccess())}} {% if(productInfo.basePrice) %} {{currencySymbol()}} {% endif %}</div>
                         <div class="text_bold">REF: {{productInfo.product.sku}}</div>
-                        <div class="add_cesta_ficha"><a href="#"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                        <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendUserShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
                     {% endif %} {# endif offer #}
                     
                     {% else %} {# else is_granted #}
                     <div class="no_price_access_ficha">{{ noPriceAccess() }} </div>
                     <div class="text_bold">REF: {{productInfo.product.sku}}</div>
-                    <div class="add_cesta_ficha"><a href="#"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
+                    <div class="add_cesta_ficha"><a href="{{ path('TKShopFrontendUserShoppingAddProduct', {'id' : product.id }) }}"><img src="{{ asset('bundles/tecnokey/images/btn_add_cesta_ficha.png') }}" alt="add_cesta" /></a></div>
                 {% endif %} {# endif is_granted #}
                 
             </div>

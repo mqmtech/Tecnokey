@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecnokey\ShopBundle\Controller\Security;
+namespace Tecnokey\ShopBundle\Controller\Backend\Security;
 
 use Tecnokey\ShopBundle\Entity\Shop\Brand;
 use Tecnokey\ShopBundle\Entity\Shop\Product;
@@ -19,12 +19,12 @@ use Exception;
 /**
  * Frontend\Default controller.
  *
- * @Route("/seguridad")
+ * @Route("/admin/seguridad")
  */
 class DefaultController extends Controller {
     
     /**
-     * @Route("/login", name="TKShopSecurityLogin")
+     * @Route("/login", name="TKShopBackendSecurityLogin")
      */
     public function loginAction()
     {
@@ -38,7 +38,7 @@ class DefaultController extends Controller {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render('TecnokeyShopBundle:Security\Default:login.html.twig', array(
+        return $this->render('TecnokeyShopBundle:Backend\Security\Default:login.html.twig', array(
             // last username entered by the user
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
@@ -46,7 +46,7 @@ class DefaultController extends Controller {
     }
     
     /**
-     * @Route("/login_check", name="TKShopSecurityLoginCheck")
+     * @Route("/login_check", name="TKShopBackendSecurityLoginCheck")
      */
     public function securityCheckAction()
     {
@@ -54,7 +54,7 @@ class DefaultController extends Controller {
     }
     
     /**
-     * @Route("/logout", name="TKShopSecurityLogout")
+     * @Route("/logout", name="TKShopBackendSecurityLogout")
      */
     public function securityLogoutAction()
     {

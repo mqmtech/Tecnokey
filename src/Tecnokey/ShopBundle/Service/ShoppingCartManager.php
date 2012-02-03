@@ -48,6 +48,30 @@ class ShoppingCartManager {
     }
     
     /**
+     * Remove an items by its id in the Shopping Cart
+     * Important note: it's needed to perform an em->persist() / em->flush() to make this changes permanent
+     *
+     * @param $itemId
+     */
+    public function removeItem(ShoppingCart $shoppingCart, $id){
+        if($shoppingCart == NULL){
+            return NULL;
+        }
+        $items = $shoppingCart->getItems();
+        
+        //clear the items in database
+        foreach ($items as $item) {
+            if($item->getId() == $id){
+                $this->getEntityManager()->remove($item);
+                $items->removeElement($item);
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    
+    /**
      * Check the quantity of the items and delete every item with quantity = 0
      * @param ShoppingCart $shoppingCart 
      */

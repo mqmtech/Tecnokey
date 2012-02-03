@@ -13,18 +13,21 @@ use Tecnokey\ShopBundle\Form\Shop\CustomFileType;
 
 use Tecnokey\ShopBundle\Form\DataTransformer\PriceToPrettyPriceTransformer;
 use MQMTech\ToolsBundle\Service\Utils;
+use Tecnokey\ShopBundle\Service\MarketManager;
 
 class PrettyPriceType extends AbstractType{
     private $utils;
+    private $marketManager;
     
-    public function __construct(Utils $utils)
+    public function __construct(Utils $utils, MarketManager $marketManager)
     {
         $this->utils = $utils;
+        $this->marketManager = $marketManager;
     }
     
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $transformer = new PriceToPrettyPriceTransformer($this->utils);
+        $transformer = new PriceToPrettyPriceTransformer($this->utils, $this->marketManager);
         $builder->appendClientTransformer($transformer);
     }
     

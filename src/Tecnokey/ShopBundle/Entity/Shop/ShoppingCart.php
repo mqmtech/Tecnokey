@@ -253,7 +253,7 @@ class ShoppingCart {
         $this->items[] = $item;
         $item->setShoppingCart($this); //Important to keep the right info in the database
     }
-
+    
     public function getUser() {
         return $this->user;
     }

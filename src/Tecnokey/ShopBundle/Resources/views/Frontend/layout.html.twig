@@ -25,7 +25,7 @@ TODO:
             <div class="logo"><img src="{{ asset('bundles/tecnokey/images/logo.png') }}" alt="logo" /></div>
             <div class="cestalogin"><!--start cesta login-->
                     {% block login %}
-                        {% render path('TKShopFrontendUserLogin', {'_format': 'partialhtml'}) | toAppPath %}
+                        {% render path('TKShopFrontendUserProfile', {'_format': 'partialhtml'}) | toAppPath %}
                     {% endblock %}
                     {% block cesta %}
                         {% include 'TecnokeyShopBundle:Frontend:cesta.partialhtml.twig'%}
