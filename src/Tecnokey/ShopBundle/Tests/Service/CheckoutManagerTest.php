@@ -73,7 +73,10 @@ class CheckoutManagerTest extends TestCase {
         //generate Order
         $order = $checkoutManager->shoppingCartToOrder($shoppingCart);
         
-        print_r($order);
+        $this->assertEquals($order->getTotalBasePrice(), $shoppingCart->getTotalBasePrice());
+        $this->assertEquals($order->getItems()->next()->getTotalBasePrice(), $shoppingCart->getItems()->next()->getTotalBasePrice());
+        
+        //print_r($order);
 
     }
 

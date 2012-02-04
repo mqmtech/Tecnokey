@@ -73,6 +73,7 @@ class CheckoutManager {
         
         //Calculate totalPrice
         $totalPrice = $totalBasePrice + $taxPrice;
+        
         $shoppingCart->setTotalPrice($totalPrice);
         
         $shoppingCart->setModifiedAt(new \DateTime('now'));

@@ -39,20 +39,19 @@ class ShoppingCartController extends Controller {
     /**
      * Finds and displays a Shop\ShoppingCart entity.
      *
-     * @Route("/{id}/show", name="TKShopFrontendShoppingCartShow")
+     * @Route("/ver.{_format}", defaults={"_format"="html"}, name="TKShopFrontendUserShoppingCartShow")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('TecnokeyShopBundle:Shop\ShoppingCart')->find($id);
-
+        $entity = $this->getShoppingCartFromCurrentUser();
+        $checkoutManager = $this->get('checkoutManager');
+        $entity = $checkoutManager->checkout($entity);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($entity->getId());
 
         return array(
             'entity'      => $entity,
@@ -222,16 +221,15 @@ class ShoppingCartController extends Controller {
             // Check if the quantity of an Entity is zero, then remove the entity
             $entity = $this->get('shoppingCartManager')->removeItemsWithoutProducts($entity);
             // End Check if the quantity of an Entity is zero
-            
             $em->persist($entity);
             $em->flush();
             
-            //Get extra data to see if the cart must just updated or must be ordered
             $request = Request::createFromGlobals();
             $order = $request->request->get(self::FORM_ORDER_FIELD);
             if($order == self::FORM_ORDER_COMFIRM_VALUE){
+                $checkoutManager = $this->get('checkoutManager');    
+                $entity = $checkoutManager->checkout($entity);
                 // generate an order
-                    $checkoutManager = $this->get('checkoutManager');
                     $order = $checkoutManager->shoppingCartToOrder($entity);
                     
                     $user = $this->get('userManager')->getCurrentUser();
@@ -241,21 +239,14 @@ class ShoppingCartController extends Controller {
                     $em->persist($order);
                     $em->flush();
                 // remove cart
-                //$em->remove($entity);
-                //$em->flush();
+                $this->get('shoppingCartManager')->removeAllItems($entity);
+                $em->flush();
             
                 // redirect to an order page                
+                return $this->redirect($this->generateUrl('TKShopFrontendOrderIndex'));
             }
-            //End get extra data
-
-            return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit'));
         }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit'));
     }
 
     private function createDeleteForm($id)

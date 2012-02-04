@@ -30,7 +30,7 @@
             		<div class="realizados_btn"><a href="estado_realizados_lista.html"><img src="{{ asset('bundles/tecnokey/images/icono_realizados.png') }}" alt="realizado" />Pedidos Realizados</a></div>
                 </div>
             
-    <div class="cesta_btn"><a href="cesta.html">Cesta</a></div>
+    <div class="cesta_btn"><a href="{{ path('TKShopFrontendUserShoppingCartIndex') }}">Cesta</a></div>
          
       </div>
         
@@ -57,7 +57,7 @@
                                 <div class="producto_legend"><a href="#">{{ entity.id }}</a></div>
                                 <div class="precio_ud_legend">{{ entity.createdAt | date ("d/m/Y") }}</div>
                               	<div class="cantidad_legend">{{ entity.items | length }}</div>
-                                <div class="subtotat_legend">{{ entity.totalPrice ~ currencySymbol() }}</div>
+                                <div class="subtotat_legend">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
                               	<div class=" estado_enviado">{{ entity.status }}</div>
                      </div>
                         {% endfor %}

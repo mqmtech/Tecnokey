@@ -28,7 +28,8 @@ TODO:
                         {% render path('TKShopFrontendUserProfile', {'_format': 'partialhtml'}) | toAppPath %}
                     {% endblock %}
                     {% block cesta %}
-                        {% include 'TecnokeyShopBundle:Frontend:cesta.partialhtml.twig'%}
+                        {% render path('TKShopFrontendUserShoppingCartShow', {'_format': 'partialhtml'}) | toAppPath %}
+                        {#{% include 'TecnokeyShopBundle:Frontend:cesta.partialhtml.twig'%}#}
                     {% endblock %}
                 </div><!--end cesta login-->
             </div><!--end logo login container-->	
