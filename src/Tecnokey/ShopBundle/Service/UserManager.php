@@ -43,7 +43,7 @@ class UserManager {
     public function getCurrentUser(){
         if($this->securityContext != NULL){
             $user = $this->securityContext->getToken()->getUser(); 
-             return $user;
+            return $user;
         }
         else{
             throw new \Exception("Custom Exception: No SecurityContext has been setted in UserManager");

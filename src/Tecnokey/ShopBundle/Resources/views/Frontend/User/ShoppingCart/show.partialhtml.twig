@@ -1,0 +1,10 @@
+{#Requires:
+shoppingCart : Shopping Cart
+
+TODO: Create the controller for the shopping cart
+#}
+<div class="cesta">
+    <span><img src="{{ asset('bundles/tecnokey/images/cesta_ico.png') }}" alt="cesta"/></span>
+    <span class="text_bold"><a href="{{ path('TKShopFrontendUserShoppingCartEdit') }}">CESTA:</a></span>
+    <span class="text_general">{{ entity.items | length }} Artículo(s) :</span> <span class="text_bold_red">{{ entity.totalPrice | roundoff | toPrettyPrice ~ currencySymbol() }} </span>
+</div>

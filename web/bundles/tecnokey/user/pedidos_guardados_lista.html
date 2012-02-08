@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>| Tecnokey |</title>
+<link href="../css/site.css" rel="stylesheet" type="text/css" />
+
+<!--Desarrollado por:
+Diseño grafico y maquetación: Amar Bouchekioua.
+Programación de la aplicacion: Mario Quesada.
+Agradecimiento:
+Javier Vidal Moreno-->
+<link href="../css/user.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--start page-->
+<div class="container">
+
+<!--start header-->
+<div class="headercontainer">
+
+	<div class="logologincontainer">
+		<div class="logo"><img src="../images/logo.png" alt="logo" /></div>
+				
+<div class="header_admin">
+                	<div class="nombre_cliente">Nombre del cilente</div>
+                	<div class="logout_user"><a href="#">Cerrar sesión</a></div>
+                </div>
+        
+
+				
+<div class="cestalogin"><!--start cesta login-->
+                	
+                    <div class="login">
+                    <div class="micuenta"><a href="#">Mi cuenta</a></div>
+                    </div>
+                    
+                    <div class="cesta">
+                    <span><img src="../images/cesta_ico.png" alt="cesta"/></span>
+                    <span class="text_bold">CESTA:</span>
+                    <span class="text_general">0 Artículo(s) :</span> <span class="text_bold_red">00,00 €</span>
+					</div>
+                    
+                  </div><!--end cesta login-->
+                		
+	</div><!--end logo login container-->
+<!--start menu-->     
+        	<div class="menucontainer">
+            <div id="menu">
+                <ul>
+                    <li><a href="../index.html">inicio</a></li>
+                    <li><a href="../productos.html" class="current">Productos</a></li>
+                    <li><a href="../empresa.html">Empresa</a></li>
+                    <li><a href="../contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            
+             <div class="buscarcontainer">
+                <input name="buscar" type="buscar" onclick="this.value='';" class="buscarform" value="Buscar" />
+                <div class="buscarbtn"><a href="#">Buscar</a></div>
+            </div>
+            
+            </div><!--start menu--> 
+
+
+</div><!--end header-->
+
+<!--start arbol-->
+<div class="arbol_container">
+    <div class="arbol">
+		<div class="arboltext"><a href="#">Inicio</a> \ Pedidos guardados<a href="#"></a></div>
+	</div>
+</div>
+<!--end arbol-->
+
+<!--star body leftnavbar resultado-->
+<div class="bodycontainer">
+
+	<div class="left">
+    	<div class="titulo_todos_prod"><span>TODOS LOS PRODUCTOS</span></div>
+        <div class="leftnav"><a href="#">BUZONES</a></div>
+        <div class="leftnav"><a href="#">ACCESORIOS PARA COMUNIDADES</a></div>
+        <div class="leftnav"><a href="#">CAJAS FUERTES</a></div>
+        <div class="leftnav"><a href="#">CANDADOS</a></div>
+        <div class="leftnav"><a href="#">CERRADURAS</a></div>
+        <div class="leftnav"><a href="#">CERRADURAS ELÉCTRICAS</a></div>
+        <div class="leftnav"><a href="#">CERRADURAS ELECTROMECÁNICAS</a></div>
+        <div class="leftnav"><a href="#">CIERRAPUERTAS</a></div>
+        <div class="leftnav"><a href="#">CILINDROS Y AMAESTRAMIENTOS</a></div>
+        <div class="leftnav"><a href="#">DOMÓTICA</a></div>
+        <div class="leftnav"><a href="#">LLAVES Y MANDOS</a></div>
+        <div class="leftnav"><a href="#">MAQUINAS DUPLICADORAS</a></div>
+        <div class="leftnav"><a href="#">MANILLERÍA, POMOS</a></div>
+        <div class="leftnav"><a href="#">VÍAS DE ESCAPE</a></div>
+        <div class="leftnav"><a href="#">HERRAMIENTAS</a></div>
+        <div class="leftnav"><a href="#">VIGILANCIA Y SEGURIDAD</a></div>
+        <div class="leftnav"><a href="#">DISPOSITIVOS</a></div> 
+    </div><!--end left-->
+    
+
+<!--start right-->
+    <div class="right">
+    	<!--start menu user-->
+		<div class="menu_user_container">
+         	<div class="perfil_btn"><a href="#">Perfil</a></div>
+				
+                <div class="menu_pedidos_container">
+                	<div class="pedidos_container">PEDIDOS</div>
+            		<div class="guardados_btn"><a href="pedidos_guardados_lista.html">Guardados</a></div>
+            		<div class="proceso_btn"><a href="estado_proceso_lista.html">En proceso</a></div>
+            		<div class="realizados_btn"><a href="estado_realizados_lista.html">Realizados</a></div>
+                </div>
+            
+            <div class="cesta_btn"><a href="cesta.html">Cesta</a></div>
+         
+         </div>
+        
+        <!--end menu user--> 
+        
+        <!--start cuerpo--> 
+        <div class="right_cuerpo_user">
+        	<div class="titulo_current">Pedidos guardados: <span class="text_bold">Haga cilck sobre EDITAR para obtener más detalles.</span></div>
+            
+            
+<div class="lista_pedidos_container">
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">Número del pedido</a></div>
+                                <div class="precio_ud_legend"><a href="#">Fecha</a></div>
+                                <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+                                <div class="subtotat_legend"><a href="#">Importe</a></div>
+                              <div class="estado"><a href="#">Estado</a></div>
+                            </div>
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">10-16-000001</a></div>
+                                <div class="precio_ud_legend">01/01/2012</div>
+                              	<div class="cantidad_legend">5</div>
+                                <div class="subtotat_legend">149,88 €</div>
+                              	<div class="estado_editar"><a href="#">Editar</a></div>
+                            </div>
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">10-16-000001</a></div>
+                                <div class="precio_ud_legend">01/01/2012</div>
+                              <div class="cantidad_legend">5</div>
+                                <div class="subtotat_legend">149,88 €</div>
+                              <div class="estado_editar"><a href="#">Editar</a></div>
+                            </div>
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">10-16-000001</a></div>
+                                <div class="precio_ud_legend">01/01/2012</div>
+                              	<div class="cantidad_legend">5</div>
+                                <div class="subtotat_legend">149,88 €</div>
+                              	<div class="estado_editar"><a href="#">Editar</a></div>
+                            </div>
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">10-16-000001</a></div>
+                                <div class="precio_ud_legend">01/01/2012</div>
+                              	<div class="cantidad_legend">5</div>
+                                <div class="subtotat_legend">149,88 €</div>
+                              	<div class="estado_editar"><a href="#">Editar</a></div>
+                            </div>
+                            
+                            <div class="legend_container">
+                                <div class="producto_legend"><a href="#">10-16-000001</a></div>
+                                <div class="precio_ud_legend">01/01/2012</div>
+                              <div class="cantidad_legend">5</div>
+                                <div class="subtotat_legend">149,88 €</div>
+                              <div class="estado_editar"><a href="#">Editar</a></div>
+                            </div>
+                            
+               </div>
+        
+        </div>
+        <!--end cuerpo--> 
+          
+    
+    </div><!--end right-->
+	
+
+</div><!--end leftnavbar resultado-->
+
+<!--start footer-->
+<div class="footer">
+
+	<div class="otherproducts">Nuestros Proveedores:</div>
+	
+    <div class="img_bottom_div">
+    
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>  
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>
+      <div class="img_bottom_otherp"></div>    
+    
+    </div>
+	
+    
+    <div class="bottom_menu_div"><span class="text_bold">| <a href="../index.html">Inicio</a> | <a href="../productos.html">Productos</a> | <a href="../empresa.html">Empresa</a> | <a href="../contacto.html">Contacto</a> | </span></div>
+  	<div class="Copyright">Copyright 2011 TECNOKEY. All rights reserved.</div>
+	<div class="gris_tab"></div>
+
+</div>
+<!--end footer-->
+
+
+</div><!--end page-->
+</body>
+</html>

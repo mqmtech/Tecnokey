@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecnokey\ShopBundle\Controller\Frontend;
+namespace Tecnokey\ShopBundle\Controller\Frontend\User;
 
 use Tecnokey\ShopBundle\Entity\Shop\Brand;
 use Tecnokey\ShopBundle\Entity\Shop\Product;
@@ -20,9 +20,9 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 /**
  * Frontend\Default controller.
  *
- * @Route("/tienda/usuarios")
+ * @Route("/tienda/usuario")
  */
-class UserController extends Controller {
+class DefaultController extends Controller {
 
     /**
      * Frontend demo
@@ -37,14 +37,19 @@ class UserController extends Controller {
     /**
      * Frontend demo
      *
-     * @Route("/login.{_format}", defaults={"_format"="partialhtml"}, name="TKShopFrontendUserLogin")
+     * @Route("/perfil.{_format}", defaults={"_format"="partialhtml"}, name="TKShopFrontendUserProfile")
      * @Template()
      */
-    public function loginAction(){
-        return array(
+    public function profileAction($_format){
+        
+        return $this->render("TecnokeyShopBundle:Frontend\User\Default:profile.".$_format.".twig", array('lastUser' => "admin"));
+        //return $this->render("TecnokeyShopBundle:Frontend\User:orders.".$_format.".twig", array('lastUser' => "admin"));
+        //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+
+        /*return array(
             "lastUser" => "admin"
-        );
-    }    
+        );*/
+    }  
     
      /**
      * Frontend demo

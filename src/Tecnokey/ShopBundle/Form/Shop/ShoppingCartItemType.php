@@ -10,14 +10,18 @@ class ShoppingCartItemType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            //->add('product')
-            ->add('basePrice', 'text', array(
-                'read_only' => true
-            ))
-            ->add('totalBasePrice', 'text', array(
-                'read_only' => true
-            ))
-            ->add('quantity')            
+            //->add('product', 'form.type.shoppingcart_product',array(
+              //  'read_only' => true    
+                //))
+            //->add('basePrice', 'text', array(
+             //   'read_only' => true
+            //))
+            //->add('totalBasePrice', 'text', array(
+            //    'read_only' => true
+            //))
+            ->add('quantity', "integer", array(
+                
+            ))            
         ;
     }
 

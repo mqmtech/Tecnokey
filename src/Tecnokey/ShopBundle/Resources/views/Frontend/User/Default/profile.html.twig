@@ -1,0 +1,28 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Login |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+<!--start right-->
+    <div class="right">
+        Bienvenido {{ app.user.username }}
+        <br/>
+        <a href="{{ path('TKShopFrontendOrderIndex') }}">ir a historial de pedidos</a>
+    </div><!--end right-->
+{% endblock right_content %}

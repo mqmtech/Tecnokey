@@ -33,7 +33,7 @@ class CheckoutManager {
      * @param ShoppingCart $shoppingCart
      * @return ShoppingCart 
      */
-    public function checkout(ShoppingCart $shoppingCart){
+    public function checkout(ShoppingCart $shoppingCart = null){
         if($shoppingCart == NULL){
             return NULL;
         }
@@ -42,38 +42,40 @@ class CheckoutManager {
         $marketManager = $this->getMarketManager();
 
         $shoppingCartItems = $shoppingCart->getItems();
-        foreach ($shoppingCartItems as $item) {
-            //Verify stock
-            //stockManager->isStock($item->getProduct(), $item->getQuantity());
-            //if no stock break and show error!
+        if($shoppingCartItems){
+            foreach ($shoppingCartItems as $item) {
+                //Verify stock
+                //stockManager->isStock($item->getProduct(), $item->getQuantity());
+                //if no stock break and show error!
 
-            //Calculate price per unit and total (and check for offers)
-            $priceInfo = $priceManager->getPriceInfo($item->getProduct(), 1);
-            $item->setBasePrice($priceInfo->getBasePrice());
+                //Calculate price per unit and total (and check for offers)
+                $priceInfo = $priceManager->getPriceInfo($item->getProduct(), 1);
+                $item->setBasePrice($priceInfo->getBasePrice());
+
+                $priceInfo = $priceManager->getPriceInfo($item->getProduct(), $item->getQuantity());
+                $item->setTotalBasePrice($priceInfo->getBasePrice());
+            }
             
-            $priceInfo = $priceManager->getPriceInfo($item->getProduct(), $item->getQuantity());
-            $item->setTotalBasePrice($priceInfo->getBasePrice());
+            $priceInfo = $priceManager->getItemCollectionPriceInfo($shoppingCartItems->toArray());
+            $shoppingCart->setTotalProductsBasePrice($priceInfo->getBasePrice());
+        
+            //Calculate totalBasePrice (products + shipment)
+            $totalBasePrice = $priceInfo->getBasePrice() ; // + shipment when it's needed
+            $shoppingCart->setTotalBasePrice($totalBasePrice);
+        
+            //Get Tax
+            $tax = $marketManager->getIva();
+            $shoppingCart->setTax($tax);
+
+            //Get Tax Price
+            $taxPrice =  $tax * $totalBasePrice;
+            $shoppingCart->setTaxPrice($taxPrice);
+
+            //Calculate totalPrice
+            $totalPrice = $totalBasePrice + $taxPrice;
+
+            $shoppingCart->setTotalPrice($totalPrice);
         }
-        
-        //Calculate totalProductsBasePrice
-        $priceInfo = $priceManager->getItemCollectionPriceInfo($shoppingCart->getItems()->toArray());
-        $shoppingCart->setTotalProductsBasePrice($priceInfo->getBasePrice());
-        
-        //Calculate totalBasePrice (products + shipment)
-        $totalBasePrice = $priceInfo->getBasePrice() ; // + shipment when it's needed
-        $shoppingCart->setTotalBasePrice($totalBasePrice);
-        
-        //Get Tax
-        $tax = $marketManager->getIva();
-        $shoppingCart->setTax($tax);
-        
-        //Get Tax Price
-        $taxPrice =  $tax * $totalBasePrice;
-        $shoppingCart->setTaxPrice($taxPrice);
-        
-        //Calculate totalPrice
-        $totalPrice = $totalBasePrice + $taxPrice;
-        $shoppingCart->setTotalPrice($totalPrice);
         
         $shoppingCart->setModifiedAt(new \DateTime('now'));
         

@@ -1,0 +1,70 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Login |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+<!--start right-->
+    <div class="right">
+    	<!--start menu user-->
+		<div class="menu_user_container">
+         	<div class="perfil_btn"><a href="#"><img src="{{ asset('bundles/tecnokey/images/icono_perfil.png') }}" alt="perfil" />Perfil</a></div>
+				
+	<div class="menu_pedidos_container">
+                	<div class="proceso_btn"><a href="estado_proceso_lista.html"><img src="{{ asset('bundles/tecnokey/images/icono_proceso.png') }}" alt="proceso" />Pedidos En proceso</a></div>
+            		<div class="realizados_btn"><a href="estado_realizados_lista.html"><img src="{{ asset('bundles/tecnokey/images/icono_realizados.png') }}" alt="realizado" />Pedidos Realizados</a></div>
+                </div>
+            
+    <div class="cesta_btn"><a href="{{ path('TKShopFrontendUserShoppingCartIndex') }}">Cesta</a></div>
+         
+      </div>
+        
+        <!--end menu user--> 
+        
+        <!--start cuerpo--> 
+        <div class="right_cuerpo_user">
+        	<div class="titulo_current">Pedidos realizados:
+            <span class="text_bold">Consulte el historial de sus pedidos realizados.</span></div>
+               <div class="lista_pedidos_container">
+                    {% if entities is defined %}
+                        {% if entities | length < 1 %}
+                        <span class="text_bold">Todavía no ha realizado ningun pedido</span></div>
+                        {% endif %}
+                        {% for entity in entities %}
+                        <div class="legend_container">
+                            <div class="producto_legend"><a href="#">Número del pedido</a></div>
+                            <div class="precio_ud_legend"><a href="#">Fecha</a></div>
+                            <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+                            <div class="subtotat_legend"><a href="#">Importe</a></div>
+                          <div class="estado"><a href="#">Estado</a></div>
+                        </div>
+                       <div class="legend_container">
+                                <div class="producto_legend"><a href="#">{{ entity.id }}</a></div>
+                                <div class="precio_ud_legend">{{ entity.createdAt | date ("d/m/Y") }}</div>
+                              	<div class="cantidad_legend">{{ entity.items | length }}</div>
+                                <div class="subtotat_legend">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
+                              	<div class=" estado_enviado">{{ entity.status }}</div>
+                     </div>
+                        {% endfor %}
+                    {% else %}                       
+                    {% endif %} {# if orders is defined #}
+               </div>
+        </div>
+        <!--end cuerpo--> 
+    </div><!--end right-->
+{% endblock right_content %}

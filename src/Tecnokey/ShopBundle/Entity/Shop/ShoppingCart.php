@@ -16,7 +16,7 @@ use Tecnokey\ShopBundle\Entity\Shop\ShoppingCartItem;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class ShoppingCart {
+class ShoppingCart{
 
     /**
      * @var integer $id
@@ -135,7 +135,7 @@ class ShoppingCart {
     function __construct() {
         $this->createdAt = new \DateTime('now');
         
-        $this->items = new ArrayCollection();
+        $this->items = array();
     }
     
     public function getShippingBasePrice() {
@@ -238,7 +238,7 @@ class ShoppingCart {
         return $this->items;
     }
 
-    protected function setItems($items) {
+    public function setItems($items) {
         $this->items = $items;
     }
     
@@ -248,12 +248,12 @@ class ShoppingCart {
      */
     public function addItem(ShoppingCartItem $item){
         if($this->getItems() == NULL){
-            $this->items = new ArrayCollection();
+            $this->items = array();
         }
         $this->items[] = $item;
         $item->setShoppingCart($this); //Important to keep the right info in the database
     }
-
+    
     public function getUser() {
         return $this->user;
     }
@@ -261,6 +261,19 @@ class ShoppingCart {
     public function setUser($user) {
         $this->user = $user;
     }
+
+    /*public function serialize() {
+        return implode(';', array(
+            'items' => serialize($this->getItems()),
+        ));
+    }
+
+    public function unserialize($serialized) {
+        //throw new \Exception("Custom Exception: " . $serialized);
+        
+        $serialized = explode(';', $serialized);
+        $this->setItems(unserialize($serialized[0]));        
+    }*/
 }
 
 ?>

@@ -153,6 +153,27 @@ class ShoppingCartItem{
     public function setShoppingCart($shoppingCart) {
         $this->shoppingCart = $shoppingCart;
     }
+
+    /*public function serialize() {
+        
+        return implode(',', array(
+            //'id' => $this->getId(),
+            //'basePrice' => $this->getBasePrice(),
+            //'totalBasePrice' => $this->getTotalBasePrice(),
+            //'quantity' => $this->getQuantity(),
+            'product' => serialize($this->getProduct()),
+            ));
+    }
+
+    public function unserialize($serialized) {
+        $serialized = explode(',', $serialized);
+
+        //$this->setId($serialized[0]);    
+        //$this->setBasePrice($serialized[1]); 
+        //$this->setTotalBasePrice($serialized[2]); 
+        //$this->setQuantity($serialized[3]); 
+        $this->setProduct(unserialize($serialized[0])); 
+    }*/
 }
 
 ?>

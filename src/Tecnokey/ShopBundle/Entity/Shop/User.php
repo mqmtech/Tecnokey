@@ -17,6 +17,13 @@ use Tecnokey\ShopBundle\Entity\Shop\Order;
  */
 class User implements UserInterface, \Serializable
 {
+    const ROLE_ANON = "ROLE_ANON";
+    const ROLE_USER = "ROLE_USER";
+    const ROLE_BASIC_STAFF = "ROLE_BASIC_STAFF";
+    const ROLE_STAFF = "ROLE_STAFF";
+    const ROLE_ADMIN = "ROLE_ADMIN";
+    const ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
+    
     /**
      * @var integer $id
      *
@@ -108,7 +115,7 @@ class User implements UserInterface, \Serializable
     
     /**
      *
-     * @var Order $orders
+     * @var array $orders
      * @ORM\OneToMany(targetEntity="Order",  mappedBy="user", cascade={"persist", "remove"})
      */
     private $orders;
@@ -404,15 +411,15 @@ class User implements UserInterface, \Serializable
         $rol = $this->getPermissionType();
         
         $roles = array(
-            'ROLE_USER'=>'ROLE_USER',
-            'ROLE_BASIC_STAFF'=>'ROLE_BASIC_STAFF',
-            'ROLE_STAFF'=>'ROLE_STAFF',
-            'ROLE_ADMIN'=>'ROLE_ADMIN',
-            'ROLE_SUPER_ADMIN'=>'ROLE_SUPER_ADMIN',
+            'ROLE_USER'=> self::ROLE_USER,
+            'ROLE_BASIC_STAFF'=> self::ROLE_BASIC_STAFF,
+            'ROLE_STAFF'=> self::ROLE_STAFF,
+            'ROLE_ADMIN'=> self::ROLE_ADMIN,
+            'ROLE_SUPER_ADMIN'=> self::ROLE_SUPER_ADMIN,
         );
         
         if(!array_key_exists($rol, $roles)){
-            $rol = 'ROLE_USER';
+            $rol = self::ROLE_USER;
         }
         
         //return array('ROLE_SUPER_ADMIN');
@@ -432,7 +439,7 @@ class User implements UserInterface, \Serializable
     
     public function serialize() {
         return implode(',', array(
-            'id' => $this->getUsername(),
+            'id' => $this->getId(),
             'username' => $this->getUsername(),
         ));
     }
@@ -449,6 +456,9 @@ class User implements UserInterface, \Serializable
      * @return type 
      */
     public function isDBUser(){
+        if($this->getPermissionType() == self::ROLE_ANON){
+            return false;
+        }
         return true;
     }
 }

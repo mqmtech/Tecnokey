@@ -42,6 +42,32 @@ class DefaultController extends Controller {
         
     }
     
+     /**
+     * Return static pages
+     * @Route("/empresa", name="TKShopFrontendCompanyShow")
+     * @param type $page
+     * @return type 
+     */
+    public function companyAction()
+    {
+        //return new Response ( "Static Routing to page: ". $page );
+        //return $this->render("TecnokeyShopBundle:Default:".$page.".html.twig");
+        return $this->render("TecnokeyShopBundle:Default:empresa.html.twig");
+    }
+    
+    /**
+     * Return static pages
+     * @Route("/politica", name="TKShopFrontendPolicyShow")
+     * @param type $page
+     * @return type 
+     */
+    public function policyAction()
+    {
+        //return new Response ( "Static Routing to page: ". $page );
+        //return $this->render("TecnokeyShopBundle:Default:".$page.".html.twig");
+        return $this->render("TecnokeyShopBundle:Default:politica.html.twig");
+    }
+    
     /**
      * Frontend demo
      *

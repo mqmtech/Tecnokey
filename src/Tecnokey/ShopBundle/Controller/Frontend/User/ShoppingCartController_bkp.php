@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecnokey\ShopBundle\Controller\Frontend;
+namespace Tecnokey\ShopBundle\Controller\Frontend\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -10,7 +10,7 @@ use Tecnokey\ShopBundle\Form\Shop\ShoppingCartType;
 /**
  * Frontend\Default controller.
  *
- * @Route("/tienda/carrito")
+ * @Route("/tienda/usuario/carrito")
  */
 class ShoppingCartController extends Controller {
 
@@ -21,11 +21,14 @@ class ShoppingCartController extends Controller {
      * @Template()
      */
     public function indexAction() {
-        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+        /*$shoppingCart = $this->getShoppingCartFromCurrentUser();
         
         return array(
             'shoppingCart' => $shoppingCart
-        );       
+        );*/
+        
+        //return $this->redirect($this->generateUrl('TKShopFrontendShoppingCartEditFromCurrentUser'));
+        return $this->forward('TecnokeyShopBundle:Frontend\User\ShoppingCart:editFromCurrentUser');
     }
     
     /**
@@ -102,17 +105,46 @@ class ShoppingCartController extends Controller {
      *
      * @Route("/usuario/editar", name="TKShopFrontendShoppingCartEditFromCurrentUser")
      */
-    public function editFromCurrentUser(){
+    public function editFromCurrentUserAction(){
         $shoppingCart = $this->getShoppingCartFromCurrentUser();
         if($shoppingCart != NULL){
             /*$response = $this->forward($this->generateUrl("TKShopFrontendShoppingCartEdit", array(
             'id' => $shoppingCart->getId()
             )));*/
-            $response = $this->forward("TecnokeyShopBundle:Frontend\ShoppingCart:edit", array(
+            $response = $this->forward("TecnokeyShopBundle:Frontend\User\ShoppingCart:edit", array(
             'id' => $shoppingCart->getId()
             ));
             
             return $response;
+        }
+        else{
+            $this->get('session')->setFlash('shoppingCart_error',"Atencion: El usuario no dispone de carrito de la compra");
+            return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+        }
+    }
+    
+    /**
+     * Displays a form to edit an existing Shop\ShoppingCart entity.
+     *
+     * @Route("/usuario/item/{id}/eliminar", name="TKShopFrontenShoppingCartDeleteItemFromCurrentUser")
+     */
+    public function deleteItemFromCurrentUserAction($id){
+        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+        if($shoppingCart != NULL){
+            
+            $this->get('shoppingCartManager')->removeItem($shoppingCart, $id);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($shoppingCart);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('TKShopFrontendShoppingCartEdit', array(
+            'id' => $shoppingCart->getId()
+            )));
+            /*return $this->forward("TecnokeyShopBundle:Frontend\ShoppingCart:edit", array(
+            'id' => $shoppingCart->getId()
+            ));*/
+            
+            
         }
         else{
             $this->get('session')->setFlash('shoppingCart_error',"Atencion: El usuario no dispone de carrito de la compra");

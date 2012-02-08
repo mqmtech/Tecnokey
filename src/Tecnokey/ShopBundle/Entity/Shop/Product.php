@@ -19,7 +19,7 @@ use \DateTime;
  * @ORM\Entity(repositoryClass="Tecnokey\ShopBundle\Repository\ProductRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Product {
+class Product{
 
     /**
      * @var integer $id
@@ -260,6 +260,24 @@ class Product {
         }
         
     }
+    
+    /*public function serialize() {
+        
+        return implode(',', array(
+            //'id' => $this->getId(),
+            'name' => $this->getName(),
+            'basePrice' => $this->getBasePrice(),
+            ));
+    }
+
+    public function unserialize($serialized) {
+        $serialized = explode(',', $serialized);
+
+        //$this->setId($serialized[0]);    
+        $this->setName($serialized[0]);    
+        //$this->setCreatedAt($serialized[1]); 
+        $this->setBasePrice($serialized[1]);
+    }*/
     
     /**
      *
