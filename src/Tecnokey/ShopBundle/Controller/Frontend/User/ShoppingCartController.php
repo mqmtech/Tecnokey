@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tecnokey\ShopBundle\Form\Shop\ShoppingCartType;
 use Symfony\Component\HttpFoundation\Request;
+<<<<<<< HEAD
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
 
 use Symfony\Component\Serializer\Serializer;
@@ -15,6 +16,8 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
         
 
+=======
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
 /**
  * Frontend\Default controller.
  *
@@ -33,7 +36,11 @@ class ShoppingCartController extends Controller {
      * @Template()
      */
     public function indexAction() {
+<<<<<<< HEAD
         /*$shoppingCart = $this->getUserShoppingCart();
+=======
+        /*$shoppingCart = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         
         return array(
             'shoppingCart' => $shoppingCart
@@ -51,6 +58,7 @@ class ShoppingCartController extends Controller {
      */
     public function showAction()
     {
+<<<<<<< HEAD
         $entity = $this->getUserShoppingCart();
         
         if (!$entity) {
@@ -59,6 +67,14 @@ class ShoppingCartController extends Controller {
         $checkoutManager = $this->get('checkoutManager');
         $entity = $checkoutManager->checkout($entity);
         
+=======
+        $entity = $this->getShoppingCartFromCurrentUser();
+        $checkoutManager = $this->get('checkoutManager');
+        $entity = $checkoutManager->checkout($entity);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
+        }
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
 
         $deleteForm = $this->createDeleteForm($entity->getId());
 
@@ -101,9 +117,14 @@ class ShoppingCartController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+<<<<<<< HEAD
             /*$em->persist($entity);
             $em->flush();*/
             $this->persistAndFlushShoppingCart($entity);
+=======
+            $em->persist($entity);
+            $em->flush();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
 
             return $this->redirect($this->generateUrl('TKShopFrontendShoppingCartShow', array('id' => $entity->getId())));
             
@@ -121,7 +142,11 @@ class ShoppingCartController extends Controller {
      * @Route("/editar", name="TKShopFrontendUserShoppingCartEdit")
      */
     public function editAction(){
+<<<<<<< HEAD
         $entity = $this->getUserShoppingCart();
+=======
+        $entity = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
             /*$this->get('session')->setFlash('shoppingCart_error',"Atencion: El usuario no dispone de carrito de la compra");
@@ -153,14 +178,23 @@ class ShoppingCartController extends Controller {
      * @Route("/item/{id}/eliminar", name="TKShopFrontendUserShoppingCartDeleteItem")
      */
     public function deleteItemAction($id){
+<<<<<<< HEAD
         $shoppingCart = $this->getUserShoppingCart();
+=======
+        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         if($shoppingCart != NULL){
             
             $this->get('shoppingCartManager')->removeItem($shoppingCart, $id);
             $em = $this->getDoctrine()->getEntityManager();
+<<<<<<< HEAD
             /*$em->persist($shoppingCart);
             $em->flush();*/
             $this->persistAndFlushShoppingCart($shoppingCart);
+=======
+            $em->persist($shoppingCart);
+            $em->flush();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
             
             return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit', array(
             'id' => $shoppingCart->getId()
@@ -190,16 +224,25 @@ class ShoppingCartController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+<<<<<<< HEAD
             $entity = $this->getUserShoppingCart();
+=======
+            $entity = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
             //$entity = $em->getRepository('TecnokeyShopBundle:Shop\ShoppingCart')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
             }
 
+<<<<<<< HEAD
             /*$em->remove($entity);
             $em->flush();*/
             $this->removeShoppingCart($entity);
+=======
+            $em->remove($entity);
+            $em->flush();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         }
 
         return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartIndex'));
@@ -216,7 +259,11 @@ class ShoppingCartController extends Controller {
     {
         $em = $this->getDoctrine()->getEntityManager();
 
+<<<<<<< HEAD
         $entity = $this->getUserShoppingCart();
+=======
+        $entity = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\ShoppingCart entity.');
@@ -233,9 +280,14 @@ class ShoppingCartController extends Controller {
             // Check if the quantity of an Entity is zero, then remove the entity
             $entity = $this->get('shoppingCartManager')->removeItemsWithoutProducts($entity);
             // End Check if the quantity of an Entity is zero
+<<<<<<< HEAD
             /*$em->persist($entity);
             $em->flush();*/
             $this->persistAndFlushShoppingCart($entity);
+=======
+            $em->persist($entity);
+            $em->flush();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
             
             $request = Request::createFromGlobals();
             $order = $request->request->get(self::FORM_ORDER_FIELD);
@@ -274,7 +326,11 @@ class ShoppingCartController extends Controller {
      * @Route("/agregar_producto/{id}/", name="TKShopFrontendUserShoppingAddProduct")
      */
     public function addProductAction($id){
+<<<<<<< HEAD
         $shoppingCart = $this->getUserShoppingCart();
+=======
+        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         if($shoppingCart == NULL){
             return $this->shoppingCartErrorHandler();
         }
@@ -286,9 +342,14 @@ class ShoppingCartController extends Controller {
             throw new Exception("Custom Exception: Product with id $id does NOT exist in database");
         }
         $this->get('shoppingCartManager')->addProductToCart($shoppingCart, $product);
+<<<<<<< HEAD
         /*$em->persist($shoppingCart);
         $em->flush();*/
         $this->persistAndFlushShoppingCart($shoppingCart);
+=======
+        $em->persist($shoppingCart);
+        $em->flush();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         
         return $this->redirect($this->generateUrl("TKShopFrontendUserShoppingCartIndex"));
     }
@@ -297,7 +358,11 @@ class ShoppingCartController extends Controller {
      * @Route("/limpiar_carrito/", name="TKShopFrontendUserShoppingCartRemoveAllItems")
      */
     public function removeAllProductsAction(){
+<<<<<<< HEAD
         $shoppingCart = $this->getUserShoppingCart();
+=======
+        $shoppingCart = $this->getShoppingCartFromCurrentUser();
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         
         if($shoppingCart == NULL){
             return $this->shoppingCartErrorHandler();
@@ -306,9 +371,14 @@ class ShoppingCartController extends Controller {
         $this->get('shoppingCartManager')->removerAllItems($shoppingCart);
         
         $em = $this->getDoctrine()->getEntityManager();
+<<<<<<< HEAD
         /*$em->persist($shoppingCart);
         $em->flush();        */
         $this->persistAndFlushShoppingCart($shoppingCart);
+=======
+        $em->persist($shoppingCart);
+        $em->flush();        
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         
         return $this->redirect($this->generateUrl("TKShopFrontendUserShoppingCartIndex"));
     }    
@@ -333,7 +403,11 @@ class ShoppingCartController extends Controller {
      * 
      * @return ShoppingCart 
      */
+<<<<<<< HEAD
     protected function getUserShoppingCart(){
+=======
+    protected function getShoppingCartFromCurrentUser(){
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         $user = $this->get('userManager')->getCurrentUser();
         $shoppingCart = NULL;
         if($this->get('userManager')->isDBUser($user)){
@@ -343,6 +417,7 @@ class ShoppingCartController extends Controller {
                 $user->setShoppingCart($shoppingCart);
             }
         }
+<<<<<<< HEAD
         else{
             //Get the shoppingCart from session
             $session = $this->get('session');
@@ -400,5 +475,9 @@ class ShoppingCartController extends Controller {
             $session->save();
         }
     }
+=======
+        return $shoppingCart;
+    }
+>>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
 
 }
