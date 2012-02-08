@@ -63,7 +63,6 @@ class CheckoutManager {
             $totalBasePrice = $priceInfo->getBasePrice() ; // + shipment when it's needed
             $shoppingCart->setTotalBasePrice($totalBasePrice);
         
-<<<<<<< HEAD
             //Get Tax
             $tax = $marketManager->getIva();
             $shoppingCart->setTax($tax);
@@ -77,16 +76,6 @@ class CheckoutManager {
 
             $shoppingCart->setTotalPrice($totalPrice);
         }
-=======
-        //Get Tax Price
-        $taxPrice =  $tax * $totalBasePrice;
-        $shoppingCart->setTaxPrice($taxPrice);
-        
-        //Calculate totalPrice
-        $totalPrice = $totalBasePrice + $taxPrice;
-        
-        $shoppingCart->setTotalPrice($totalPrice);
->>>>>>> e2a26287a45b783ede7404655ae75b397760b7d0
         
         $shoppingCart->setModifiedAt(new \DateTime('now'));
         
