@@ -22,9 +22,15 @@
 
 {% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
 
-<form action="{{ path('crud_user_create') }}" method="post" {{ form_enctype(form) }}>
-    {% include 'TecnokeyShopBundle:Frontend/User/Default:formBody.partialhtml.twig' %}
+<form action="{{ path('TKShopFrontendUserCreate') }}" method="post" {{ form_enctype(form) }}>
+    {% include 'TecnokeyShopBundle:Frontend/User/Register:formBody.partialhtml.twig' %}
 </form>
+
+    {% for key, flash in app.session.getFlashes() %}
+    <div class="error">
+        {{ flash }}
+    </div>
+    {% endfor %}
 
 {% endblock right_content %}
 

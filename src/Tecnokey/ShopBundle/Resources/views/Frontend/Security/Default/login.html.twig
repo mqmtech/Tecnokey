@@ -18,7 +18,7 @@
     {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
 {% endblock %}
 
-{% block right_content %}
+{% block right %}
 <!--start right-->
 <div class="right">
     <!--start area privada-->
@@ -51,11 +51,11 @@
 
         <div class="input_container_user">
             <p class="text_bold">Para proceder a la apertura de una nueva cuenta, póngase en contacto con nosotros haciendo click en el siguiente enlace :</p><br />
-            <p class="text_general"><a href="#">Solicitud de una nueva cuenta de usuario</a></p>
+            <p class="text_general"><a href="{{ path('TKShopFrontendUserNew') }}">Solicitud de una nueva cuenta de usuario</a></p>
         </div>
 
     </div>
     <!--start area privada-->   
 
 </div><!--end right-->
-{% endblock right_content %}
+{% endblock right %}

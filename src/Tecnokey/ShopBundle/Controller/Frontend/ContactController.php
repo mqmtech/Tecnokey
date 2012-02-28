@@ -77,6 +77,55 @@ class ContactController extends Controller {
         
     }
     
+        /**
+     *
+     * @Route("/enviar_consulta2", name="TKShopFrontendContactSendEmail2")
+     * @Method("post")
+     * @template("TecnokeyShopBundle:Default:contacto.html.twig")
+     */
+    public function sendEmail2Action() {
+        
+        try{
+        $request = Request::createFromGlobals();
+        
+        //Get request parameters
+        // the URI being requested (e.g. /about) minus any query parameters
+        //$request->getPathInfo();
+
+        // retrieve GET and POST variables respectively
+        //$request->query->get('foo');
+        //$request->request->get('bar');
+        
+        $company = $request->request->get("company");
+        $email = $request->request->get("email");
+        $message = $request->request->get("message");
+                
+       $form_feedback = $this->getFormvalidationFeedback($company, $email, $message);
+        $this->get('session')->setFlash('form_feedback', $form_feedback);
+        if($form_feedback["success"] != NULL){
+            //Send email
+            //End getting request parameters
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Consulta de '. $company.' para Tecknokey')
+            ->setFrom("consultas@tecnokey.es")
+            //->setTo("ciberxtrem@gmail.com")
+            ->addTo("ciberxtrem@gmail.com")
+            ->addTo("marioquesada85@gmail.com")
+            //->addTo("amkribo@gmail.com")
+            ->setBody("De: ".$email."\nMensaje: \n".$message);
+
+            $this->get('mailer')->send($message);
+            //End Sending email
+        }
+        //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+        return array();
+        }
+        catch (Exception $e){
+            return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+        }
+        
+    }
+    
     /**
      * @Route("/enviar_consulta_hosting", name="TKShopFrontendContactSendEmailHosting")
      * @Method("post")

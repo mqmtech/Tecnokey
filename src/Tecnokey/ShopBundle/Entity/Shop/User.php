@@ -24,6 +24,8 @@ class User implements UserInterface, \Serializable
     const ROLE_ADMIN = "ROLE_ADMIN";
     const ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
     
+    const DEFAULT_IS_ENABLED = false;
+    
     /**
      * @var integer $id
      *
@@ -500,7 +502,7 @@ class User implements UserInterface, \Serializable
      * 
      * WARNING: password must be already encoded by the superior layer (tipically WebController or UserManager)
      */
-    public function __construct($username = NULL, $password = NULL, $permissionType = NULL) {
+    public function __construct($username = NULL, $password = NULL, $permissionType = NULL, $isEnabled = self::DEFAULT_IS_ENABLED) {
         
         if($username){
             $this->setUsername($username);

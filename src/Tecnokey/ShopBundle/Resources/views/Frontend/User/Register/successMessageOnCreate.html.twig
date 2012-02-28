@@ -1,0 +1,55 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Productos |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right %}
+<!--start right-->
+<div class="right">
+    <!--start area privada-->
+    <div class="titulo_area_privada_container">
+        <p class=" text_general_blue">Área Privada:</p>
+        <p class="text_bold">Datos de registro recibidos</p>
+    </div>
+
+    
+        <div class="login_user_container">
+            <div class="tiulo_login_user">Su registro está siendo validado</div>
+
+            <div class="input_container_user">
+                {% if user is defined %}
+                <p class="text_bold">Gracias por registrarse en Tecno-key. En el momento en que su registro sea validado por el staff de tecno-key enviaremos recibirá un email de confirmación en la siguiente dirección de correo electrónico:</p>
+                <p class="text_bold">{{ user.email }}</p>
+                {% else %}
+                <p class="text_bold">Gracias por registrarse en Tecno-key. En el momento en que su registro sea validado por el staff de tecno-key recibirá un email de confirmación en su dirección de correo electrónico</p>
+                {% endif %}
+                <p class="text_bold"></p>
+                <br/>
+                <p class="text_general"><a href="{{ path('TKShopFrontendIndex') }}">Para continuar haga click aquí</a></p>
+                
+            </div>
+        </div>
+    <!--start area privada-->   
+
+</div><!--end right-->
+{% endblock right %}
+
+
+
+
+

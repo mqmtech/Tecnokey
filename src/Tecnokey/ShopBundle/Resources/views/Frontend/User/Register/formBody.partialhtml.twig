@@ -36,8 +36,9 @@
                             
                             <div class="input_right">
                             <p><span class="red">*</span> Confirmar e-mail:</p>
-                            {#<input name="mail" type="Empresa" class="input_new_cliente" />#}
-                            
+                            <input name="emailConfirmation" type="Empresa" class="input_new_cliente" />
+                            {#{{ form_errors(form.emailConfirmation) }}
+                            {{ form_widget(form.emailConfirmation, {'attr' : { 'class' : 'input_new_cliente' } }) }}#}
                             </div>
                             </div>
                                                 
@@ -49,7 +50,9 @@
                         </div>
                         
                         <div class="input_right"><p><span class="red">*</span> Confirmar contraseña:</p>
-                        {#<input name="pass" type="password" class="input_new_cliente" />#}
+                        <input name="passwordConfirmation" type="password" class="input_new_cliente" />
+                        {#{{ form_errors(form.passwordConfirmation) }}
+                        {{ form_widget(form.passwordConfirmation, {'attr' : { 'class' : 'input_new_cliente' } }) }}#}
                         </div>
                     </div>
                     

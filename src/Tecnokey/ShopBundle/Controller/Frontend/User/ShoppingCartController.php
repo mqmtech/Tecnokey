@@ -106,7 +106,6 @@ class ShoppingCartController extends Controller {
             $this->persistAndFlushShoppingCart($entity);
 
             return $this->redirect($this->generateUrl('TKShopFrontendShoppingCartShow', array('id' => $entity->getId())));
-            
         }
 
         return array(
@@ -237,28 +236,8 @@ class ShoppingCartController extends Controller {
             $em->flush();*/
             $this->persistAndFlushShoppingCart($entity);
             
-            $request = Request::createFromGlobals();
-            $order = $request->request->get(self::FORM_ORDER_FIELD);
-            if($order == self::FORM_ORDER_COMFIRM_VALUE){
-                $checkoutManager = $this->get('checkoutManager');    
-                $entity = $checkoutManager->checkout($entity);
-                // generate an order
-                $order = $checkoutManager->shoppingCartToOrder($entity);
-
-                $user = $this->get('userManager')->getCurrentUser();
-
-                $order->setUser($user);
-
-                $em->persist($order);
-                $em->flush();
-                //End generating an order
-                    
-                // remove all cart items
-                $this->get('shoppingCartManager')->removeAllItems($entity);
-                $em->flush();
-                //End removing all cart items
-            
-                // redirect to the current orders page                
+            $confirmed = false;//$this->confirmOrder($entity);
+            if($confirmed == true){
                 return $this->redirect($this->generateUrl('TKShopFrontendOrderIndex'));
             }
         }
@@ -365,6 +344,40 @@ class ShoppingCartController extends Controller {
             }
         }
         return $shoppingCart;
+    }
+    
+    /**
+     *
+     * @param ShoppingCart $shoppingCart
+     * @return boolean 
+     */
+    public function confirmOrder($entity){
+        $request = Request::createFromGlobals();
+            $order = $request->request->get(self::FORM_ORDER_FIELD);
+            if($order == self::FORM_ORDER_COMFIRM_VALUE){
+                $checkoutManager = $this->get('checkoutManager');    
+                $entity = $checkoutManager->checkout($entity);
+                // generate an order
+                $order = $checkoutManager->shoppingCartToOrder($entity);
+
+                $user = $this->get('userManager')->getCurrentUser();
+
+                $order->setUser($user);
+
+                $em->persist($order);
+                $em->flush();
+                //End generating an order
+                    
+                // remove all cart items
+                $this->get('shoppingCartManager')->removeAllItems($entity);
+                $em->flush();
+                //End removing all cart items
+            
+                // redirect to the current orders page                
+                //return $this->redirect($this->generateUrl('TKShopFrontendOrderIndex'));
+                return true;
+            }
+            return false;
     }
     
     /**

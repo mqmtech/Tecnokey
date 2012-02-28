@@ -18,6 +18,44 @@
     {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
 {% endblock %}
 
+{% block jsfunctions %}
+    {{ parent() }}
+    <script>
+    jQuery(document).ready(function(){
+    
+        var $dialog = $('<div></div>')
+                    .html('La confirmación de pedidos aún no se encuentra activada')
+                    .dialog({
+                            autoOpen: false,
+                            title: 'Función deshabilitada',
+                            resizable: false,
+                            height:240,
+                            modal: true,
+                            buttons: {
+				"Abortar pedido": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+                    });
+
+    
+        jQuery(".confirmar_pedido").click(function(event){
+        
+            event.preventDefault(); // now js will take full control of the product delection
+            delform = $( this ).parents("form");
+            
+            $dialog.bind( "dialogbeforeclose", function(e, ui) {
+               //alert( $(e.target)[0].tittle );
+            });
+            
+           $dialog.dialog("open");
+
+        });
+        
+     })
+     </script>
+{% endblock jsfunctions %}
+
 {% block right_content %}
 
 {% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
@@ -43,7 +81,7 @@
                 <div class="prods_detalles_container">
                     <div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id' : dataItem.id}) }}"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}  " alt="logo" /></a></div>
                     <div class="foto_prod_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
-                    <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name }}</a></div>
+                    <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name | truncate(43) }}</a></div>
                     <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
                     <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
                                 {#<div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="1" /></div>#}
