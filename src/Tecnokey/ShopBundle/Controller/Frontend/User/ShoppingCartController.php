@@ -351,7 +351,13 @@ class ShoppingCartController extends Controller {
      * @param ShoppingCart $shoppingCart
      * @return boolean 
      */
-    public function confirmOrder($entity){
+    public function confirmOrder(ShoppingCart $entity){
+        
+        $items = $entity->getItems();
+        if(count($items) < 1){
+            return false;
+        }
+        
         $request = Request::createFromGlobals();
             $order = $request->request->get(self::FORM_ORDER_FIELD);
             if($order == self::FORM_ORDER_COMFIRM_VALUE){
