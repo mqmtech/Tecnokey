@@ -18,22 +18,11 @@
     {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
 {% endblock %}
 
-{% block right_content %}
+{% block right %}
 <!--start right-->
     <div class="right">
     	<!--start menu user-->
-		<div class="menu_user_container">
-         	<div class="perfil_btn"><a href="#"><img src="{{ asset('bundles/tecnokey/images/icono_perfil.png') }}" alt="perfil" />Perfil</a></div>
-				
-	<div class="menu_pedidos_container">
-                	<div class="proceso_btn"><a href="estado_proceso_lista.html"><img src="{{ asset('bundles/tecnokey/images/icono_proceso.png') }}" alt="proceso" />Pedidos En proceso</a></div>
-            		<div class="realizados_btn"><a href="estado_realizados_lista.html"><img src="{{ asset('bundles/tecnokey/images/icono_realizados.png') }}" alt="realizado" />Pedidos Realizados</a></div>
-                </div>
-            
-    <div class="cesta_btn"><a href="{{ path('TKShopFrontendUserShoppingCartIndex') }}">Cesta</a></div>
-         
-      </div>
-        
+        {% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
         <!--end menu user--> 
         
         <!--start cuerpo--> 
@@ -67,4 +56,4 @@
         </div>
         <!--end cuerpo--> 
     </div><!--end right-->
-{% endblock right_content %}
+{% endblock right %}

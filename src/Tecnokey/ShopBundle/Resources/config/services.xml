@@ -50,5 +50,9 @@
             <argument type="service" id="security.context" />
         </service>
         
+        <service id="productStatistic" class="Tecnokey\ShopBundle\Service\ProductStatisticManager" public="true">
+            <argument type="service" id="doctrine" />
+        </service>
+        
     </services>
 </container>

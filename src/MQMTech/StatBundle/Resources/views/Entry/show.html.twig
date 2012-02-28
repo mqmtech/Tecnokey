@@ -1,0 +1,45 @@
+<h1>Entry</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Targettype</th>
+            <td>{{ entity.targetType }}</td>
+        </tr>
+        <tr>
+            <th>Targetid</th>
+            <td>{{ entity.targetId }}</td>
+        </tr>
+        <tr>
+            <th>Createdat</th>
+            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Modifiedat</th>
+            <td>{{ entity.modifiedAt|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('stats_crud_entry') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('stats_crud_entry_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('stats_crud_entry_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

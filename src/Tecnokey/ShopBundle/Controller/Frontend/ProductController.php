@@ -21,6 +21,7 @@ use Tecnokey\ShopBundle\Service\ProductManager;
 
 use Symfony\Component\HttpFoundation\Request;
 
+use Tecnokey\ShopBundle\Entity\Statistic\ProductStatistic;
 
 /**
  * Frontend\Default controller.
@@ -144,11 +145,31 @@ class ProductController extends Controller {
             $i++;
         }
         
-        $productPriceInfo = $this->get('productManager')->getProductPriceInfo($product);        
+        $productPriceInfo = $this->get('productManager')->getProductPriceInfo($product);    
+        
+        //Set Statistics
+        $productStatistic = $this->registerProductStatistic($product);
+        $em->persist($productStatistic);
+        $em->flush();
+        //End Setting Statistics
         return array(
             'breadcrumb' => $breadcrumb,
             'product' => $product,
             'productInfo' => $productPriceInfo
         );
     }    
+    
+    /**
+     *
+     * @param Product $product
+     * @return ProductStatistic 
+     */
+    public function registerProductStatistic(Product $product){
+        $productStatistic = new ProductStatistic();
+        $productStatistic->setType(\Tecnokey\ShopBundle\Entity\Statistic\Statistic::PRODUCT_TYPE_SEEN);
+        
+        $this->get("productStatistic")->registerStatToProduct($productStatistic, $product);
+        
+        return $productStatistic;
+    }
 }

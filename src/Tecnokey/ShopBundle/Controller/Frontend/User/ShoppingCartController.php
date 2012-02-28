@@ -243,19 +243,22 @@ class ShoppingCartController extends Controller {
                 $checkoutManager = $this->get('checkoutManager');    
                 $entity = $checkoutManager->checkout($entity);
                 // generate an order
-                    $order = $checkoutManager->shoppingCartToOrder($entity);
+                $order = $checkoutManager->shoppingCartToOrder($entity);
+
+                $user = $this->get('userManager')->getCurrentUser();
+
+                $order->setUser($user);
+
+                $em->persist($order);
+                $em->flush();
+                //End generating an order
                     
-                    $user = $this->get('userManager')->getCurrentUser();
-                    
-                    $order->setUser($user);
-                    
-                    $em->persist($order);
-                    $em->flush();
-                // remove cart
+                // remove all cart items
                 $this->get('shoppingCartManager')->removeAllItems($entity);
                 $em->flush();
+                //End removing all cart items
             
-                // redirect to an order page                
+                // redirect to the current orders page                
                 return $this->redirect($this->generateUrl('TKShopFrontendOrderIndex'));
             }
         }
@@ -343,21 +346,22 @@ class ShoppingCartController extends Controller {
                 $user->setShoppingCart($shoppingCart);
             }
         }
-        else{
+        else{   
+            return new ShoppingCart();
+            throw new \Exception("Custom Exception: Getting ShoppingCart from session -> the serializable object must be completed before used in production");
             //Get the shoppingCart from session
             $session = $this->get('session');
             $shoppingCart = $session->get('shoppingCart');
             if($shoppingCart){
-                $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
-                $shoppingCart = $serializer->deserialize($shoppingCart, 'Tecnokey\ShopBundle\Entity\Shop\ShoppingCart', 'json');                
+                //$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
+                //$shoppingCart = $serializer->deserialize($shoppingCart, 'Tecnokey\ShopBundle\Entity\Shop\ShoppingCart', 'json');                
             }
             else{
                 $shoppingCart = new ShoppingCart();
-                
-                $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
-                $json = $serializer->serialize($shoppingCart, 'json');
-                $session->set('shoppingCart', $json);
-                $session->save();
+                //$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
+                //$json = $serializer->serialize($shoppingCart, 'json');
+                //$session->set('shoppingCart', $json);
+                //$session->save();
             }
         }
         return $shoppingCart;
@@ -377,10 +381,10 @@ class ShoppingCartController extends Controller {
         else{
             $session = $this->get('session');
             //$session->set('shoppingCart', serialize($shoppingCart));
-            $serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
-            $json = $serializer->serialize($shoppingCart, 'json');
-            $session->set('shoppingCart', $json);
-            $session->save();
+            //$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new JsonEncoder()));
+            //$json = $serializer->serialize($shoppingCart, 'json');
+            //$session->set('shoppingCart', $json);
+            //$session->save();
         }
     }
     

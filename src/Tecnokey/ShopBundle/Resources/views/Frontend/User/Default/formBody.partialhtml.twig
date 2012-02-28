@@ -1,0 +1,125 @@
+    	<!--start formulario de alta-->
+            <div class="formulario_alta_new_cliente">
+            	
+                <div class="form_new_cliente_container">
+  <p><strong>Para darse de alta como nuevo cliente de Tecnokey, por favor rellene el siguiente formulario:</strong> <span class=" text_general"><span class="red">*</span> Campos obligatorios</span></p><br />
+  
+                   
+                        <div class="input_container_new_cliente">
+                        
+                        	<div class="input_left">
+                        	  <p><span class="red">*</span> Nombre:</p>
+                            
+                                  {{ form_errors(form.firstName) }}
+                                  {{ form_widget(form.firstName, {'attr' : { 'class' : 'input_new_cliente_nombre_appellido' } }) }}
+                                  {#<input name="Empresa" type="Empresa" class="input_new_cliente_nombre_appellido" />#}
+                                
+                                </div>
+                            
+                            <div class="input_right"><p><span class="red">*</span> Apellidos:</p>
+                            {#<input name="Empresa" type="Empresa" class="input_new_cliente_nombre_appellido" />#}
+                                {{ form_errors(form.lastName) }}
+                                {{ form_widget(form.lastName, {'attr' : { 'class' : 'input_new_cliente_nombre_appellido' } }) }}
+                            </div>
+                  </div>
+                         
+       <br /> <p><strong class="blue">Introduzca los datos de acceso:</strong></p>
+       			<div class="linea_horizontal"></div>           
+                            
+                    
+                            <div class="input_container_new_cliente">
+                            <div class="input_left"><p><span class="red">*</span> e-mail:</p>
+                            {#<input name="mail" type="text" class="input_new_cliente" />#}
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email, {'attr' : { 'class' : 'input_new_cliente' } }) }} 
+                            </div>
+                            
+                            <div class="input_right">
+                            <p><span class="red">*</span> Confirmar e-mail:</p>
+                            {#<input name="mail" type="Empresa" class="input_new_cliente" />#}
+                            
+                            </div>
+                            </div>
+                                                
+                    <div class="input_container_new_cliente">
+                        <div class="input_left"><p><span class="red">*</span> Contraseña:</p> 
+                        {#<input name="pass" type="password" class="input_new_cliente" />#}
+                        {{ form_errors(form.password) }}
+                        {{ form_widget(form.password, {'attr' : { 'class' : 'input_new_cliente' } }) }} 
+                        </div>
+                        
+                        <div class="input_right"><p><span class="red">*</span> Confirmar contraseña:</p>
+                        {#<input name="pass" type="password" class="input_new_cliente" />#}
+                        </div>
+                    </div>
+                    
+          <br /> <p><strong class="blue">Introduzca los datos de su empresa:</strong></p> 
+          <div class="linea_horizontal"></div>  
+                   
+              <div class="input_container_new_cliente">
+                        <div class="input_left"><p><span class="red">*</span> Razón social:</p>
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                            {{ form_errors(form.firmName) }}
+                            {{ form_widget(form.firmName, {'attr' : { 'class' : 'input_new_cliente' } }) }} 
+                        </div>
+                        <div class="input_right"><p><span class="red">*</span> CIF:</p>
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                            {{ form_errors(form.vatin) }}
+                            {{ form_widget(form.vatin, {'attr' : { 'class' : 'input_new_cliente' } }) }} 
+                        </div>
+                  </div>
+                    
+                    <div class="input_container_new_cliente">
+                        <div class="input_left_2"><p><span class="red">*</span> Dirección:</p>
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente_direccion" />#}
+                            {{ form_errors(form.address) }}
+                            {{ form_widget(form.address, {'attr' : { 'class' : 'input_new_cliente_direccion' } }) }} 
+                        </div>
+                        
+                        <div class="input_right_2"><p><span class="red">*</span> CP:</p>
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente_cp" />#}
+                            {{ form_errors(form.zipCode) }}
+                            {{ form_widget(form.zipCode, {'attr' : { 'class' : 'input_new_cliente_cp' } }) }} 
+                        </div>
+                    </div>
+                    
+                    <div class="input_container_new_cliente">
+                    	<div class="input_left"><p><span class="red">*</span> Población:</p>
+                    	{#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                        {{ form_errors(form.city) }}
+                        {{ form_widget(form.city, {'attr' : { 'class' : 'input_new_cliente' } }) }} 
+                        </div>
+                    	<div class="input_right"><p><span class="red">*</span> Provincia:</p>
+                    	{#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                        {{ form_errors(form.province) }}
+                        {{ form_widget(form.province, {'attr' : { 'class' : 'input_new_cliente' } }) }}
+                        </div>
+                    </div>
+                    
+                  	<div class="input_container_new_cliente">
+                       	<div class="input_left"><p><span class="red">*</span> Teléfono:</p>	
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                        {{ form_errors(form.phone) }}
+                        {{ form_widget(form.phone, {'attr' : { 'class' : 'input_new_cliente' } }) }}
+                        </div>
+                        <div class="input_right"><p>Fax:</p>
+                        {#<input name="Empresa" type="Empresa" class="input_new_cliente" />#}
+                        {{ form_errors(form.fax) }}
+                        {{ form_widget(form.fax, {'attr' : { 'class' : 'input_new_cliente' } }) }}
+                        </div>
+                    </div>
+          
+                    {{ form_rest(form) }}
+                    
+                    <div class="aceptar_enviar_container">
+                    	<span><input name="" type="checkbox" value="" checked="checked" /> <span>Acepto la <strong  class="blue">Política de uso</strong> de Tecnokey.com</span></span>
+                    	<div class="btn_solicitar_alta">
+                        <button class="btn_solicitar_alta" type="submit">Enviar</button>
+                        </div>
+                        
+                    </div>
+          
+                </div>
+            
+            </div>
+        <!--end formulario-->  

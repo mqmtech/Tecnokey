@@ -1,0 +1,51 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Login |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block right_content %}
+
+{% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
+
+{% if app.user is defined %}
+    {% set user = app.user %}
+    Bienvenido {{ app.user.username }}
+    <!--start cuerpo--> 
+        <div class="right_cuerpo_user">
+        	<div class="titulo_current">Mi perfil:</div>
+            <div class="form_new_cliente_container">
+            	<p><strong>Descuento:</strong> <strong class="green">{% if user.offer.discount is not defined %} 0% {% else %} {{ user.offer.discount }} {% endif %}</strong></p>
+                <div class="linea_horizontal"></div>
+                <p><strong>Nombre:</strong> <span>{{ user.firstname }}</span></p>
+                <p><strong>Apellidos:</strong>  <span>{{ user.lastname }}</span></p>
+                <p><strong>Nombre de usuario:</strong> {{ user.username }} </p> 
+                <p><strong>e-mail:</strong>  <span>{{ user.email }}</span></p>
+                <p><strong>Razón social:</strong>{{ user.firmName }}</p>
+                <p><strong>CIF:</strong>{{ user.vatin }}</p>
+                <p><strong>Dirección:</strong> <span>{{ user.address }}</span></p>
+                <p><strong>CP:</strong> {{ user.zipCode }}</p>	
+                <p><strong>Población:</strong>{{ user.city }}</p>
+                <p><strong>Provincia:</strong>{{ user.province }}</p>
+                <p><strong>Teléfono:</strong>{{ user.phone }}</p>
+                <p><strong>Fax:</strong>{{ user.fax }}</p>
+          </div>
+
+        </div>
+        <!--end cuerpo-->         
+{% endif %}    
+{% endblock right_content %}

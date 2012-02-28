@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Tecnokey\ShopBundle\TecnokeyShopBundle(),
             new MQMTech\DemoBundle\MQMTechDemoBundle(),
+            new MQMTech\StatBundle\MQMTechStatBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -32,6 +32,43 @@ class User implements UserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+     /**
+     * @var string $username
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true, nullable=true)
+     */
+    private $username;
+    
+    /**
+     * @var string $password
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     */
+    private $password;
+    
+    /**
+     * @var string $permissionType
+     *
+     * @ORM\Column(name="permissionType", type="string", length=255, nullable=true)
+     */
+    private $permissionType;
+    
+    /**
+     * @var boolean $isEnabled
+     *
+     * @ORM\Column(name="isEnabled", type="boolean", nullable=true)
+     */
+    private $isEnabled;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="TimeOffer", cascade={"persist", "remove", "detached"})
+     * @ORM\JoinColumn(name="offerId", referencedColumnName="id", nullable=true)
+     *
+     * @var TimeOffer $offer
+     */
+    private $offer;
 
     /**
      * @var string $firstName
@@ -61,35 +98,56 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
-
-    /**
-     * @var boolean $isEnabled
-     *
-     * @ORM\Column(name="isEnabled", type="boolean", nullable=true)
-     */
-    private $isEnabled;
-
-    /**
-     * @var string $permissionType
-     *
-     * @ORM\Column(name="permissionType", type="string", length=255, nullable=true)
-     */
-    private $permissionType;
-    
-     /**
-     * @var string $username
-     *
-     * @ORM\Column(name="username", type="string", length=255, unique=true, nullable=true)
-     */
-    private $username;
     
     /**
-     * @var string $password
+     * @var string $firmName // razon social in spanish
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     * @ORM\Column(name="firmName", type="string", length=255, nullable=true)
      */
-    private $password;
-
+    private $firmName;
+    
+    /**
+     * @var string $vatin // value added tax identification number, CIF/NIF in spanish
+     *
+     * @ORM\Column(name="vatin", type="string", length=255, nullable=true)
+     */
+    private $vatin;
+    
+    /**
+     * @var string $zipCode // Codigo Postal in spanish
+     *
+     * @ORM\Column(name="zipCode", type="string", length=255, nullable=true)
+     */
+    private $zipCode;
+    
+    /**
+     * @var string $city 
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    private $city;
+    
+    /**
+     * @var string $province 
+     *
+     * @ORM\Column(name="province", type="string", length=255, nullable=true)
+     */
+    private $province;
+    
+    /**
+     * @var string $phone 
+     *
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     */
+    private $phone;
+    
+    /**
+     * @var string $fax 
+     *
+     * @ORM\Column(name="fax", type="string", length=255, nullable=true)
+     */
+    private $fax;
+    
     /**
      * @var datetime $createdAt
      *
@@ -120,6 +178,72 @@ class User implements UserInterface, \Serializable
      */
     private $orders;
     
+    public function getOffer() {
+        return $this->offer;
+    }
+
+    public function setOffer($offer) {
+        $this->offer = $offer;
+    }
+
+        
+    public function getFirmName() {
+        return $this->firmName;
+    }
+
+    public function setFirmName($firmName) {
+        $this->firmName = $firmName;
+    }
+
+    public function getVatin() {
+        return $this->vatin;
+    }
+
+    public function setVatin($vatin) {
+        $this->vatin = $vatin;
+    }
+
+    public function getZipCode() {
+        return $this->zipCode;
+    }
+
+    public function setZipCode($zipCode) {
+        $this->zipCode = $zipCode;
+    }
+
+    public function getCity() {
+        return $this->city;
+    }
+
+    public function setCity($city) {
+        $this->city = $city;
+    }
+
+    public function getProvince() {
+        return $this->province;
+    }
+
+    public function setProvince($province) {
+        $this->province = $province;
+    }
+
+    public function getPhone() {
+        return $this->phone;
+    }
+
+    public function setPhone($phone) {
+        $this->phone = $phone;
+    }
+
+    public function getFax() {
+        return $this->fax;
+    }
+
+    public function setFax($fax) {
+        $this->fax = $fax;
+    }
+
+            
     public function getOrders() {
         return $this->orders;
     }
@@ -392,6 +516,8 @@ class User implements UserInterface, \Serializable
         
         //Create a shopping cart by default
         $this->shoppingCart = new ShoppingCart();
+        
+        $this->offer = new TimeOffer(); //To initializate dates, otherwise dates are old in the form
     }
     
     //** Implementing UserInterface Methods **//

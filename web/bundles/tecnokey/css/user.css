@@ -244,11 +244,13 @@
 	width: 64px;
 }
 /*========perfil CESTA======== */
+
+
 .prods_detalles_container{
 	width: 726px;
 	height: 60px;
 	border-bottom: 1px solid #ccc;
-	line-height: 20px;
+	line-height: 60px;
 	background-image: url(../images/fondo_prod_cesta.png);
 	text-shadow: #fffeff 1px 1px 0;
 }	
@@ -449,6 +451,212 @@
 
 }
 
+/* formulario Nuevo Cliente */
+
+.red{
+	color: #e51230;
+}
+
+.blue{
+	color: #258cdb;
+}
+
+.green{
+	color: #179108;
+}
+
+.linea_horizontal{
+	border-bottom: 1px solid #ccc;
+	margin-top: 2px;
+	margin-bottom: 8px;
+	height: 1px;
+}
+
+.form_new_cliente_container{
+	padding: 10px;
+	border: 1px solid #ccc;
+	background: #fff;
+	color: #000000;
+	font:0.8em Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	float: left;
+	height: auto;
+	width: 706px;
+}
+
+.input_container_new_cliente{
+	height: 50px;
+	width: 668px;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.input_left{
+	float: left;
+	height: auto;
+	width: 323px;
+	margin-right: 15px;
+}
+
+.input_right{
+	float: left;
+	height: auto;
+	width: 323px;
+}
+
+.input_new_cliente{
+	width: 310px;
+	border: 1px solid #ccc;
+	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
+	height: 15px;
+	margin-bottom: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.input_new_cliente_nombre_appellido{
+	width: 310px;
+	border: 1px solid #ccc;
+	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
+	height: 15px;
+	margin-bottom: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.input_left_2{
+	float: left;
+	height: auto;
+	width: 511px;
+	margin-right: 15px;
+}
+
+.input_right_2{
+	float: left;
+	height: auto;
+	width: 132px;
+}
+.input_new_cliente_direccion{
+	width: 499px;
+	border: 1px solid #ccc;
+	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
+	height: 15px;
+	margin-bottom: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.input_new_cliente_cp{
+	width: 120px;
+	border: 1px solid #ccc;
+	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
+	color: #555;
+	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
+	height: 15px;
+	margin-bottom: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.aceptar_enviar_container {
+	width: 660px;
+	float: left;
+	height: auto;
+}
+
+.btn_solicitar_alta a{
+	height: 26px;
+	width: auto;
+	border: 1px solid #ccc;
+	background-image: url(../images/fondo_arbol.png);
+	font: bold 1em/24px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #555;
+	float: left;
+	margin-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.btn_solicitar_alta a:hover{
+	text-decoration: underline;
+}
+
+/* Lista clientes */
+
+.lista_clientes_container{
+	background: #fff;
+	height: auto;
+	color: #555;
+	font-size: 13px;
+	border: 1px solid #ccc;
+	float: left;
+	width: 726px;
+	margin-bottom: 15px;
+}
+/*========legends======= */
+.legend_clientes_container {
+	height: 28px;
+	border-bottom: 1px solid #ccc;
+	background-image: url(../images/fondo_prod_cesta.png);
+	line-height: 28px;
+	padding-left: 10px;
+	font-size: 12px;
+	width: 716px;
+	text-shadow: #fffeff 1px 1px 0;
+}
+
+.legend_clientes_container a{
+	color: inherit;
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	width: 716px;
+	text-shadow: #fffeff 1px 1px 0;
+}
+
+.legend_clientes_container a:hover{
+	text-decoration: underline;
+}
+
+
+.cliente_legend{
+	float: left;
+	width: 235px;
+} 
+
+.empresa_cliete_legend{
+	float: left;
+	width: 120px;
+	text-align: left;
+}
+ 
+.descueto_cliente_legend{
+	
+	float: left;
+	text-align: center;
+	width: 130px;
+	color: #179108;
+}
+ 
+.n_pedidos_cliente_legend{
+	width: 120px;
+	float: left;
+	text-align: center;
+} 
+
+.state_cliente_legend{
+	float: left;
+	padding-right: 10px;
+	color: #258cdb;
+	text-align: right;
+	width: 100px;
+}
+
 /* modded by mario -  31/01/2012 */
 
 .input_cantidad_cesta {
@@ -458,7 +666,7 @@
 	font: bold 1em/20px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
 	color: #555;
 	padding: 1px;
-	margin-top: 2px;
+	margin-top: 19px;
 	text-align: center;
 	float: left;
 	margin-left: 8px;
@@ -486,16 +694,25 @@
 	float: left;
 }
 
+.input_new_cliente, .input_new_cliente_nombre_appellido, .input_new_cliente_direccion, .input_new_cliente_cp {
+    height: 30px;
+        
+}
+
+.btn_solicitar_alta button{
+	height: 26px;
+	width: auto;
+	border: 1px solid #ccc;
+	background-image: url(../images/fondo_arbol.png);
+	font: bold 1em/24px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+	color: #555;
+	float: left;
+	margin-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.btn_solicitar_alta:hover button{
+	text-decoration: underline;
+}
 /* end modded by mario */
-
-
-
-
-
-
-
-
-
-
-
-

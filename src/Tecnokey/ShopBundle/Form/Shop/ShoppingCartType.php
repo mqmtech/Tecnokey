@@ -16,7 +16,8 @@ class ShoppingCartType extends AbstractType
             //->add('modifiedAt')
             //->add('user')
             ->add('items', 'collection', array(
-                'type' => new ShoppingCartItemType()
+                'type' => new ShoppingCartItemType(),
+                'label' => ' '
             ))
             //->add('totalBasePrice')
             //->add('tax', 'number', array(

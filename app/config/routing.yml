@@ -1,3 +1,8 @@
+MQMTechStatBundle:
+    resource: "@MQMTechStatBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 MQMTechDemoBundle:
     resource: "@MQMTechDemoBundle/Controller/"
     type:     annotation

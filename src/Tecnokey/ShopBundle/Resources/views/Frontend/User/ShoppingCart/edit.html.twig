@@ -20,64 +20,42 @@
 
 {% block right_content %}
 
-<!--start right-->
-<div class="right">
-    <!--start menu user-->
-    <div class="menu_user_container">
-        <div class="perfil_btn"><a href="#">Perfil</a></div>
+{% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
 
-        <div class="menu_pedidos_container">
-            <div class="pedidos_container">PEDIDOS</div>
-            <div class="guardados_btn"><a href="pedidos_guardados_lista.html">Guardados</a></div>
-            <div class="proceso_btn"><a href="estado_proceso_lista.html">En proceso</a></div>
-            <div class="realizados_btn"><a href="estado_realizados_lista.html">Realizados</a></div>
+<!--end menu user-->  <!--start cuerpo--> 
+<div class="right_cuerpo_user">
+    <div class="titulo_current">Contenido de la cesta:</div>
+
+    <div class="lista_pedidos_container">
+        <div class="legend_container">
+            <div class="producto_legend"><a href="#">Producto</a></div>
+            <div class="ref_legend"><a href="#">Referencia</a></div>
+            <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
+            <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+            <div class="subtotat_legend"><a href="#">Subtotat</a></div>
         </div>
-
-        <div class="cesta_btn"><a href="cesta.html">Cesta</a></div>
-
-    </div>
-
-    <!--end menu user--> 
-
-    <!--start cuerpo--> 
-
-    <form name="edit_form" action="{{ path('TKShopFrontendUserShoppingCartUpdate') }}" method="post" {{ form_enctype(edit_form) }}>        
-
-        <div class="right_cuerpo_user">
-            <div class="titulo_current">Contenido de la cesta:</div>
-
-            <div class="lista_pedidos_container">
-                <div class="legend_container">
-                    <div class="producto_legend"><a href="#">Producto</a></div>
-                    <div class="ref_legend"><a href="#">Referencia</a></div>
-                    <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
-                    <div class="cantidad_legend"><a href="#">Cantidad</a></div>
-                    <div class="subtotat_legend"><a href="#">Subtotat</a></div>
-                </div>
-
+        <form name="edit_form" action="{{ path('TKShopFrontendUserShoppingCartUpdate') }}" method="post" {{ form_enctype(edit_form) }}>        
                 {% set count = 0 %}
                 {% for item in edit_form.items %}
-                    {{ "Count: " ~ entity.items | length }}
                     {% if (entity.items[count] is defined ) %}
                         {% set dataItem = entity.items[count] %}
-                        <div class="prods_detalles_container">
-                            {% set imageSizeInfo =  dataItem.product.image.getImageSize("12", "12") %}
-                            <div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id': dataItem.id}) }}"><img class="fotoprod" src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};" /></a></div>
-                            <div {#class="btn_eliminar_cesta"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}" alt="logo" /></div>#}
-                            <div class="foto_prod_cesta"><img src="{{ dataItem.product.image.webPath }}"></img></div>
-                            <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name }}</a></div>
-                            <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
-                            <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}} </div>
-                            <div class="cantidad_cesta">{{ form_widget(item.quantity, {'attr' : { 'class' : 'input_cantidad_cesta' } } ) }} </div>
-                            {#<div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" />{{ dataItem.quantity }}</div>#}
-                            <div class="precio_subtotal_cesta"> {{ dataItem.totalBasePrice ~ currencySymbol() }} </div>
-                        </div>
+                            {% set imageSizeInfo =  dataItem.product.image.getImageSize("62", "60") %}
+                <div class="prods_detalles_container">
+                    <div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id' : dataItem.id}) }}"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}  " alt="logo" /></a></div>
+                    <div class="foto_prod_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
+                    <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name }}</a></div>
+                    <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
+                    <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
+                                {#<div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="1" /></div>#}
+                    <div class="cantidad_cesta">{{ form_widget(item.quantity, {'attr' : { 'class' : 'input_cantidad_cesta' } } ) }} </div>
+                    <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
+                </div>
                         {% set count = count + 1 %}
                     {% endif %}
                 {% endfor %}
-                     
+
                     {{ form_rest(edit_form) }}
-                    
+
                 <div class="precio_desglos_container">
                     <div class="iva_desglos">Total - Sin iva</div>
                     <div class="precio_total_desglos">{{ entity.totalBasePrice ~ currencySymbol() }}</div>
@@ -90,21 +68,17 @@
                     <div class="btn_guardar_pedido"><a href="#">Guardar pedido</a></div>
                     <div class="confirmar_pedido"><a href="#">Confirmar Pedido</a></div>                
                      #}
-                    <input type="hidden" id="{{ order_field }}" name="{{ order_field }}" value="{{ update_value }}"/>
-                    <input class="actualizar_pedido" type="submit" name="Actualizar Pedido" value="Actualizar Pedido"/>
-                    <input class="confirmar_pedido" onclick="edit_form.{{ order_field }}.value='{{ comfirm_value }}'; return true;" type="submit" name="Confirmar Pedido" value="Confirmar Pedido"/>
-                </div>                
+                        <input type="hidden" id="{{ order_field }}" name="{{ order_field }}" value="{{ update_value }}"/>
+                        <input class="actualizar_pedido" type="submit" name="Actualizar Pedido" value="Actualizar Pedido"/>
+                        <input class="confirmar_pedido" onclick="edit_form.{{ order_field }}.value='{{ comfirm_value }}'; return true;" type="submit" name="Confirmar Pedido" value="Confirmar Pedido"/>
+                    </div>                
+                </form>
             </div>
+
         </div>
-    </form>
-    <!--end cuerpo--> 
-</form>
 
-
-
-</div><!--end right-->
-
-
+        <!--end cuerpo--> 
+{#</div><!--end right-->#}
 
 {% endblock right_content %}
 

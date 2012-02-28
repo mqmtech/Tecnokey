@@ -7,6 +7,7 @@ use Tecnokey\ShopBundle\Entity\Shop\Category;
 use Tecnokey\ShopBundle\Entity\Shop\Image;
 use Tecnokey\ShopBundle\Entity\Shop\Brand;
 use Tecnokey\ShopBundle\Entity\Shop\TimeOffer;
+use Tecnokey\ShopBundle\Entity\Statistic\ProductStatistic;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -197,13 +198,21 @@ class Product{
      */
     private $fourthTag;
     
-        /**
+    /**
+     * @ORM\OneToMany(targetEntity="Tecnokey\ShopBundle\Entity\Statistic\ProductStatistic", mappedBy="product", cascade={"persist"})
+     * @var array $statistics;
+     */
+    private $statistics;
+    
+     /**
      * Constructor
      */
     public function __construct() {
         $this->createdAt = new DateTime();
         
         $this->offer = new TimeOffer(); //To initializate dates, otherwise dates are old in the form
+        
+        $this->statistics = new ArrayCollection();
     }
 
 
@@ -279,6 +288,23 @@ class Product{
         $this->setBasePrice($serialized[1]);
     }*/
     
+    /**
+     *
+     * @return ArrayCollection
+     */
+     public function getStatistics() {
+         return $this->statistics;
+     }
+
+     public function setStatistics($statistics) {
+         $this->statistics = $statistics;
+     }
+     
+     public function addStatistic($statistic){
+         $this->statistics[] = $statistic;
+     }
+
+     
     /**
      *
      * @return TimeOffer 

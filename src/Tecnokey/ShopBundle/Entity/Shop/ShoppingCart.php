@@ -135,7 +135,7 @@ class ShoppingCart{
     function __construct() {
         $this->createdAt = new \DateTime('now');
         
-        $this->items = array();
+        $this->items = new ArrayCollection();
     }
     
     public function getShippingBasePrice() {

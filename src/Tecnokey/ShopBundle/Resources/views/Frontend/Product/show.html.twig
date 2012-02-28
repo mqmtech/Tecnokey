@@ -68,7 +68,7 @@
 {% block right %}
 <!--start right-->
 <div class="right">
-
+    
     <!--start ficha-->
     <div class="div_detail_fecha"><span class="text_bold"><a href="{{ path('TKShopFrontendCategoriesShowAllCategories', {'id': product.category.parentCategory.id }) }}">{{ product.category.parentCategory.name }}</a></span> / <span class="text_bold"><a href="{{ path('TKShopFrontendSearchProductsByBrand', {'id' : product.brand.id}) }}">{{ product.brand.name|truncate }}</a></span></div>
     <div class="titulo_prod_ficha"><h1>{{ product.name }}</h1></div>
