@@ -54,6 +54,18 @@
         
      })
      </script>
+     
+         <script>
+    jQuery(document).ready(function(){
+        jQuery('#tecnokey_shopbundle_shop_shoppingcarttype_items_0_quantity').click(function(event){
+            var value = jQuery(this).attr('value');
+        if(value < 1){
+            value = 1;
+        }
+        jQuery('#tecnokey_shopbundle_shop_shoppingcarttype_items_0_quantity').attr('value', value);
+        })
+     })
+     </script>
 {% endblock jsfunctions %}
 
 {% block right_content %}
@@ -70,7 +82,7 @@
             <div class="ref_legend"><a href="#">Referencia</a></div>
             <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
             <div class="cantidad_legend"><a href="#">Cantidad</a></div>
-            <div class="subtotat_legend"><a href="#">Subtotat</a></div>
+            <div class="subtotat_legend"><a href="#">Subtotal</a></div>
         </div>
         <form name="edit_form" action="{{ path('TKShopFrontendUserShoppingCartUpdate') }}" method="post" {{ form_enctype(edit_form) }}>        
                 {% set count = 0 %}
