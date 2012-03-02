@@ -73,11 +73,10 @@ class ContactController extends Controller {
             //End Sending email
         }
         //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        return array();
-        
+        return array();        
     }
     
-        /**
+    /**
      *
      * @Route("/enviar_consultaSwift", name="TKShopFrontendContactSendEmailBySwift")
      * @Method("post")
@@ -126,7 +125,7 @@ class ContactController extends Controller {
      * @Method("post")
      * @template("TecnokeyShopBundle:Default:contacto.html.twig")
      */
-    public function sendEmailTestAction(){
+    public function sendEmailHostingAction(){
         
         $request = Request::createFromGlobals();
         
@@ -134,14 +133,13 @@ class ContactController extends Controller {
         $company = $request->request->get("company");
         $email = $request->request->get("email");
         $message = $request->request->get("message");
-
         
-        $para      = 'ciberxtrem@gmail.com';
-        $titulo = 'El título';
+        $para      = 'amaestramientos@tecno-key.com';
+        $titulo = '[Tecnokey Online] Consulta de '. $company;
         $mensaje = $message;
-        $cabeceras = 'From: gdeveloperaccount@gmail.com' . "\r\n" .
-            'Reply-To: gdeveloperaccount@gmail.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+        $cabeceras = 'From: '. $email . "\r\n" .
+            'Reply-To: '. $email . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();            
 
         
         $form_feedback = $this->getFormvalidationFeedback($company, $email, $message);

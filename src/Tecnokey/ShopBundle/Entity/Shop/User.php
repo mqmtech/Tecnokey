@@ -45,7 +45,7 @@ class User implements UserInterface, \Serializable
     
     /**
      * @Assert\NotBlank
-     * @Assert\MinLength(limit = 6)
+     * @Assert\MinLength(limit = 4)
      * 
      * @var string $password
      *
@@ -94,6 +94,7 @@ class User implements UserInterface, \Serializable
     /**
      * @Assert\NotBlank
      * @Assert\MinLength(limit = 4)
+     * @Assert\Email
      * 
      * @var string $email
      *
@@ -509,7 +510,7 @@ class User implements UserInterface, \Serializable
      * 
      * WARNING: password must be already encoded by the superior layer (tipically WebController or UserManager)
      */
-    public function __construct($username = NULL, $password = NULL, $permissionType = NULL, $isEnabled = self::DEFAULT_IS_ENABLED) {
+    public function __construct($username = NULL, $password = NULL, $permissionType = self::ROLE_USER, $isEnabled = self::DEFAULT_IS_ENABLED) {
         
         if($username){
             $this->setUsername($username);
@@ -560,8 +561,15 @@ class User implements UserInterface, \Serializable
             $rol = self::ROLE_USER;
         }
         
-        //return array('ROLE_SUPER_ADMIN');
-        return array($rol);
+        //Verify whether user is enabled before letting him log
+        if($this->getIsEnabled()){
+            return array($rol);
+        }
+        else{
+            return array();
+        }
+        //End Verifying whether user is enabled before letting him log
+        
     }
     
     public function getSalt() {

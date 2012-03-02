@@ -12,7 +12,6 @@ use Tecnokey\ShopBundle\Form\Shop\UserType;
 use Tecnokey\ShopBundle\Entity\Shop\User;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Frontend\Default controller.
@@ -82,11 +81,13 @@ class RegisterController extends Controller {
                 $em->persist($entity);
                 $em->flush();
                 //return $this->redirect($this->generateUrl('TKShopFrontendUserShow', array('id' => $entity->getId())));
+                $this->sendSuccessRegistrationEmailSwift($entity);
                 return $this->render("TecnokeyShopBundle:Frontend\User\Register:successMessageOnCreate." . "html" . ".twig", array('user' => $entity));
                 
             } catch (Exception $e) {
                 $this->get('session')->setFlash('Email', "El email empleado ya está registrado");
             }
+            
         }
 
         return array(
@@ -222,27 +223,29 @@ class RegisterController extends Controller {
                         ->getForm()
         ;
     }
+    
+    private function sendSuccessRegistrationEmailHosting(User $user){
+        
+        $para      = $user->getEmail();
+        $titulo = '[Tecnokey] Registro en versión de prueba]';
+        $mensaje = 'Gracias '. $user->getFirstName() . ' ' . $user->getLastName() . ' por completar su registro en Tecnokey, cuando su cuenta sea validada le enviaremos un e-mail de confirmación.';
+        $cabeceras = 'From: '. "amaestramientos@tecno-key.com" . "\r\n" .
+            'Reply-To: '. "Tecnokey" . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();            
 
-    /**
-     * Frontend demo
-     *
-     * @Route("/auto_login.{_format}", defaults={"_format"="html"}, name="TKShopFrontendUserAutoLogin")
-     */
-    public function autoLoginAction() {
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $user = $em->getRepository("TecnokeyShopBundle:Shop\User")->find(1);
-
-        // create the authentication token
-        $token = new UsernamePasswordToken(
-                        $user,
-                        null,
-                        'main',
-                        $user->getRoles());
-        // give it to the security context
-        $this->container->get('security.context')->setToken($token);
-
-        return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
+        mail($para, $titulo, $mensaje, $cabeceras);
+        
     }
+    
+    public function sendSuccessRegistrationEmailSwift(User $user) {
+           
+            $message = \Swift_Message::newInstance()
+            ->setSubject('[Tecnokey] Registro en versión de prueba]')
+            ->setFrom(array('amaestramientos@tecno-key.com' => "Tecnokey"))
+            ->setReplyTo("amaestramientos@tecno-key.com")
+            ->addTo($user->getEmail())
+            ->setBody('Gracias '. $user->getFirstName() . ' ' . $user->getLastName() . ' por completar su registro en Tecnokey, cuando su cuenta sea validada le enviaremos un e-mail de confirmación.');
 
+            $this->get('mailer')->send($message);
+    }
 }

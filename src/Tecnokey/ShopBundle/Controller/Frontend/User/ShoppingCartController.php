@@ -265,7 +265,11 @@ class ShoppingCartController extends Controller {
         $em->persist($shoppingCart);
         $em->flush();
 
-        return $this->redirect($this->generateUrl("TKShopFrontendUserShoppingCartIndex"));
+        //return $this->redirect($this->generateUrl("TKShopFrontendUserShoppingCartIndex"));
+        $session = $this->get('session');
+        $last_route = $session->get('last_route', array('name' => 'TKShopFrontendIndex'));
+        return ($this->redirect($this->generateUrl($last_route['name'], $last_route['params'])));    
+    
     }
 
     /**

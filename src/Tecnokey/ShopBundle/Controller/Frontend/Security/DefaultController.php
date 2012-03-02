@@ -15,6 +15,7 @@ use Tecnokey\ShopBundle\Entity\Shop\Category;
 use Symfony\Component\Security\Core\SecurityContext;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Exception;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Frontend\Default controller.
@@ -43,6 +44,27 @@ class DefaultController extends Controller {
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
         ));
+    }
+    
+    /**
+     *
+     * @Route("/auto_login.{_format}", defaults={"_format"="html"}, name="TKShopFrontendSecurityAutoLogin")
+     */
+    public function autoLoginAction() {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $em->getRepository("TecnokeyShopBundle:Shop\User")->find(1);
+
+        // create the authentication token
+        $token = new UsernamePasswordToken(
+                        $user,
+                        null,
+                        'main',
+                        $user->getRoles());
+        // give it to the security context
+        $this->container->get('security.context')->setToken($token);
+
+        return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
     }
     
     /**

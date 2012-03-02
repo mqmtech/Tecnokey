@@ -3,7 +3,7 @@
 {#Requires:
 #}
 
-{% block title %}| Tecnokey | Productos |{% endblock %}
+{% block title %}| Tecnokey | Contacto |{% endblock %}
 
 {% block menu %}<!--start header-->
         {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'contacto'} %}
@@ -76,7 +76,7 @@ jQuery(document).ready(function(){
           
         
 <div class="form_container">
-    <form action="{{ path('TKShopFrontendContactSendEmailBySwift') }}" method="POST">
+    <form action="{{ path('TKShopFrontendContactSendEmailHosting') }}" method="POST">
             <p class="text_general">Empresa:</p>
             <input name="company" type="Empresa" class="correo_form" value="" />
             <p class="text_general">Correo electrónico:</p>

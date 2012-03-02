@@ -27,5 +27,6 @@ class TecnokeyShopExtension extends Extension
         $loader->load('services.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
+        $loader->load('listeners.xml');
     }
 }
