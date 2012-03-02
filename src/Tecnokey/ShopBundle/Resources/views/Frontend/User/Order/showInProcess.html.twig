@@ -1,6 +1,6 @@
 {% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
 
-{% block title %}| Tecnokey | Pedidos |{% endblock %}
+{% block title %}| Tecnokey | Pedidos en proceso |{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -27,11 +27,18 @@
         
         <!--start cuerpo--> 
         <div class="right_cuerpo_user">
-        	<div class="titulo_current">Pedidos realizados:
-            <span class="text_bold">Consulte el historial de sus pedidos realizados.</span></div>
+<div class="titulo_current">Seguimiento de pedidos: 
+        	  <span class="text_bold">Consulte el estado de todos sus pedidos realizados.</span>
+</div>
                <div class="lista_pedidos_container">
                     {% include 'TecnokeyShopBundle:Frontend/User/Order:showAll.partialhtml.twig' with {'entities' : entities} %}            
                </div>
+                
+                <p class="text_bold">Los posibles estados son los siguientes:</p>
+				<p class="text_general">Recibido: Pedido recibido pero no se ha procesado.</p>
+          <p class="text_general">En proceso:  Pedido preparado para el envió.</p>
+          <p class="text_general">Enviado: Pedido Entregado al servicio de mensajería, según la modalidad de envío.</p>
+          
         </div>
         <!--end cuerpo--> 
     </div><!--end right-->

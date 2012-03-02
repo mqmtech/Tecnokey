@@ -30,6 +30,40 @@ class OrderController extends Controller
 
         return array('entities' => $entities);
     }
+    
+     /**
+     * 
+     *
+     * @Route("/realizados", name="TKShopFrontendOrdersShowDelivered")
+     * @Template()
+     */
+    public function showDeliveredAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\Order')->findDelivered();
+
+        return array(
+            'entities' => $entities,
+        );
+    }
+    
+    /**
+     * 
+     *
+     * @Route("/en_proceso", name="TKShopFrontendOrdersShowInProcess")
+     * @Template()
+     */
+    public function showInProcessAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\Order')->findInProcess();
+
+        return array(
+            'entities' => $entities,
+        );
+    }
 
     /**
      * Finds and displays a Shop\Order entity.

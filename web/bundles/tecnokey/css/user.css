@@ -715,4 +715,16 @@
 .btn_solicitar_alta:hover button{
 	text-decoration: underline;
 }
+
+.field_inline_error{
+    
+    display: block;
+    position: absolute;
+    color: #F00;
+    display: none;
+    background-color: transparent;    
+}
+    
+
+
 /* end modded by mario */

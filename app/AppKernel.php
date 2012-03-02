@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Tecnokey\ShopBundle\TecnokeyShopBundle(),
             new MQMTech\DemoBundle\MQMTechDemoBundle(),
             new MQMTech\StatBundle\MQMTechStatBundle(),
+            new MQMTech\ToolsBundle\MQMTechToolsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

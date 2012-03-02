@@ -5,6 +5,10 @@ namespace Tecnokey\ShopBundle\Form\Shop;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Validator\Constraints\Collection;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)

@@ -79,13 +79,13 @@ class ContactController extends Controller {
     
         /**
      *
-     * @Route("/enviar_consulta2", name="TKShopFrontendContactSendEmail2")
+     * @Route("/enviar_consultaSwift", name="TKShopFrontendContactSendEmailBySwift")
      * @Method("post")
      * @template("TecnokeyShopBundle:Default:contacto.html.twig")
      */
-    public function sendEmail2Action() {
+    public function sendEmailSwiftAction() {
         
-        try{
+        
         $request = Request::createFromGlobals();
         
         //Get request parameters
@@ -118,12 +118,7 @@ class ContactController extends Controller {
             //End Sending email
         }
         //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        return array();
-        }
-        catch (Exception $e){
-            return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        }
-        
+        return array();        
     }
     
     /**
@@ -163,15 +158,15 @@ class ContactController extends Controller {
         $error_fields = array();
         $success =  "¡Su mensaje ha sido enviado con éxito!";
         
-        if($company == "Empresa" || $company == ""){
+        if($company == ""){
             $error_fields["Empresa"] = "Falta información de empresa";
         }
 
-        if($email == "" || $email == "Correo"){
+        if($email == ""){
             $error_fields["Correo"] = "Falta información de email";
         }
         
-        if($message == "Mensaje" || $message == ""){
+        if($message == ""){
             $error_fields["Mensaje"] = "Falta información de mensaje";
         }
 

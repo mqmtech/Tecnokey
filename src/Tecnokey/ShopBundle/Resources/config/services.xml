@@ -19,6 +19,9 @@
     -->
     
     <services>
+        
+        
+        
         <service id="marketManager" class="Tecnokey\ShopBundle\Service\MarketManager" public="true"
             factory-class="Tecnokey\ShopBundle\Service\MarketManager"
             factory-method="getInstance"
@@ -35,12 +38,6 @@
                 >
         </service>
         
-        <service id="checkoutManager" class="Tecnokey\ShopBundle\Service\CheckoutManager" public="true"
-                >
-            <argument type="service" id="priceManager" />
-            <argument type="service" id="marketManager" />
-        </service>
-        
         <service id="shoppingCartManager" class="Tecnokey\ShopBundle\Service\ShoppingCartManager" public="true">
             <argument type="service" id="doctrine" />
         </service>        
@@ -48,6 +45,21 @@
         <service id="userManager" class="Tecnokey\ShopBundle\Service\UserManager" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="security.context" />
+        </service>
+        
+        <service id="orderFactory" class="Tecnokey\ShopBundle\Entity\Shop\Factory\OrderFactory" public="true">
+            <argument type="service" id="userManager" />
+        </service>
+        
+        <service id="orderManager" class="Tecnokey\ShopBundle\Service\OrderManager" public="true">
+            <argument type="service" id="tools.inireader" strict="false"/>
+        </service>
+        
+         <service id="checkoutManager" class="Tecnokey\ShopBundle\Service\CheckoutManager" public="true"
+                >
+            <argument type="service" id="priceManager" />
+            <argument type="service" id="marketManager" />
+            <argument type="service" id="orderFactory" />
         </service>
         
         <service id="productStatistic" class="Tecnokey\ShopBundle\Service\ProductStatisticManager" public="true">

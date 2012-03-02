@@ -16,16 +16,14 @@ use \DateTime;
  * @author mqmtech
  * 
  * @ORM\Table(name="shop_order")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tecnokey\ShopBundle\Repository\OrderRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Order {
 
-    const STATUS_0_NOT_SAVED = "NOT_SAVED";                             //order not saved in database
-    const STATUS_1_SAVED = "SAVED";                                     //order saved in database
-    const STATUS_2_PENDING_CLIENT_ACTION = "PENDING_CLIENT_ACTION";     //order pending for some client action (ex.: to pay the shopping)
-    const STATUS_3_READY_TO_DELIVERY = "READY_TO_DELIVERY";             //order ready to be delivered
-    const STATUS_4_DELIVERED= "DELIVERED";                              //order delivered
+    const STATUS_0_RECEIVED = "RECEIVED";                               //order saved in database
+    const STATUS_1_IN_PROCESS = "IN_PROCESS";                           //order being processed by Tecnokey staff
+    const STATUS_2_DELIVERED = "DELIVERED";                              //order delivered
     
     /**
      * @var integer $id
@@ -35,6 +33,13 @@ class Order {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var string $publicId
+     *
+     * @ORM\Column(name="publicId", type="string", length=255, nullable=true)
+     */
+    private $publicId;
 
     /**
      * @var string $name
@@ -70,7 +75,6 @@ class Order {
      * @ORM\Column(name="checkoutAt", type="datetime", nullable=true)
      */
     private $checkoutAt;
-
 
     /**
      *
@@ -170,9 +174,20 @@ class Order {
         
         $this->items = new ArrayCollection();
         
-        $this->setStatus(self::STATUS_0_NOT_SAVED);
+        $this->setStatus(self::STATUS_0_RECEIVED);
+
     }
     
+    public function getPublicId() {
+        return $this->publicId;
+    }
+
+    public function setPublicId($publicId) {
+        $this->publicId = $publicId;
+    }
+
+    
+        
     public function getItems() {
         return $this->items;
     }

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
 use Tecnokey\ShopBundle\Entity\Shop\Order;
 
+
 /**
  * Tecnokey\ShopBundle\Entity\Shop\User
  *
@@ -43,6 +44,9 @@ class User implements UserInterface, \Serializable
     private $username;
     
     /**
+     * @Assert\NotBlank
+     * @Assert\MinLength(limit = 6)
+     * 
      * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
@@ -88,6 +92,9 @@ class User implements UserInterface, \Serializable
     private $lastName;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\MinLength(limit = 4)
+     * 
      * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
@@ -514,12 +521,15 @@ class User implements UserInterface, \Serializable
             $this->setPermissionType($permissionType);
         }
         
-        $this->createdAt = new \DateTime('now');
+        $this->setIsEnabled($isEnabled);
         
-        //Create a shopping cart by default
-        $this->shoppingCart = new ShoppingCart();
+        $this->setCreatedAt(new \DateTime('now'));
         
-        $this->offer = new TimeOffer(); //To initializate dates, otherwise dates are old in the form
+        
+        $this->setShoppingCart(new ShoppingCart()); //Create a shopping cart by default
+
+        $this->setOffer(new TimeOffer()); //To initializate dates, otherwise dates are old in the form
+        
     }
     
     //** Implementing UserInterface Methods **//

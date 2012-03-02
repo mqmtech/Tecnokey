@@ -1,6 +1,6 @@
 {% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
 
-{% block title %}| Tecnokey | Productos |{% endblock %}
+{% block title %}| Tecnokey | Registro de cliente |{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -20,17 +20,9 @@
 
 {% block right_content %}
 
-{% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
-
 <form action="{{ path('TKShopFrontendUserCreate') }}" method="post" {{ form_enctype(form) }}>
     {% include 'TecnokeyShopBundle:Frontend/User/Register:formBody.partialhtml.twig' %}
 </form>
-
-    {% for key, flash in app.session.getFlashes() %}
-    <div class="error">
-        {{ flash }}
-    </div>
-    {% endfor %}
 
 {% endblock right_content %}
 

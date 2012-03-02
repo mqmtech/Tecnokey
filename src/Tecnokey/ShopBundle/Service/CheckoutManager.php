@@ -13,8 +13,8 @@ namespace Tecnokey\ShopBundle\Service;
 use Tecnokey\ShopBundle\Entity\Shop\Order;
 use Tecnokey\ShopBundle\Entity\Shop\OrderItem;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
-
 use Tecnokey\ShopBundle\Service\PriceManager;
+use Tecnokey\ShopBundle\Entity\Shop\Factory\IOrderFactory;
 
 class CheckoutManager {
     
@@ -22,9 +22,12 @@ class CheckoutManager {
     private $priceManager;
     private $marketManager;
     
-    public function __construct(PriceManager $priceManager, $marketManager) {
+    private $orderFactory;
+    
+    public function __construct(PriceManager $priceManager, $marketManager, IOrderFactory $orderFactory) {
         $this->priceManager = $priceManager;
         $this->marketManager = $marketManager;
+        $this->orderFactory = $orderFactory;
     }
     
     /**
@@ -93,7 +96,10 @@ class CheckoutManager {
             return NULL;
         }
         
-        $order = new Order();
+        $orderFactory = $this->getOrderFactory();
+        $order = $orderFactory->create();
+        //$order = new Order();
+        
         $shoppingCartItems = $shoppingCart->getItems();
         
         $marketManager = $this->getMarketManager();
@@ -137,6 +143,14 @@ class CheckoutManager {
 
     public function setMarketManager($marketManager) {
         $this->marketManager = $marketManager;
+    }
+    
+    public function getOrderFactory() {
+        return $this->orderFactory;
+    }
+
+    public function setOrderFactory($orderFactory) {
+        $this->orderFactory = $orderFactory;
     }
 
 }

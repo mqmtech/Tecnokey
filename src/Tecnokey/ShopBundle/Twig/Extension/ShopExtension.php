@@ -54,6 +54,15 @@ class ShopExtension extends \Twig_Extension {
         $this->utils = $utils;
         $this->marketManager = $marketManager;
     }
+    
+    /**
+     * Returns the name of the extension.
+     *
+     * @return string The extension name
+     */
+    public function getName() {
+        return 'Shop';
+    }
 
     /**
      * {@inheritdoc}
@@ -177,16 +186,6 @@ class ShopExtension extends \Twig_Extension {
             return 'No Properties';
         }
         return $properties['no_price_access'];
-    }
-    
-
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName() {
-        return 'Shop';
     }
     
     /**
