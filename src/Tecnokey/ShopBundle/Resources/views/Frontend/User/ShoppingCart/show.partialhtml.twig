@@ -7,7 +7,7 @@ TODO: Create the controller for the shopping cart
     <span><img src="{{ asset('bundles/tecnokey/images/cesta_ico.png') }}" alt="cesta"/></span>
     <span class="text_bold"><a href="{{ path('TKShopFrontendUserShoppingCartEdit') }}">CESTA:</a></span>
     {% if entity is not null %}
-    <span class="text_general">{{ entity.items | length }} Artículo(s) :</span> <span class="text_bold_red">{{ entity.totalPrice | roundoff | toPrettyPrice ~ currencySymbol() }} </span>
+    <span class="text_general">{{ entity.productsQuantity }} Artículo(s) :</span> <span class="text_bold_red">{{ entity.totalPrice | roundoff | toPrettyPrice ~ currencySymbol() }} </span>
     {% else %}
     <span class="text_general">{{ 0 }} Artículo(s) :</span> <span class="text_bold_red">{{ 0.0 | toPrettyPrice ~ currencySymbol() }} </span>
     {% endif %}

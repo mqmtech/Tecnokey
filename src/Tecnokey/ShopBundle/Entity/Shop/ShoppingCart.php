@@ -138,6 +138,21 @@ class ShoppingCart{
         $this->items = new ArrayCollection();
     }
     
+    /**
+     *
+     * @return int
+     */
+    public function getProductsQuantity(){
+        $items = $this->getItems();
+        
+        $quantity = 0;
+        foreach ($items as $item) {
+            $quantity += $item->getQuantity();
+        }
+        
+        return $quantity;
+    }
+    
     public function getShippingBasePrice() {
         return $this->shippingBasePrice;
     }
