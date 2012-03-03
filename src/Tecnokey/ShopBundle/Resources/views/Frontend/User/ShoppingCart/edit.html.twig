@@ -97,6 +97,7 @@
                     <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
                     <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
                                 {#<div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="1" /></div>#}
+                    {{ form_errors(item.quantity) }}
                     <div class="cantidad_cesta">{{ form_widget(item.quantity, {'attr' : { 'class' : 'input_cantidad_cesta' } } ) }} </div>
                     <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
                 </div>

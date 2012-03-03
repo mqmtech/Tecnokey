@@ -44,8 +44,8 @@ class User implements UserInterface, \Serializable
     private $username;
     
     /**
-     * @Assert\NotBlank
-     * @Assert\MinLength(limit = 4)
+     * @Assert\NotBlank(message = "No puede estar vacio")
+     * @Assert\MinLength(limit = 4, message = "Debe contener almenos 6 caracteres")
      * 
      * @var string $password
      *
@@ -92,9 +92,8 @@ class User implements UserInterface, \Serializable
     private $lastName;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\MinLength(limit = 4)
-     * @Assert\Email
+     * @Assert\NotBlank(message = "No puede estar vacio")
+     * @Assert\Email(message = "No es un email")
      * 
      * @var string $email
      *
@@ -117,6 +116,7 @@ class User implements UserInterface, \Serializable
     private $firmName;
     
     /**
+     * @Assert\MinLength(limit = 5, message = "Debe estar compuesto por, como mínimo, mínimo 5 caracteres")
      * @var string $vatin // value added tax identification number, CIF/NIF in spanish
      *
      * @ORM\Column(name="vatin", type="string", length=255, nullable=true)
@@ -145,6 +145,7 @@ class User implements UserInterface, \Serializable
     private $province;
     
     /**
+     * @Assert\MinLength(limit = 5, message = "Debe estar compuesto por, como mínimo, mínimo 5 números")
      * @var string $phone 
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -152,6 +153,7 @@ class User implements UserInterface, \Serializable
     private $phone;
     
     /**
+     * @Assert\MinLength(limit = 5, message = "Debe estar compuesto por, como mínimo, mínimo 5 números")
      * @var string $fax 
      *
      * @ORM\Column(name="fax", type="string", length=255, nullable=true)

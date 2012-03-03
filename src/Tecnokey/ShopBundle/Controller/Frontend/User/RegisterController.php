@@ -63,8 +63,10 @@ class RegisterController extends Controller {
         $form = $this->createForm(new UserType(), $entity);
         $form->bindRequest($request);
 
-
-        if ($form->isValid() && $this->extraRegistrationValidation($entity)) {
+        $basicValidation = $form->isValid();
+        $extraValidation = $this->extraRegistrationValidation($entity);
+        
+        if ($basicValidation && $extraValidation) {
             // encode password //
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($entity);

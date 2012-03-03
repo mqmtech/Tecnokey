@@ -41,7 +41,8 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('TecnokeyShopBundle:Shop\Order')->findDelivered();
+        $user = $this->get('userManager')->getCurrentUser();
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findDeliveredOrders($user);
 
         return array(
             'entities' => $entities,
@@ -58,7 +59,8 @@ class OrderController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('TecnokeyShopBundle:Shop\Order')->findInProcess();
+        $user = $this->get('userManager')->getCurrentUser();
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findInProcessOrders($user);
 
         return array(
             'entities' => $entities,
@@ -263,6 +265,5 @@ class OrderController extends Controller
         else{
             return NULL;
         }
-        
     }
 }

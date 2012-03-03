@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCart;
 use \DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tecnokey\ShopBundle\Entity\Shop\ShoppingCartItem
@@ -60,7 +61,9 @@ class ShoppingCartItem{
     private $totalBasePrice;
 
     /**
-     *
+     * @Assert\NotBlank(message = "Se debe especificar una cantidad")
+     * @Assert\Min(limit = "1", message = "La cantidad debe ser como mínimo 1")
+     * 
      * @var integer $quantity
      * @ORM\Column(name="quantity", type="integer", nullable=true)
      */

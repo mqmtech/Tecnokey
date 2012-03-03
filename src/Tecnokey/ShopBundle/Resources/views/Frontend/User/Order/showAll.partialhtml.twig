@@ -1,8 +1,8 @@
-    {% if entities is defined %}
+    {% if entities is defined and entities | length > 0%}
         {% if entities | length < 1 %}
         <span class="text_bold">Todavía no ha realizado ningun pedido</span></div>
         {% endif %}
-<div class="legend_container">
+        <div class="legend_container">
             <div class="producto_legend"><a href="#">Número del pedido</a></div>
             <div class="precio_ud_legend"><a href="#">Fecha</a></div>
             <div class="cantidad_legend"><a href="#">Cantidad</a></div>

@@ -1,7 +1,8 @@
 <?php
 namespace Tecnokey\ShopBundle\Repository;
 use Doctrine\ORM\EntityRepository;
-
+use Tecnokey\ShopBundle\Entity\Shop\User;
+use \Tecnokey\ShopBundle\Entity\Shop\Order;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -32,6 +33,44 @@ class UserRepository extends EntityRepository{
 
         return $users;
         //End grabbing cats from db
+    }
+    
+    /**
+     * 
+     * return array
+     */
+    public function findDeliveredOrders(User $user){
+
+        //Grab categories from db
+        $em = $this->getEntityManager();
+        $q = $em->createQuery("select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status LIKE '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'");
+        $orders = $q->getResult();
+        //End grabbing cats from db
+        
+        if($orders == NULL){
+            return NULL;
+        }
+        
+        return $orders;
+    }
+    
+        /**
+     * 
+     * return array
+     */
+    public function findInProcessOrders(User $user){
+
+        //Grab categories from db
+        $em = $this->getEntityManager();
+        $q = $em->createQuery("select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status <> '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'");
+        $orders = $q->getResult();
+        //End grabbing cats from db
+        
+        if($orders == NULL){
+            return NULL;
+        }
+        
+        return $orders;
     }
 }
 
