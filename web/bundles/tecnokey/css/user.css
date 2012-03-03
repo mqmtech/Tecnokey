@@ -659,13 +659,19 @@
 
 /* modded by mario -  31/01/2012 */
 
+.precio_subtotal_cesta{
+	color: #e51230;
+	float: right;
+	width: 75px;
+}
+
 .input_cantidad_cesta {
-	width: 30px;
+	width: 45px;
 	height: 20px;
 	border: 1px solid #ccc;
 	font: bold 1em/20px Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
 	color: #555;
-	padding: 1px;
+	padding: 0px;
 	margin-top: 19px;
 	text-align: center;
 	float: left;

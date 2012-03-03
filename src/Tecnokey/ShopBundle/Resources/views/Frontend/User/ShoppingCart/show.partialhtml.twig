@@ -3,6 +3,49 @@ shoppingCart : Shopping Cart
 
 TODO: Create the controller for the shopping cart
 #}
+    <style>
+		.ui-effects-transfer { border: 3px dotted #258CDB; } 
+    </style>
+
+	<script>
+	$(function() {
+		// run the currently selected effect
+		function runEffect(source, target) {
+			// get effect type from 
+			var selectedEffect = "transfer";
+			
+			// most effect types need no options passed by default
+			var options = {};
+			// some effects have required parameters
+			if ( selectedEffect === "scale" ) {
+				options = { percent: 0 };
+			} else if ( selectedEffect === "transfer" ) {
+				options = { to: target, className: "ui-effects-transfer" };
+			} else if ( selectedEffect === "size" ) {
+				options = { to: { width: 200, height: 60 } };
+			}
+
+			// run the effect
+			$( source ).effect( selectedEffect, options, 500, callback );
+		};
+
+		// callback function to bring a hidden box back
+		function callback() {
+			setTimeout(function() {
+				$( target ).removeAttr( "style" ).hide().fadeIn();
+			}, 1000 );
+		};
+                
+                tecnokey.ecommerce.eventSubscriber.addEventListener('SHOPPING_CART.ADD', function(event){
+                    //alert("ShoppingCart item added : " + event);
+                    runEffect(event, ".cesta img");
+                });
+	});
+        
+        
+    </script>
+
+
 <div class="cesta">
     <span><img src="{{ asset('bundles/tecnokey/images/cesta_ico.png') }}" alt="cesta"/></span>
     <span class="text_bold"><a href="{{ path('TKShopFrontendUserShoppingCartEdit') }}">CESTA:</a></span>

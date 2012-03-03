@@ -232,7 +232,7 @@ class ShoppingCartController extends Controller {
                 $confirmed = $this->confirmOrder($entity);
                 
                 if ($confirmed == true) {
-                    return $this->redirect($this->generateUrl('TKShopFrontendOrderIndex'));
+                    return $this->redirect($this->generateUrl('TKShopFrontendOrdersShowInProcess'));
                 }
             }
         }

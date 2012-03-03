@@ -57,12 +57,12 @@
      
          <script>
     jQuery(document).ready(function(){
-        jQuery('#tecnokey_shopbundle_shop_shoppingcarttype_items_0_quantity').click(function(event){
+        jQuery('.input_cantidad_cesta').click(function(event){
             var value = jQuery(this).attr('value');
         if(value < 1){
             value = 1;
         }
-        jQuery('#tecnokey_shopbundle_shop_shoppingcarttype_items_0_quantity').attr('value', value);
+        jQuery(this).attr('value', value);
         })
      })
      </script>

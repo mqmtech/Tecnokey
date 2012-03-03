@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link type="text/css" href="{{ asset('bundles/tecnokey/js/jqueryui/css/ui-lightness/jquery-ui-1.8.16.custom.css') }}" rel="stylesheet" />	
+        
 {% endblock %}
 
 {% block javascripts %}
@@ -49,6 +50,19 @@
     });
 
      </script>
+
+
+<script>    
+jQuery(window).load(function(){
+    jQuery('.add_cesta_ficha').click(function(event){
+      
+        //event.preventDefault();
+        tecnokey.ecommerce.eventSubscriber.dispatchEvent('SHOPPING_CART.ADD', this);
+
+    });
+    
+});
+</script>
 {% endblock jsfunctions %}
 
 {% block title %}| Tecnokey | Productos |{% endblock %}
