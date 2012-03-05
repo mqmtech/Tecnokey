@@ -32,7 +32,7 @@
         }
     }
                 
-    app['Ecommerce'] = function (){
+    app['Kernel'] = function (){
         this.eventSubscriber = new app['EventSubscriber'];
     
         this.test = function(){
@@ -42,7 +42,7 @@
     /// End App classes ///
 
     /// App instances ///
-    app['ecommerce'] = new app['Ecommerce']();
+    app['kernel'] = new app['Kernel']();
     /// End App instances ///
     
     /******************************************************************/
@@ -52,7 +52,7 @@
     
     //Set functions
     window.tecnokey.EventSubscriber = app['EventSubscriber'];
-    window.tecnokey.ecommerce = app['ecommerce'];
+    window.tecnokey.kernel = app['kernel'];
     //End set functions
     /******************************************************************/
     

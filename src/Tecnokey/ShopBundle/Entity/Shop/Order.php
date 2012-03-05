@@ -178,6 +178,21 @@ class Order {
 
     }
     
+    /**
+     *
+     * @return int
+     */
+    public function getProductsQuantity(){
+        $items = $this->getItems();
+        
+        $quantity = 0;
+        foreach ($items as $item) {
+            $quantity += $item->getQuantity();
+        }
+        
+        return $quantity;
+    }
+    
     public function getPublicId() {
         return $this->publicId;
     }

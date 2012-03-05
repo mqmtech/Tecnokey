@@ -12,16 +12,16 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('crud_productstatisctic_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('crud_productstatistic_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.type }}</td>
             <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('crud_productstatisctic_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('crud_productstatistic_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('crud_productstatisctic_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('crud_productstatistic_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
             </td>
@@ -32,7 +32,7 @@
 
 <ul>
     <li>
-        <a href="{{ path('crud_productstatisctic_new') }}">
+        <a href="{{ path('crud_productstatistic_new') }}">
             Create a new entry
         </a>
     </li>

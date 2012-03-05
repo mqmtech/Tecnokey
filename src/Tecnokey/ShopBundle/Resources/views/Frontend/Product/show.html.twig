@@ -57,7 +57,7 @@ jQuery(window).load(function(){
     jQuery('.add_cesta_ficha').click(function(event){
       
         //event.preventDefault();
-        tecnokey.ecommerce.eventSubscriber.dispatchEvent('SHOPPING_CART.ADD', this);
+        tecnokey.kernel.eventSubscriber.dispatchEvent('SHOPPING_CART.ADD', this);
 
     });
     

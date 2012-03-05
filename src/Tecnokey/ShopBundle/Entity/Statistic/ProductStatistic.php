@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Tecnokey\ShopBundle\Entity\Statistic\Statistic
  *
  * @ORM\Table(name="shop_statistic_product")
- * @ORM\Entity(repositoryClass="namespace Tecnokey\ShopBundle\Repository\ProductStatisticRepository")
+ * @ORM\Entity(repositoryClass="Tecnokey\ShopBundle\Repository\ProductStatisticRepository")
  */
 class ProductStatistic extends Statistic
 {

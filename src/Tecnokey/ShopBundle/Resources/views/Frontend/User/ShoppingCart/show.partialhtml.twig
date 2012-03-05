@@ -26,7 +26,7 @@ TODO: Create the controller for the shopping cart
 			}
 
 			// run the effect
-			$( source ).effect( selectedEffect, options, 500, callback );
+			$( source ).effect( selectedEffect, options, 999, callback );
 		};
 
 		// callback function to bring a hidden box back
@@ -36,7 +36,7 @@ TODO: Create the controller for the shopping cart
 			}, 1000 );
 		};
                 
-                tecnokey.ecommerce.eventSubscriber.addEventListener('SHOPPING_CART.ADD', function(event){
+                tecnokey.kernel.eventSubscriber.addEventListener('SHOPPING_CART.ADD', function(event){
                     //alert("ShoppingCart item added : " + event);
                     runEffect(event, ".cesta img");
                 });
