@@ -66,5 +66,10 @@
             <argument type="service" id="doctrine" />
         </service>
         
+        <service id="ecommerceMailer" class="Tecnokey\ShopBundle\Service\EcommerceMailer" public="true">
+            <argument type="service" id="kernel"/>
+            <argument type="service" id="mailer"/>
+        </service>
+        
     </services>
 </container>

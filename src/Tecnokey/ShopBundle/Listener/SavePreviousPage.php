@@ -7,7 +7,7 @@
 namespace Tecnokey\ShopBundle\Listener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Description of PriceToPrettyPriceTransformer
@@ -17,12 +17,19 @@ use Symfony\Component\Routing\Router;
 class SavePreviousPage {
  
         /**
-         * @var \Symfony\Component\DependencyInjection\ContainerInterface
+         * @var RouterInterface
          */
         private $router;
+        
+        /**
+         *
+         * @var array
+         */
+        private $ignoredRoutes;
  
-        public function __construct(Router $router) {
+       public function __construct(RouterInterface $router, array $ignoredRoutes) {
             $this->router = $router;
+            $this->ignoredRoutes = $ignoredRoutes;
         }
  
         public function onKernelRequest(GetResponseEvent $event) {
@@ -30,7 +37,7 @@ class SavePreviousPage {
             if ($event->getRequestType() !== \Symfony\Component\HttpKernel\HttpKernel::MASTER_REQUEST) {
                 return;
             }
- 
+   
             /** @var \Symfony\Component\HttpFoundation\Request $request  */
             $request = $event->getRequest();
             /** @var \Symfony\Component\HttpFoundation\Session $session  */
@@ -38,7 +45,8 @@ class SavePreviousPage {
  
             $routeParams = $this->router->match($request->getPathInfo());
             $routeName = $routeParams['_route'];
-            if ($routeName[0] == '_') {
+            
+            if ($routeName[0] == '_' || $this->inIgnoredRouters($routeName)) {
                 return;
             }
             unset($routeParams['_route']);
@@ -52,6 +60,16 @@ class SavePreviousPage {
             $session->set('last_route', $thisRoute);
             $session->set('this_route', $routeData);
             $session->save();
+        }
+        
+        public function inIgnoredRouters($routeName){
+            for ($index = 0; $index < count($this->ignoredRoutes); $index++) {
+                $ignoredRoute = $this->ignoredRoutes[$index];
+                if($routeName == $ignoredRoute){
+                    return true;
+                }
+            }
+            return false;
         }
 }
 

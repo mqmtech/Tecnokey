@@ -30,7 +30,12 @@ class ContactController extends Controller {
      * @Template("TecnokeyShopBundle:Default:contacto.html.twig")
      */
     public function indexAction() {
-        return array();
+        
+        $form = $this->createContactForm();
+        
+        return array(
+            'form' => $form->createView(),
+        );
     }
     
     /**
@@ -40,139 +45,59 @@ class ContactController extends Controller {
      * @template("TecnokeyShopBundle:Default:contacto.html.twig")
      */
     public function sendEmailAction() {
+        $form = $this->createContactForm();
         
-        $request = Request::createFromGlobals();
+        $request = Request::createFromGlobals();        
+        $form->bindRequest($request);
+        $feedback = null;
+        if($form->isValid()){
+            $data = $form->getData();
         
-        //Get request parameters
-        // the URI being requested (e.g. /about) minus any query parameters
-        //$request->getPathInfo();
-
-        // retrieve GET and POST variables respectively
-        //$request->query->get('foo');
-        //$request->request->get('bar');
-        
-        $company = $request->request->get("company");
-        $email = $request->request->get("email");
-        $message = $request->request->get("message");
-                
-       $form_feedback = $this->getFormvalidationFeedback($company, $email, $message);
-        $this->get('session')->setFlash('form_feedback', $form_feedback);
-        if($form_feedback["success"] != NULL){
-            //Send email
-            //End getting request parameters
-            $message = \Swift_Message::newInstance()
-            ->setSubject('Consulta de '. $company.' para Tecknokey')
-            ->setFrom("consultas@tecnokey.es")
-            //->setTo("ciberxtrem@gmail.com")
-            ->addTo("ciberxtrem@gmail.com")
-            ->addTo("marioquesada85@gmail.com")
-            //->addTo("amkribo@gmail.com")
-            ->setBody("De: ".$email."\nMensaje: \n".$message);
-
-            $this->get('mailer')->send($message);
-            //End Sending email
+            $company = $data["company"];
+            $email = $data["email"];
+            $message = $data["message"];
+            
+            $mailer = $this->get('ecommerceMailer');
+            $mailer->sendEmail($email, 'ciberxtrem@gmail.com', "[Tecnokey Online] Consulta de $company", $message);
+            
+            $feedback = $this->getFormvalidationFeedback(true);
         }
-        //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        return array();        
+        else{
+            $feedback = $this->getFormvalidationFeedback(false);
+        }
+            $this->get('session')->setFlash('form_feedback', $feedback);
+        
+        return array('form' => $form->createView());
+    }
+    
+    public function createContactForm($data = null, $options = array()){
+        $form = $this->createFormBuilder($data, $options)
+                ->add('company', 'text', array(
+                    'required' => true,
+                ))
+                ->add('email', 'email', array(
+                    'required' => true,
+                ))
+                ->add('message', 'textarea', array(
+                    'required' => true,
+                ))
+                ->getForm();
+        
+        return $form;
     }
     
     /**
      *
-     * @Route("/enviar_consultaSwift", name="TKShopFrontendContactSendEmailBySwift")
-     * @Method("post")
-     * @template("TecnokeyShopBundle:Default:contacto.html.twig")
+     * @param boolean $isSuccess
+     * @return type 
      */
-    public function sendEmailSwiftAction() {
-        
-        
-        $request = Request::createFromGlobals();
-        
-        //Get request parameters
-        // the URI being requested (e.g. /about) minus any query parameters
-        //$request->getPathInfo();
+    public function getFormvalidationFeedback($isSuccess){
 
-        // retrieve GET and POST variables respectively
-        //$request->query->get('foo');
-        //$request->request->get('bar');
-        
-        $company = $request->request->get("company");
-        $email = $request->request->get("email");
-        $message = $request->request->get("message");
-                
-       $form_feedback = $this->getFormvalidationFeedback($company, $email, $message);
-        $this->get('session')->setFlash('form_feedback', $form_feedback);
-        if($form_feedback["success"] != NULL){
-            //Send email
-            //End getting request parameters
-            $message = \Swift_Message::newInstance()
-            ->setSubject('Consulta de '. $company.' para Tecknokey')
-            ->setFrom("consultas@tecnokey.es")
-            //->setTo("ciberxtrem@gmail.com")
-            ->addTo("ciberxtrem@gmail.com")
-            ->addTo("marioquesada85@gmail.com")
-            //->addTo("amkribo@gmail.com")
-            ->setBody("De: ".$email."\nMensaje: \n".$message);
-
-            $this->get('mailer')->send($message);
-            //End Sending email
-        }
-        //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        return array();        
-    }
-    
-    /**
-     * @Route("/enviar_consulta_hosting", name="TKShopFrontendContactSendEmailHosting")
-     * @Method("post")
-     * @template("TecnokeyShopBundle:Default:contacto.html.twig")
-     */
-    public function sendEmailHostingAction(){
-        
-        $request = Request::createFromGlobals();
-        
-        //Get request parameters
-        $company = $request->request->get("company");
-        $email = $request->request->get("email");
-        $message = $request->request->get("message");
-        
-        $para      = 'amaestramientos@tecno-key.com';
-        $titulo = '[Tecnokey Online] Consulta de '. $company;
-        $mensaje = $message;
-        $cabeceras = 'From: '. $email . "\r\n" .
-            'Reply-To: '. $email . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();            
-
-        
-        $form_feedback = $this->getFormvalidationFeedback($company, $email, $message);
-        $this->get('session')->setFlash('form_feedback', $form_feedback);
-        if($form_feedback["success"] != NULL){
-            mail($para, $titulo, $mensaje, $cabeceras);
-        }        
-        //return $this->redirect($this->generateUrl("TKShopFrontendIndex"));
-        return array();
-    }
-    
-    public function getFormvalidationFeedback($company, $email, $message){
-        $errors =  array("title" => "¡Formulario incompleto! Rellene todos los campos antes de enviar.");
-        $error_fields = array();
-        $success =  "¡Su mensaje ha sido enviado con éxito!";
-        
-        if($company == ""){
-            $error_fields["Empresa"] = "Falta información de empresa";
-        }
-
-        if($email == ""){
-            $error_fields["Correo"] = "Falta información de email";
-        }
-        
-        if($message == ""){
-            $error_fields["Mensaje"] = "Falta información de mensaje";
-        }
-
-        if(count($error_fields) > 0) {
+        if(!$isSuccess) {
             return array(
             "success" => NULL,
-            "error" => "¡Formulario incompleto! Rellene todos los campos antes de enviar.",
-            "fields" => $error_fields
+            "error" => "¡Formulario incorrecto! Revise todos los campos antes de enviar.",
+            "fields" => array()
             );
         }
         else{

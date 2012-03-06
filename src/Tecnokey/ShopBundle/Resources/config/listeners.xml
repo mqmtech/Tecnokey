@@ -4,12 +4,22 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
+    <parameters>
+        <parameter key="tk.kernel.params" type="collection">
+            <parameter type="string">TKShopFrontendSecurityLogin</parameter>
+            <parameter type="string">TKShopBackendSecurityLogin</parameter>
+        </parameter>
+    </parameters>
 
     <services>
         <service id="tk.kernel.listener" class="Tecnokey\ShopBundle\Listener\SavePreviousPage">
               <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
               <argument type="service" id="router" />
+              <!--argument type="collection">
+                  <argument type="string">yeah</argument>
+                  <argument type="string">uo</argument>
+              </argument-->
+              <argument>%tk.kernel.params%</argument>
           </service>
     </services>
 

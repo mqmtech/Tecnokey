@@ -76,15 +76,17 @@ jQuery(document).ready(function(){
           
         
 <div class="form_container">
-    <form action="{{ path('TKShopFrontendContactSendEmailHosting') }}" method="POST">
+    <form action="{{ path('TKShopFrontendContactSendEmail') }}" method="POST">
             <p class="text_general">Empresa:</p>
-            <input name="company" type="Empresa" class="correo_form" value="" />
+            {{ form_widget(form.company, {'attr' : {'class' : 'correo_form' }}) }}
+
             <p class="text_general">Correo electrónico:</p>
-            <input name="email" type="Correo" class="correo_form" value="" />
-            
+            {{ form_widget(form.email, {'attr' : {'class' : 'correo_form' }}) }}
+
             <p class="text_general">Su mensaje:</p>
-            <textarea name="message" class="mensaje_form" cols="mensaje"></textarea>
-            <!--div class="enviar_btn"><a href="#">Enviar</a></div-->
+            {{ form_widget(form.message, {'attr' : {'class' : 'mensaje_form'}}) }}
+
+            {{ form_rest(form) }}
             <input type="submit" class="enviar_btn" value= "Enviar"></div-->
     </form>
    	  </div>
