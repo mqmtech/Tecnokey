@@ -1,0 +1,53 @@
+<script>
+(function(window){
+    jQuery(document).ready(function(){
+        
+        var $dialog = $('<div></div>')
+                    .html("Se han econtrado errores")
+                    .dialog({
+                            autoOpen: false,
+                            title: 'Se han encontrado errores',
+                            resizable: false,
+                            height:240,
+                            width: 540,
+                            modal: true,
+                            buttons: {
+				"Aceptar": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+                    });
+
+        var errorsDescription = "";
+        var errors = jQuery(".field_inline_error");
+        for(i = 0 ; i < errors.length ; i++){      
+            var error = errors[i];
+            
+            var errorHtml = jQuery(error).html();    
+            if(errorHtml.trim() != ""){
+                var errorField = jQuery(error).attr('name');
+                errorsDescription += errorField + ": " + errorHtml + "<br/>";
+            }
+            
+        }
+        
+        if(errorsDescription != ""){
+                event.preventDefault(); // now js will take full control of the product delection
+                delform = $( this ).parents("form");
+
+                $dialog.bind( "dialogbeforeclose", function(e, ui) {
+                   //alert( $(e.target)[0].tittle );
+                });
+
+               $dialog.html(errorsDescription);
+               $dialog.dialog("open");
+        }
+     })
+     
+     
+})(window)
+ </script> 
+
+{% for key, flash in app.session.getFlashes() %}
+    <div class="field_inline_error" name="{{ key }}">{{ flash }}</div>
+{% endfor %}

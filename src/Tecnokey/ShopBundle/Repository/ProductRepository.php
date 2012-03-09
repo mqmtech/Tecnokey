@@ -19,6 +19,29 @@ class ProductRepository extends EntityRepository{
     const RECENT_ORDER_BY = 'DESC';
     const RELATED_MAX_RESULTS = 5;
 
+    public function findAllCount(){
+        $em = $this->getEntityManager();
+        $sql = "SELECT count (p) from TecnokeyShopBundle:Shop\\Product p";
+        
+        $q = $em->createQuery($sql);
+        return $q->getSingleScalarResult();
+    }
+    
+    public function findAll($firstResult = null, $maxResults = null){
+        $em = $this->getEntityManager();
+        $sql = "SELECT p from TecnokeyShopBundle:Shop\\Product p";
+        
+        $q = $em->createQuery($sql);
+        if($firstResult){
+            $q->setFirstResult($firstResult);
+        }
+        if($maxResults){
+            $q->setMaxResults($maxResults);
+        }
+        
+        return $q->getResult();
+    }
+    
     /**
      *
      * @param type $categoryId
@@ -118,7 +141,7 @@ class ProductRepository extends EntityRepository{
      * @param Array $orderBy
      * @return array 
      */
-    public function searchByWordFull($word, $mode="OR", $orderBy=NULL){
+    public function searchByWordFull($word, $mode="OR", $orderBy=NULL, $firstResult = null, $maxResults = null){
         //Grab propduct from db
         $em = $this->getEntityManager();
         
@@ -143,10 +166,48 @@ class ProductRepository extends EntityRepository{
         $query .= $this->orderBy("p", $orderBy);
         
         $q = $em->createQuery("select p from TecnokeyShopBundle:Shop\\Product p JOIN p.brand b" . $query);
+        
+        $q->setFirstResult($firstResult);
+        $q->setMaxResults($maxResults);
+        
         $products= $q->getResult();
         //End grabbing products from db
         
         return $products;
+    }
+    
+        public function searchByWordFullCount($word, $mode="OR", $orderBy=NULL){
+        //Grab propduct from db
+        $em = $this->getEntityManager();
+        
+        $query = "";
+        //Name and description search
+        $query .= " WHERE p." . "name" . " LIKE '%" . $word . "%'";
+        $query .= " OR p." . "description" . " LIKE '%" . $word . "%'";
+        
+        //Tag search
+        $query .= " OR p." . "tag" . " LIKE '%" . $word . "%'";
+        $query .= " OR p." . "secondTag" . " LIKE '%" . $word . "%'";
+        $query .= " OR p." . "thirdTag" . " LIKE '%" . $word . "%'";
+        $query .= " OR p." . "fourthTag" . " LIKE '%" . $word . "%'";
+        
+        //Sku Search
+        $query .= " OR p." . "sku" . " LIKE '%" . $word . "%'";
+        
+        //Brand search
+        $query .= " OR b." . "name" . " LIKE '%" . $word . "%'";
+        $query .= " OR b." . "description" . " LIKE '%" . $word . "%'";
+        
+        $query .= $this->orderBy("p", $orderBy);
+        
+        $q = $em->createQuery("select p from TecnokeyShopBundle:Shop\\Product p JOIN p.brand b" . $query);
+        
+        //count
+        $qCount = $em->createQuery("select count (p) from TecnokeyShopBundle:Shop\\Product p JOIN p.brand b" . $query);
+        $pCount = $qCount->getSingleScalarResult();
+        //End count
+        
+        return $pCount;
     }
     
     /**

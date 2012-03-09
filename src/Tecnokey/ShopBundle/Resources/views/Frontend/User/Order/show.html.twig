@@ -1,85 +1,119 @@
-<h1>Shop\Order</h1>
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ entity.name }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ entity.description }}</td>
-        </tr>
-        <tr>
-            <th>Createdat</th>
-            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Modifiedat</th>
-            <td>{{ entity.modifiedAt|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Checkoutat</th>
-            <td>{{ entity.checkoutAt|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Shippingbaseprice</th>
-            <td>{{ entity.shippingBasePrice }}</td>
-        </tr>
-        <tr>
-            <th>Totalproductsbaseprice</th>
-            <td>{{ entity.totalProductsBasePrice }}</td>
-        </tr>
-        <tr>
-            <th>Totalbaseprice</th>
-            <td>{{ entity.totalBasePrice }}</td>
-        </tr>
-        <tr>
-            <th>Tax</th>
-            <td>{{ entity.tax }}</td>
-        </tr>
-        <tr>
-            <th>Taxprice</th>
-            <td>{{ entity.taxPrice }}</td>
-        </tr>
-        <tr>
-            <th>Totalprice</th>
-            <td>{{ entity.totalPrice }}</td>
-        </tr>
-        <tr>
-            <th>Shippingmethod</th>
-            <td>{{ entity.shippingMethod }}</td>
-        </tr>
-        <tr>
-            <th>Orderstate</th>
-            <td>{{ entity.orderState }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ entity.status }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block title %}| Tecnokey | Pedido |{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('crud_order') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('crud_order_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('crud_order_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ <a href="{{ path('TKShopFrontendUserShow', {'_format': 'html'}) }}">Mi cuenta</a> \ Pedido \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block jsfunctions %}
+    {{ parent() }}
+    <script>
+    jQuery(document).ready(function(){
+    
+        var $dialog = $('<div></div>')
+                    .html('La confirmación de pedidos aún no se encuentra activada')
+                    .dialog({
+                            autoOpen: false,
+                            title: 'Función deshabilitada',
+                            resizable: false,
+                            height:240,
+                            modal: true,
+                            buttons: {
+				"Abortar pedido": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+                    });
+
+    
+        jQuery(".confirmar_pedido_deshabilitado").click(function(event){
+        
+            event.preventDefault(); // now js will take full control of the product delection
+            delform = $( this ).parents("form");
+            
+            $dialog.bind( "dialogbeforeclose", function(e, ui) {
+               //alert( $(e.target)[0].tittle );
+            });
+            
+           $dialog.dialog("open");
+
+        });
+        
+     })
+     </script>
+     
+         <script>
+    jQuery(document).ready(function(){
+        jQuery('.input_cantidad_cesta').click(function(event){
+            var value = jQuery(this).attr('value');
+        if(value < 1){
+            value = 1;
+        }
+        jQuery(this).attr('value', value);
+        })
+     })
+     </script>
+{% endblock jsfunctions %}
+
+{% block right_content %}
+
+{% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
+
+  <!--start cuerpo--> 
+<div class="right_cuerpo_user">
+    <div class="titulo_current">Datos del pedido:</div>
+
+    {% if order.items is defined %}
+                <div class="lista_pedidos_container">
+                    <div class="legend_container">
+                        <div class="producto_legend"><a href="#">Producto</a></div>
+                        <div class="ref_legend"><a href="#">Referencia</a></div>
+                        <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
+                        <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+                        <div class="subtotat_legend"><a href="#">Subtotal</a></div>
+                    </div>
+                
+                    {% for dataItem in order.items %}
+                        {% set imageSizeInfo =  dataItem.product.image.getImageSize("60", "60") %}
+                    <div class="prods_detalles_container">
+                        {#<div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id' : dataItem.id}) }}"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}  " alt="logo" /></a></div>#}
+                        <div class="foto_prod_cesta agregado_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
+                        <div class="titulo_prd_cesta">{{ dataItem.product.name | truncate(33) }}</div>
+                        <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
+                        <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
+                        <div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="{{ dataItem.quantity }}"  disabled/></div>
+                        <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
+                    </div>
+                    {% endfor %}
+
+
+                    <div class="precio_desglos_container">
+                        <div class="iva_desglos">Total - Sin iva</div>
+                        <div class="precio_total_desglos">{{ order.totalBasePrice ~ currencySymbol() }}</div>
+                        <div class="iva_desglos">Total - Con iva</div>
+                        <div class="precio_total_desglos">{{ order.totalPrice | roundoff ~ currencySymbol() }}</div>
+                    </div>
+                {% else %}
+                    <h3>No se encuetran datos del Pedido</h3>
+                {% endif %}
+                
+            </div>
+
+        </div><!--end cuerpo--> 
+{% endblock right_content %}
+
+
+

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Tecnokey\ShopBundle\Entity\Shop\User;
 use Tecnokey\ShopBundle\Entity\Shop\ShoppingCartItem;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tecnokey\ShopBundle\Entity\Shop\Order
@@ -117,6 +118,8 @@ class ShoppingCart{
     /**
      *
      * @var ArrayCollection $items of shoppingCartItem
+     * @Assert\NotBlank(message = "No hay productos en el carrito")
+     * @Assert\NotNull(message = "No hay productos en el carrito")
      * 
      * @ORM\OneToMany(targetEntity="ShoppingCartItem", mappedBy="shoppingCart", cascade={"persist", "remove"})
      * )

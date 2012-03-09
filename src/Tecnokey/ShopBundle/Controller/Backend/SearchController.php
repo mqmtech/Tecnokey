@@ -46,20 +46,18 @@ class SearchController extends Controller {
         $description = $request->query->get('description');
 
         
-        //Access to database
+        //Access to database for count
         $em = $this->getDoctrine()->getEntityManager();
-        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFull($name);
-        if($products == NULL){
-            //TODO: Lanzar pagina de errror?
-        }
+        $totalItemsLength = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFullCount($name);
+        //End access to database for count
         
         //Set Pagination
-        $pagination = NULL;
-        if($products != NULL){
-            $totalItemsLength = count($products);
-            $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
-
-            $products = $pagination->sliceArray($products);
+        $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
+        $products = null;
+        if($pagination != NULL){
+            $currentRange = $pagination->getCurrentRange();
+            $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFull($name, "OR", null, $currentRange['offset'], $currentRange['lenght']);
+            
         }
         //End Setting Pagination
         

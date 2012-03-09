@@ -3,29 +3,29 @@
         <span class="text_bold">Todavía no ha realizado ningun pedido</span></div>
         {% endif %}
         <div class="legend_container">
-            <div class="producto_legend"><a href="#">Número del pedido</a></div>
-            <div class="precio_ud_legend"><a href="#">Fecha</a></div>
-            <div class="cantidad_legend"><a href="#">Cantidad</a></div>
-            <div class="subtotat_legend"><a href="#">Importe</a></div>
-          <div class="estado"><a href="#">Estado</a></div>
+            <div class="producto_legend"><a href="{{ orderBy.orders['pedido'].url}}" class="{% if(orderBy.orders['pedido'].isCurrent) %}current{% endif %}">Número del pedido</a></div>
+            <div class="precio_ud_legend"><a href="{{ orderBy.orders['fecha'].url}}"  class="{% if(orderBy.orders['fecha'].isCurrent) %}current{% endif %}">Fecha</a></div>
+            <div class="cantidad_legend"><a href="" class="{% if(orderBy.orders['cantidad'].isCurrent) %}current{% endif %}">Cantidad</a></div>
+            <div class="subtotat_legend"><a href="{{ orderBy.orders['importe'].url}}" class="{% if(orderBy.orders['importe'].isCurrent) %}current{% endif %}">Importe</a></div>
+          <div class="estado"><a href="{{ orderBy.orders['estado'].url}}" class="{% if(orderBy.orders['estado'].isCurrent) %}current{% endif %}">Estado</a></div>
         </div>
         {% for entity in entities %}
 
        <div class="legend_container">
-                <div class="producto_legend"><a href="#">{%if entity.publicId is null %} {{entity.id}} {% else %} {{ entity.publicId }} {% endif %}</a></div>
+                <div class="producto_legend"><a href="{{ path('TKShopFrontendOrderShow', {'publicId' : entity.publicId }) }}">{%if entity.publicId is null %} {{entity.id}} {% else %} {{ entity.publicId }} {% endif %}</a></div>
                 <div class="precio_ud_legend">{{ entity.createdAt | date ("d/m/Y") }}</div>
                 <div class="cantidad_legend">{{ entity.productsQuantity }}</div>
                 <div class="subtotat_legend">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
                 {% if entity.status == "RECEIVED" %}
-                <div class=" estado_recivido">{{ entity.status | stateToDescription }}</div>
+                <div class="estado_recivido">{{ entity.status | stateToDescription }}</div>
                 {% endif %}
 
                 {% if entity.status == "IN_PROCESS" %}
-                <div class=" estado_en_proceso">{{ entity.status | stateToDescription }}</div>
+                <div class="estado_en_proceso">{{ entity.status | stateToDescription }}</div>
                 {% endif %}
 
                 {% if entity.status == "DELIVERED" %}
-                <div class=" estado_enviado">{{ entity.status | stateToDescription }}</div>
+                <div class="estado_enviado">{{ entity.status | stateToDescription }}</div>
                 {% endif %}
      </div>
         {% endfor %}

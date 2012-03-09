@@ -1,0 +1,119 @@
+{% extends 'TecnokeyShopBundle:Frontend:layout.html.twig' %}
+
+{% block title %}| Tecnokey | Previsualizacón de pedido |{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+<link href="{{ asset('bundles/tecnokey/css/user.css') }}" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block menu %}
+        {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
+{% endblock %}
+
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ <a href="{{ path('TKShopFrontendUserShow', {'_format': 'html'}) }}">Mi cuenta</a> \ Previsualizacón de pedido \
+{% endblock %}
+
+{% block left %}
+    {% render path('TKShopFrontendCategoriesShowAllFamilies', {'_format': 'partialhtml'}) | toAppPath %}
+{% endblock %}
+
+{% block jsfunctions %}
+    {{ parent() }}
+    <script>
+    jQuery(document).ready(function(){
+    
+        var $dialog = $('<div></div>')
+                    .html('La confirmación de pedidos aún no se encuentra activada')
+                    .dialog({
+                            autoOpen: false,
+                            title: 'Función deshabilitada',
+                            resizable: false,
+                            height:240,
+                            modal: true,
+                            buttons: {
+				"Abortar pedido": function() {
+					$( this ).dialog( "close" );
+				}
+			}
+                    });
+
+    
+        jQuery(".confirmar_pedido_deshabilitado").click(function(event){
+        
+            event.preventDefault(); // now js will take full control of the product delection
+            delform = $( this ).parents("form");
+            
+            $dialog.bind( "dialogbeforeclose", function(e, ui) {
+               //alert( $(e.target)[0].tittle );
+            });
+            
+           $dialog.dialog("open");
+
+        });
+        
+     })
+     </script>
+     
+         <script>
+    jQuery(document).ready(function(){
+        jQuery('.input_cantidad_cesta').click(function(event){
+            var value = jQuery(this).attr('value');
+        if(value < 1){
+            value = 1;
+        }
+        jQuery(this).attr('value', value);
+        })
+     })
+     </script>
+{% endblock jsfunctions %}
+
+{% block right_content %}
+
+{% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
+
+  <!--start cuerpo--> 
+<div class="right_cuerpo_user">
+    <div class="titulo_current">Previsualización del pedido:</div>
+
+    <div class="lista_pedidos_container">
+        <div class="legend_container">
+            <div class="producto_legend"><a href="#">Producto</a></div>
+            <div class="ref_legend"><a href="#">Referencia</a></div>
+            <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
+            <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+            <div class="subtotat_legend"><a href="#">Subtotal</a></div>
+        </div>
+        
+                {% for dataItem in order.items %}
+                    {% set imageSizeInfo =  dataItem.product.image.getImageSize("60", "60") %}
+                <div class="prods_detalles_container">
+                    {#<div class="btn_agregado_cesta"></div>#}
+                    <div class="foto_prod_cesta agregado_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
+                    <div class="titulo_prd_cesta">{{ dataItem.product.name | truncate(33) }}</div>
+                    <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
+                    <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
+                    <div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="{{ dataItem.quantity }}"  disabled/></div>
+                    <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
+                </div>
+                {% endfor %}
+
+
+                <div class="precio_desglos_container">
+                    <div class="iva_desglos">Total - Sin iva</div>
+                    <div class="precio_total_desglos">{{ order.totalBasePrice ~ currencySymbol() }}</div>
+                    <div class="iva_desglos">Total - Con iva</div>
+                    <div class="precio_total_desglos">{{ order.totalPrice | roundoff ~ currencySymbol() }}</div>
+                </div>
+
+                <div class="btn_accion_container">
+                <div><a class="confirmar_pedido" href="{{ path('TKShopFrontendOrderCreateFromShoppingCart') }}">Confirmar Pedido</a></div>                
+                </div>                
+                
+            </div>
+
+        </div><!--end cuerpo--> 
+{% endblock right_content %}
+
+
+

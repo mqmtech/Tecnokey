@@ -15,6 +15,16 @@ use Tecnokey\ShopBundle\Entity\Shop\Order;
  */
 class OrderRepository extends EntityRepository{
 
+    public function findByPublicId($publicId){
+        $em = $this->getEntityManager();
+        
+        $sql = "select o from TecnokeyShopBundle:Shop\\Order o WHERE o.publicId = '".$publicId."' ";
+        $q = $em->createQuery($sql);
+        $entity = $q->getSingleResult();
+        
+        return $entity;
+    }
+    
 }
 
 ?>

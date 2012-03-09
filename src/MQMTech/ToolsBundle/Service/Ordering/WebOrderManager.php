@@ -38,12 +38,16 @@ class WebOrderManager{
      * @var Request
      */
     private $request;
+    
+    private $orderFactory;
 
     public static function buildDefaultOrderManager(Request $request, WebOrderFactory $orderFactory, string $responsePath=NULL, array $responseParameters=NULL) {
 
         $orderManager = new WebOrderManager($request, $responsePath, $responseParameters);
+        
+        $orderManager->setOrderFactory($orderFactory);
 
-        $order = $orderFactory->buildOrder();
+        /*$order = $orderFactory->buildOrder();
         $order->setId('name'); 
         $order->setField('name');
         $order->setName('Producto');
@@ -62,11 +66,11 @@ class WebOrderManager{
         $order->setResponseParameters($responseParameters);
         $orderManager->addOrder($order);
 
-        $orderManager->initialize();
+        $orderManager->initialize();*/
         
         return $orderManager;
     }
-    
+
     public function __construct(Request $request, string $responsePath=NULL, array $responseParameters=NULL) {
         $this->setRequest($request);
         $this->setResponsePath($responsePath);
@@ -127,6 +131,24 @@ class WebOrderManager{
     public function getValues(){
         $currentOrder = $this->getCurrentOrder();
         return $currentOrder->getValues();
+    }
+    
+    public function add($id, $field, $name, $mode = 'ASC', $responsePath = null){
+        $order = $this->getOrderFactory()->buildOrder();
+        
+        $order->setId($id); 
+        $order->setField($field);
+        $order->setName($name);
+        $order->setMode($mode);
+        if($responsePath == null){
+            $responsePath = $this->getResponsePath();
+        }
+        $order->setResponsePath($responsePath);        
+        $order->setResponseParameters($this->getResponseParameters());
+        
+        $this->addOrder($order);
+        
+        return $this;
     }
   
     /**
@@ -234,6 +256,17 @@ class WebOrderManager{
     public function getOrders(){
         return $this->orders;
     }
+    
+    public function getOrderFactory() {
+        return $this->orderFactory;
+    }
+
+    public function setOrderFactory($orderFactory) {
+        $this->orderFactory = $orderFactory;
+    }
+
+
+
 }
 
 ?>

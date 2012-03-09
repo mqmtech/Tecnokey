@@ -39,13 +39,23 @@ class OrderController extends Controller
      */
     public function showDeliveredAction()
     {
+        
+        $orderBy = $this->get('view.sort');
+        $orderBy->add('pedido', 'publicId', 'pedido')
+                ->add('fecha', 'created_at', 'Fecha')
+                ->add('cantidad', 'quantity', 'Cantidad')
+                ->add('importe', 'totalPrice', 'Importe')
+                ->add('estado', 'status', 'Estado')
+                ->initialize();
+        
         $em = $this->getDoctrine()->getEntityManager();
 
         $user = $this->get('userManager')->getCurrentUser();
-        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findDeliveredOrders($user);
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findDeliveredOrders($user, $orderBy->getValues());
 
         return array(
             'entities' => $entities,
+            'orderBy' => $orderBy->switchMode(),
         );
     }
     
@@ -57,186 +67,66 @@ class OrderController extends Controller
      */
     public function showInProcessAction()
     {
+        $orderBy = $this->get('view.sort');
+        $orderBy->add('pedido', 'publicId', 'pedido')
+                ->add('fecha', 'createdAt', 'Fecha')
+                ->add('cantidad', 'quantity', 'Cantidad')
+                ->add('importe', 'totalPrice', 'Importe')
+                ->add('estado', 'status', 'Estado')
+                ->initialize();
+        
         $em = $this->getDoctrine()->getEntityManager();
 
         $user = $this->get('userManager')->getCurrentUser();
-        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findInProcessOrders($user);
+        $entities = $em->getRepository('TecnokeyShopBundle:Shop\\User')->findInProcessOrders($user, $orderBy->getValues());
 
         return array(
             'entities' => $entities,
+            'orderBy' => $orderBy->switchMode(),
         );
     }
 
     /**
      * Finds and displays a Shop\Order entity.
      *
-     * @Route("/{id}/show", name="TKShopFrontendOrderShow")
+     * @Route("/{publicId}/show", name="TKShopFrontendOrderShow")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($publicId)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('TecnokeyShopBundle:Shop\Order')->find($id);
+        $entity = $em->getRepository('TecnokeyShopBundle:Shop\Order')->findByPublicId($publicId);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Shop\Order entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
-    }
-
-    /**
-     * Displays a form to create a new Shop\Order entity.
-     *
-     * @Route("/new", name="TKShopFrontendOrderNew")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Order();
-        $form   = $this->createForm(new OrderType(), $entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'order'      => $entity,
         );
-    }
-
-    /**
-     * Creates a new Shop\Order entity.
-     *
-     * @Route("/create", name="TKShopFrontendOrderCreate")
-     * @Method("post")
-     * @Template("TecnokeyShopBundle:Frontend\User\Order:new.html.twig")
-     */
-    public function createAction()
-    {
-        $entity  = new Order();
-        $request = $this->getRequest();
-        $form    = $this->createForm(new OrderType(), $entity);
-        $form->bindRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('TKShopFrontendOrderCartShow', array('id' => $entity->getId())));
-            
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing Shop\Order entity.
-     *
-     * @Route("/{id}/edit", name="TKShopFrontendOrderEdit")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('TecnokeyShopBundle:Shop\Order')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shop\Order entity.');
-        }
-
-        $editForm = $this->createForm(new OrderType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Edits an existing Shop\Order entity.
-     *
-     * @Route("/{id}/update", name="TKShopFrontendOrderUpdate")
-     * @Method("post")
-     * @Template("TecnokeyShopBundle:Shop\Order:edit.html.twig")
-     */
-    public function updateAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('TecnokeyShopBundle:Shop\Order')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shop\Order entity.');
-        }
-
-        $editForm   = $this->createForm(new OrderType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        $request = $this->getRequest();
-
-        $editForm->bindRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('crud_order_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Deletes a Shop\Order entity.
-     *
-     * @Route("/{id}/delete", name="TKShopFrontendOrderDelete")
-     * @Method("post")
-     */
-    public function deleteAction($id)
-    {
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
-
-        $form->bindRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('TecnokeyShopBundle:Shop\Order')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Shop\Order entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('crud_order'));
-    }
-
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
     }
     
-        //  HELPER FUNCTIONS  //
+    /**
+     * Finds and displays a Shop\Order entity.
+     *
+     * @Route("/confirmar", name="TKShopFrontendOrderCreateFromShoppingCart")
+     * @Template()
+     */
+    public function createFromShoppingCartAction()
+    {
+        $confirmed = $this->confirmOrder();
+        
+        if ($confirmed == true) {
+                return $this->redirect($this->generateUrl('TKShopFrontendOrdersShowInProcess'));
+        }
+        
+        else{
+            return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit'));
+        }
+    }
+  
+    //  HELPER FUNCTIONS  //
     
     /**
      * Redirects to home page if there is a problem with Oder
@@ -265,5 +155,65 @@ class OrderController extends Controller
         else{
             return NULL;
         }
+    }
+    
+    
+    /**
+     *
+     * @param ShoppingCart $shoppingCart
+     * @return boolean 
+     */
+    public function confirmOrder() {
+        
+        $sc = $this->getUserShoppingCart();
+
+        $items = $sc->getItems();
+        if (count($items) < 1) {
+            return false;
+        }
+        try {
+            $checkoutManager = $this->get('checkoutManager');
+            $sc = $checkoutManager->checkout($sc);
+            // generate an order
+            $order = $checkoutManager->shoppingCartToOrder($sc);
+
+            $user = $this->get('userManager')->getCurrentUser();
+
+            $order->setUser($user);
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($order);
+            $em->flush();
+            //End generating an order
+            // remove all cart items
+            $this->get('shoppingCartManager')->removeAllItems($sc);
+            $em->flush();
+            //End removing all cart items
+            return true;
+            
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    /**
+     * Get the ShoppingCart from the logged user
+     * If the user does NOT have a shoppingCart then one is created and attached to user but not persisted to database
+     * 
+     * @return ShoppingCart 
+     */
+    protected function getUserShoppingCart() {
+        $user = $this->get('userManager')->getCurrentUser();
+        
+        $shoppingCart = NULL;
+        if ($this->get('userManager')->isDBUser($user)) {
+            $shoppingCart = $user->getShoppingCart();
+            if ($shoppingCart == NULL) {
+                $shoppingCart = new ShoppingCart();
+                $user->setShoppingCart($shoppingCart);
+            }
+        } 
+        
+        return $shoppingCart;
     }
 }

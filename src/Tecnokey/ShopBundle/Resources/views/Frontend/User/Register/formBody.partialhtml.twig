@@ -161,8 +161,6 @@
           
                 {% for key, flash in app.session.getFlashes() %}
                 <div class="field_inline_error" name="{{ key }}">{{ flash }}</div>
-                    
-                
                 {% endfor %}
                     {{ form_rest(form) }}
                     

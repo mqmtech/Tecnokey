@@ -312,15 +312,20 @@ class ProductController extends Controller {
     public function showAllAction() {
         //Grab products from db
         $em = $this->getDoctrine()->getEntityManager();
-        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAll();
+        //$products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAll();
         //End grabbing prods from db
         
+        //Access to database for count
+        $totalItemsLength = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAllCount();
+        //End access to database for count
+        
         //Set Pagination
-        $pagination = NULL;
-        if($products != NULL){
-            $totalItemsLength = count($products);
-            $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
-            $products = $pagination->sliceArray($products);
+        $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
+        $products = null;
+        if($pagination != NULL){
+            $currentRange = $pagination->getCurrentRange();
+            $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAll($currentRange['offset'], $currentRange['lenght']);
+            
         }
         //End Setting Pagination
         

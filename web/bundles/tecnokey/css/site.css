@@ -775,7 +775,7 @@ body {
 
 .numbers a{
 	height: 25px;
-	width: 15px;
+	width: auto;
 	float: left;
 	display: block;
 	font-size: 0.875em;
@@ -1660,3 +1660,13 @@ input.buscarbtn{
 /*.tooltip_category_tittle_overloaded{
     z-index: 10
 }*/
+
+.ui-widget-header {
+    border: 1px solid 
+    #E78F08;
+    background: 
+    #F6A828 url(../images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
+    color: 
+    white;
+    font-weight: bold;
+}

@@ -128,7 +128,7 @@ class ShoppingCartController extends Controller {
 
         $editForm = $this->createForm(new ShoppingCartType(), $entity);
         $deleteForm = $this->createDeleteForm($entity->getId());
-
+        
         return $this->render("TecnokeyShopBundle:Frontend\User\ShoppingCart:edit.html.twig", array(
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
@@ -154,9 +154,7 @@ class ShoppingCartController extends Controller {
               $em->flush(); */
             $this->persistAndFlushShoppingCart($shoppingCart);
 
-            return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit', array(
-                                'id' => $shoppingCart->getId()
-                            )));
+            return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit'));
             /* return $this->forward("TecnokeyShopBundle:Frontend\User\ShoppingCart:edit", array(
               'id' => $shoppingCart->getId()
               )); */
@@ -228,12 +226,15 @@ class ShoppingCartController extends Controller {
             $request = Request::createFromGlobals();
             $orderField = $request->request->get(self::FORM_ORDER_FIELD);
             if ($orderField == self::FORM_ORDER_COMFIRM_VALUE) {
-                
-                $confirmed = $this->confirmOrder($entity);
-                
-                if ($confirmed == true) {
-                    return $this->redirect($this->generateUrl('TKShopFrontendOrdersShowInProcess'));
+                if($this->isCartValid($entity)){
+                    return $this->render("TecnokeyShopBundle:Frontend\User\ShoppingCart:preview.html.twig", array(
+                        'order' => $this->generateOrder($entity),
+                        )
+                    );
                 }
+               else{
+                   
+               }
             }
         }
         return $this->redirect($this->generateUrl('TKShopFrontendUserShoppingCartEdit'));
@@ -326,41 +327,21 @@ class ShoppingCartController extends Controller {
         
         return $shoppingCart;
     }
-
-    /**
-     *
-     * @param ShoppingCart $shoppingCart
-     * @return boolean 
-     */
-    public function confirmOrder(ShoppingCart $entity) {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $items = $entity->getItems();
+    
+    public function isCartValid($sc){
+        $items = $sc->getItems();
         if (count($items) < 1) {
             return false;
         }
-        try {
-            $checkoutManager = $this->get('checkoutManager');
+        return true;
+    }
+    
+    public function generateOrder(ShoppingCart $entity){
+        $checkoutManager = $this->get('checkoutManager');
             $entity = $checkoutManager->checkout($entity);
             // generate an order
             $order = $checkoutManager->shoppingCartToOrder($entity);
-
-            $user = $this->get('userManager')->getCurrentUser();
-
-            $order->setUser($user);
-
-            $em->persist($order);
-            $em->flush();
-            //End generating an order
-            // remove all cart items
-            $this->get('shoppingCartManager')->removeAllItems($entity);
-            $em->flush();
-            //End removing all cart items
-            return true;
-            
-        } catch (Exception $e) {
-            return false;
-        }
+            return $order;
     }
 
     /**

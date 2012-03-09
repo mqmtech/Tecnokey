@@ -340,8 +340,8 @@
 	
 }
 
-.btn_guardar_pedido a{
-	height: 10px;
+.btn_guardar_pedido{
+	height: 32px;
 	width: auto;
 	color: #fff;
 	padding: 10px;
@@ -349,10 +349,11 @@
 	line-height: 10px;
 	background-image: url(../images/fondo_franja_azul.png);
 	float: left;
+        font-weight: bold;
 }
 
-.confirmar_pedido a{
-	height: 10px;
+.confirmar_pedido{
+	height: auto;
 	width: auto;
 	color: #fff;
 	padding: 10px;
@@ -360,9 +361,10 @@
 	line-height: 10px;
 	background-image: url(../images/fondo_franja_verde.png);
 	float: right;
+        font-weight: bold;
 }
 
-.btn_guardar_pedido a:hover, .confirmar_pedido a:hover{
+.btn_guardar_pedido :hover, .confirmar_pedido :hover{
 	text-decoration: underline;
 	border-color: #4e4e4e;
 }
@@ -403,16 +405,20 @@
 
 .estado_recibido{
 	color: #258cdb;
-	text-align: center;
+	text-align: left;
+        
 }
 .estado_en_proceso{
+        
 	color: #f87a15;
-	text-align: center;
+	text-align: left;
+        
 }
 
-.estado_enviado{
+.estado_enviado{        
 	color: #147842;
-	text-align: center;
+	text-align: left;
+        
 }
 
 .estado_editar a{
@@ -678,28 +684,6 @@
 	margin-left: 8px;
 }
 
-.confirmar_pedido{
-	height: 10px;
-	width: auto;
-	color: #fff;
-	padding: 10px;
-	border: 1px solid #ccc;
-	line-height: 0px;
-	background-image: url(../images/fondo_franja_verde.png);
-	float: right;
-}
-
-.actualizar_pedido{
-	height: 10px;
-	width: auto;
-	color: #fff;
-	padding: 10px;
-	border: 1px solid #ccc;
-	line-height: 0px;
-	background-image: url(../images/fondo_franja_azul.png);
-	float: left;
-}
-
 .input_new_cliente, .input_new_cliente_nombre_appellido, .input_new_cliente_direccion, .input_new_cliente_cp {
     height: 30px;
         
@@ -730,7 +714,14 @@
     display: none;
     background-color: transparent;    
 }
-    
 
+.legend_container div a.current {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.agregado_cesta{
+        margin-left: 34px;
+}
 
 /* end modded by mario */

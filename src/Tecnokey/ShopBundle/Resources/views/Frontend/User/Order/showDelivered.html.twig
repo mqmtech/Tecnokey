@@ -11,7 +11,7 @@
         {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
 {% endblock %}
 
-{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ <a href="{{ path('TKShopFrontendUserShow', {'_format': 'html'}) }}">Mi cuenta</a> \Pedidos realizados \
 {% endblock %}
 
 {% block left %}

@@ -2,25 +2,25 @@
     orderBy
 #}
 <div class="organizar_container">
-            <div id="organizar">
-                <ul>
-                {%if orderBy is defined %}
-                        {% for order in orderBy.orders%}
-                        {% if order.id  == 'price' %}
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <li><a href="{{ order.getURL }}" class="{% if(order.isCurrent) %}current{% endif %}">{{ order.name }}</a></li>
-                            {% else %}        
-                             {#<li><a href="">Precio</a></li>#}
-                            {% endif %}
-                        {% else %}        
-                             <li><a href="{{ order.getURL }}" class="{% if(order.isCurrent) %}current{% endif %}">{{ order.name }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                  {% else %}
-                   
-                    <li><a href="">Producto</a></li>
-                    <li><a href="">Precio</a></li>
-                 {% endif %}
-                 </ul>
-            </div>
-        </div>
+    <div id="organizar">
+        <ul>
+        {%if orderBy is defined %}
+                {% for order in orderBy.orders%}
+                {% if order.id  == 'price' %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ order.getURL }}" class="{% if(order.isCurrent) %}current{% endif %}">{{ order.name }}</a></li>
+                    {% else %}        
+                        {#<li><a href="">Precio</a></li>#}
+                    {% endif %}
+                {% else %}        
+                        <li><a href="{{ order.getURL }}" class="{% if(order.isCurrent) %}current{% endif %}">{{ order.name }}</a></li>
+                {% endif %}
+                {% endfor %}
+            {% else %}
+
+            <li><a href="">Producto</a></li>
+            <li><a href="">Precio</a></li>
+            {% endif %}
+            </ul>
+    </div>
+</div>

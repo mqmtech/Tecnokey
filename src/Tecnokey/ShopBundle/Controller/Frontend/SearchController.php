@@ -21,29 +21,6 @@ use Exception;
 class SearchController extends Controller {
     
     /**
-     * Frontend demo
-     *
-     * @Route("/", name="TKShopFrontendSearchIndex")
-     * @Template()
-     */
-    public function indexAction() {
-        //Grab categories from db
-        $em = $this->getDoctrine()->getEntityManager();
-        $categories = $em->getRepository('TecnokeyShopBundle:Shop\Category')->findAll();
-        //End grabbing cats from db
-        
-        //Grab products from db
-        $em = $this->getDoctrine()->getEntityManager();
-        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->findAll();
-        //End grabbing cats from db
-        
-        return array(
-            'categories' => $categories,
-            'products' => $products
-        );
-    }    
-    
-    /**
      * @Route("/productos/por_marca/{id}", name="TKShopFrontendSearchProductsByBrand")
      */
     public function searchProductByBrand($id){
@@ -51,6 +28,9 @@ class SearchController extends Controller {
         $errors = NULL;
         
         $orderBy = $this->get('view.sort');
+        $orderBy->add('name', 'name', 'Producto')
+                ->add('price', 'basePrice', 'Precio')
+                ->initialize();
         
         $em = $this->getDoctrine()->getEntityManager();
         $brand = $em->getRepository('TecnokeyShopBundle:Shop\Brand')->find($id);
@@ -105,24 +85,29 @@ class SearchController extends Controller {
         $name = $query->get('name');
         
         $orderBy = $this->get('view.sort');
+        $orderBy->add('name', 'name', 'Producto')
+                ->add('price', 'basePrice', 'Precio')
+                ->initialize();
         
-        //Access to database
+        //Access to database for count
         $em = $this->getDoctrine()->getEntityManager();
-        $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFull($name, "OR", $orderBy->getValues());
-        $productsInfo = NULL;
-        $pagination = NULL;
+        $totalItemsLength = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFullCount($name);
+        //End access to database for count
+        
+        //Set Pagination
+        $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
+        $products = null;
+        if($pagination != NULL){
+            $currentRange = $pagination->getCurrentRange();
+            $products = $em->getRepository('TecnokeyShopBundle:Shop\Product')->searchByWordFull($name, "OR", $orderBy->getValues(), $currentRange['offset'], $currentRange['lenght']);
+            
+        }
+        //End Setting Pagination
+        
         if($products == NULL){
             //TODO: Lanzar pagina de errror?
         }
         else{
-            //Set Pagination
-            $pagination = NULL;
-            if($products != NULL){
-                $totalItemsLength = count($products);
-                $pagination = $this->get('view.pagination')->calcPagination($totalItemsLength); 
-                $products = $pagination->sliceArray($products);
-            }
-            //End Setting Pagination
             $productsInfo = $this->get('productManager')->getProductsPriceInfo($products);
         }
 

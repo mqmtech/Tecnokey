@@ -11,7 +11,7 @@
         {% include 'TecnokeyShopBundle:Frontend:menu.partialhtml.twig' with {'menu' : 'productos'} %}
 {% endblock %}
 
-{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ Lista de la compra \
+{% block contextualThree %}<a href="{{ path('TKShopFrontendIndex') }}">Inicio</a> \ <a href="{{ path('TKShopFrontendUserShow', {'_format': 'html'}) }}">Mi cuenta</a> \ Lista de la compra \
 {% endblock %}
 
 {% block left %}
@@ -20,117 +20,174 @@
 
 {% block jsfunctions %}
     {{ parent() }}
-    <script>
-    jQuery(document).ready(function(){
+<script>
+jQuery(document).ready(function(){
     
-        var $dialog = $('<div></div>')
-                    .html('La confirmación de pedidos aún no se encuentra activada')
-                    .dialog({
-                            autoOpen: false,
-                            title: 'Función deshabilitada',
-                            resizable: false,
-                            height:240,
-                            modal: true,
-                            buttons: {
-				"Abortar pedido": function() {
-					$( this ).dialog( "close" );
-				}
-			}
-                    });
-
+    var cartOptions = new Array();
+    cartOptions['isEnabled'] = true;
     
-        jQuery(".confirmar_pedido_deshabilitado").click(function(event){
-        
-            event.preventDefault(); // now js will take full control of the product delection
-            delform = $( this ).parents("form");
-            
-            $dialog.bind( "dialogbeforeclose", function(e, ui) {
-               //alert( $(e.target)[0].tittle );
-            });
-            
-           $dialog.dialog("open");
-
+    var dialogDisabledOrder = $('<div></div>')
+                .html('La confirmación de pedidos aún no se encuentra activada')
+                .dialog({
+                        autoOpen: false,
+                        title: 'Función deshabilitada',
+                        resizable: false,
+                        height:240,
+                        modal: true,
+                        buttons: {
+                            "Volver": function() {
+                                    $( this ).dialog( "close" );
+                            }
+                    }
         });
         
-     })
-     </script>
-     
-         <script>
-    jQuery(document).ready(function(){
-        jQuery('.input_cantidad_cesta').click(function(event){
-            var value = jQuery(this).attr('value');
-        if(value < 1){
-            value = 1;
+        var dialogEmptyCart = $('<div></div>')
+                .html('No hay productos en el carrito')
+                .dialog({
+                        autoOpen: false,
+                        title: 'Carrito vacio',
+                        resizable: false,
+                        height:240,
+                        modal: true,
+                        buttons: {
+                            "Volver": function() {
+                                    $( this ).dialog( "close" );
+                            }
+                    }
+                });
+                
+        var dialogDeleteItem = $('<div></div>')
+            .html('Seguro que quiere sacar el producto del carrito ?')
+            .dialog({
+                    autoOpen: false,
+                    title: 'Quitar producto',
+                    resizable: false,
+                    height:240,
+                    modal: true,
+                    buttons: {
+                        "Eliminar": function() {
+                                $( this ).dialog( "close" );
+                                var path = jQuery(".btn_eliminar_cesta a").attr('href');
+                                window.location.href = path;
+                        },
+                        "Cancelar": function() {
+                                $( this ).dialog( "close" );
+                        }
+                }
+            });
+
+    
+    jQuery(".confirmar_pedido").click(function(event){
+        
+        if(cartOptions['isEnabled'] == false){
+            event.preventDefault(); // now js will take full control of the product delection
+
+            delform = $( this ).parents("form");
+
+            dialogDisabledOrder.bind( "dialogbeforeclose", function(e, ui) {
+            //alert( $(e.target)[0].tittle );
+            });
+            dialogDisabledOrder.dialog("open");
         }
-        jQuery(this).attr('value', value);
-        })
-     })
-     </script>
+        
+        else if({{ entity.items | length }} < 1){
+            event.preventDefault(); // now js will take full control of the product delection
+
+            delform = $( this ).parents("form");
+
+            dialogEmptyCart.bind( "dialogbeforeclose", function(e, ui) {
+            //alert( $(e.target)[0].tittle );
+            });
+            dialogEmptyCart.dialog("open");
+        }
+
+    });
+    
+    jQuery(".btn_eliminar_cesta a").click(function(event){
+        
+        event.preventDefault();
+        dialogDeleteItem.dialog("open");
+        return false;
+
+    });
+        
+ })
+    </script>
+
+    <script>
+jQuery(document).ready(function(){
+   jQuery('.input_cantidad_cesta').click(function(event){
+       var value = jQuery(this).attr('value');
+   if(value < 1){
+       value = 1;
+   }
+   jQuery(this).attr('value', value);
+   })
+})
+    </script>
 {% endblock jsfunctions %}
 
 {% block right_content %}
-
+    
 {% include 'TecnokeyShopBundle:Frontend/User:menu.partialhtml.twig' with {'nothing' : 'null'} %}            
 
-<!--end menu user-->  <!--start cuerpo--> 
-<div class="right_cuerpo_user">
-    <div class="titulo_current">Contenido de la cesta:</div>
+{% include 'TecnokeyShopBundle:Default:flashErrors.partialhtml.twig' %}            
 
-    <div class="lista_pedidos_container">
-        <div class="legend_container">
-            <div class="producto_legend"><a href="#">Producto</a></div>
-            <div class="ref_legend"><a href="#">Referencia</a></div>
-            <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
-            <div class="cantidad_legend"><a href="#">Cantidad</a></div>
-            <div class="subtotat_legend"><a href="#">Subtotal</a></div>
-        </div>
-        <form name="edit_form" action="{{ path('TKShopFrontendUserShoppingCartUpdate') }}" method="post" {{ form_enctype(edit_form) }}>        
+        <!--end menu user-->  <!--start cuerpo--> 
+        <div class="right_cuerpo_user">
+            <div class="titulo_current">Contenido de la cesta:</div>
+
+            <div class="lista_pedidos_container">
+                <div class="legend_container">
+                    <div class="producto_legend"><a href="#">Producto</a></div>
+                    <div class="ref_legend"><a href="#">Referencia</a></div>
+                    <div class="precio_ud_legend"><a href="#">Precio/UD</a></div>
+                    <div class="cantidad_legend"><a href="#">Cantidad</a></div>
+                    <div class="subtotat_legend"><a href="#">Subtotal</a></div>
+                </div>
+                <form name="edit_form" action="{{ path('TKShopFrontendUserShoppingCartUpdate') }}" method="post" {{ form_enctype(edit_form) }}>        
                 {% set count = 0 %}
                 {% for item in edit_form.items %}
                     {% if (entity.items[count] is defined ) %}
                         {% set dataItem = entity.items[count] %}
-                            {% set imageSizeInfo =  dataItem.product.image.getImageSize("62", "60") %}
-                <div class="prods_detalles_container">
-                    <div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id' : dataItem.id}) }}"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}  " alt="logo" /></a></div>
-                    <div class="foto_prod_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
-                    <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name | truncate(30) }}</a></div>
-                    <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
-                    <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
+                            {% set imageSizeInfo =  dataItem.product.image.getImageSize("60", "60") %}
+                        <div class="prods_detalles_container">
+                            <div class="btn_eliminar_cesta"><a href="{{ path('TKShopFrontendUserShoppingCartDeleteItem', {'id' : dataItem.id}) }}"><img src="{{ asset('bundles/tecnokey/images/btn_eliminar_cesta.png') }}  " alt="logo" /></a></div>
+                            <div class="foto_prod_cesta"> <img src="{{ asset (dataItem.product.image.webPath) }}" style="width: {{ imageSizeInfo.width ~ "px"}}; height: {{ imageSizeInfo.height ~ "px"}}; margin-top: {{imageSizeInfo.vPadding ~ "px"}}; margin-left: {{ imageSizeInfo.hPadding ~ "px"}};"></img> </div>
+                            <div class="titulo_prd_cesta"><a href="{{ path('TKShopFrontendProductShow', {'productId' : dataItem.product.id}) }}">{{ dataItem.product.name | truncate(33) }}</a></div>
+                            <div class="ref_prod_cesta">{{ dataItem.product.sku }}</div>
+                            <div class="precio_ud">{{ dataItem.product.basePrice | toPrettyPrice ~ currencySymbol()}}</div>
                                 {#<div class="cantidad_cesta"><input name="buscar" type="buscar" class="input_cantidad_cesta" value="1" /></div>#}
                     {{ form_errors(item.quantity) }}
-                    <div class="cantidad_cesta">{{ form_widget(item.quantity, {'attr' : { 'class' : 'input_cantidad_cesta' } } ) }} </div>
-                    <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
-                </div>
+                            <div class="cantidad_cesta">{{ form_widget(item.quantity, {'attr' : { 'class' : 'input_cantidad_cesta' } } ) }} </div>
+                            <div class="precio_subtotal_cesta">{{ dataItem.totalBasePrice ~ currencySymbol() }}</div>
+                        </div>
                         {% set count = count + 1 %}
                     {% endif %}
                 {% endfor %}
 
                     {{ form_rest(edit_form) }}
 
-                <div class="precio_desglos_container">
-                    <div class="iva_desglos">Total - Sin iva</div>
-                    <div class="precio_total_desglos">{{ entity.totalBasePrice ~ currencySymbol() }}</div>
-                    <div class="iva_desglos">Total - Con iva</div>
-                    <div class="precio_total_desglos">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
-                </div>
+                        <div class="precio_desglos_container">
+                            <div class="iva_desglos">Total - Sin iva</div>
+                            <div class="precio_total_desglos">{{ entity.totalBasePrice ~ currencySymbol() }}</div>
+                            <div class="iva_desglos">Total - Con iva</div>
+                            <div class="precio_total_desglos">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
+                        </div>
 
-                <div class="btn_accion_container">
+                        <div class="btn_accion_container">
                     {#
                     <div class="btn_guardar_pedido"><a href="#">Guardar pedido</a></div>
                     <div class="confirmar_pedido"><a href="#">Confirmar Pedido</a></div>                
                      #}
-                        <input type="hidden" id="{{ order_field }}" name="{{ order_field }}" value="{{ update_value }}"/>
-                        <input class="actualizar_pedido" type="submit" name="Actualizar Pedido" value="Actualizar Pedido"/>
-                        <input class="confirmar_pedido" onclick="edit_form.{{ order_field }}.value='{{ comfirm_value }}'; return true;" type="submit" name="Confirmar Pedido" value="Confirmar Pedido"/>
-                    </div>                
-                </form>
-            </div>
+                                <input type="hidden" id="{{ order_field }}" name="{{ order_field }}" value="{{ update_value }}"/>
+                                <input class="btn_guardar_pedido" onclick="edit_form.{{ order_field }}.value='{{ update_value }}'; return true;" type="submit" name="Actualizar Pedido" value="Actualizar Pedido"/>
+                                <input class="confirmar_pedido" onclick="edit_form.{{ order_field }}.value='{{ comfirm_value }}'; return true;" type="submit" name="Previsualizar Pedido" value="Previsualizar Pedido"/>
+                            </div>                
+                        </form>
+                    </div>
 
-        </div>
-
-        <!--end cuerpo--> 
-{#</div><!--end right-->#}
-
+                </div><!--end cuerpo--> 
 {% endblock right_content %}
 
 

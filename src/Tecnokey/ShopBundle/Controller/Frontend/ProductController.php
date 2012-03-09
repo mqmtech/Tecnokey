@@ -52,6 +52,9 @@ class ProductController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         
         $orderBy = $this->get('view.sort');
+        $orderBy->add('name', 'name', 'Producto')
+                ->add('price', 'basePrice', 'Precio')
+                ->initialize();
         
         //Grab category from db
         $category = $em->getRepository('TecnokeyShopBundle:Shop\Category')->find($categoryId);

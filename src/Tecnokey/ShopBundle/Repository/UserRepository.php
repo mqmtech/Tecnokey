@@ -27,7 +27,8 @@ class UserRepository extends EntityRepository{
 
         //Grab categories from db
         $em = $this->getEntityManager();
-        $q = $em->createQuery("select user from TecnokeyShopBundle:Shop\\User user WHERE user.permissionType = '". self::USER_PERMISSION_TYPE ."' ORDER BY user.createdAt ".self::RECENT_ORDER_BY);
+        $sql = "select user from TecnokeyShopBundle:Shop\\User user WHERE user.permissionType = '". self::USER_PERMISSION_TYPE ."' ORDER BY user.createdAt ".self::RECENT_ORDER_BY;
+        $q = $em->createQuery($sql);
         $q->setMaxResults($max);
         $users = $q->getResult();
 
@@ -39,11 +40,14 @@ class UserRepository extends EntityRepository{
      * 
      * return array
      */
-    public function findDeliveredOrders(User $user){
+    public function findDeliveredOrders(User $user, $orderBy = null){
 
         //Grab categories from db
         $em = $this->getEntityManager();
-        $q = $em->createQuery("select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status LIKE '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'");
+        $sql = "select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status LIKE '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'";
+        $sql .= $this->orderBy("o", $orderBy);
+        $q = $em->createQuery($sql);
+        
         $orders = $q->getResult();
         //End grabbing cats from db
         
@@ -58,11 +62,13 @@ class UserRepository extends EntityRepository{
      * 
      * return array
      */
-    public function findInProcessOrders(User $user){
+    public function findInProcessOrders(User $user, $orderBy = null){
 
         //Grab categories from db
         $em = $this->getEntityManager();
-        $q = $em->createQuery("select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status <> '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'");
+        $sql = "select o from TecnokeyShopBundle:Shop\\Order o JOIN o.user u WHERE o.status <> '" . Order::STATUS_2_DELIVERED . "' AND u.id ='". $user->getId() . "'";
+        $sql .= $this->orderBy("o", $orderBy); 
+        $q = $em->createQuery($sql);
         $orders = $q->getResult();
         //End grabbing cats from db
         
@@ -71,6 +77,22 @@ class UserRepository extends EntityRepository{
         }
         
         return $orders;
+    }
+    
+    /**
+     *
+     * @param string $entity
+     * @param array $orderBy 
+     */
+    public function orderBy($entity, $orderBy){
+        $sql = "";
+        if($orderBy!=NULL){
+            $sql .=" ORDER BY";
+            foreach ($orderBy as $key => $value) {
+                $sql .=" ".$entity.".".$key." ".$value;
+            }            
+        }
+        return $sql;
     }
 }
 
