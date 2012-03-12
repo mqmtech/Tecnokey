@@ -16,3 +16,6 @@ build.xml
 
 #cache
 /app/cache/*
+
+#parameters
+/app/config/parameters.ini

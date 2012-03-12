@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Frontend\Default controller.
  *
- * @Route("/tienda/registro")
+ * @Route("/tienda/registro_not_allowed")
  */
 class RegisterController extends Controller {
 
@@ -82,8 +82,7 @@ class RegisterController extends Controller {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($entity);
                 $em->flush();
-                //return $this->redirect($this->generateUrl('TKShopFrontendUserShow', array('id' => $entity->getId())));
-                $this->sendSuccessRegistrationEmailSwift($entity);
+                //$this->sendSuccessRegistrationEmailSwift($entity);
                 return $this->render("TecnokeyShopBundle:Frontend\User\Register:successMessageOnCreate." . "html" . ".twig", array('user' => $entity));
                 
             } catch (Exception $e) {

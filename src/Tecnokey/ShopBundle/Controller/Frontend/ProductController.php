@@ -151,7 +151,8 @@ class ProductController extends Controller {
         $productPriceInfo = $this->get('productManager')->getProductPriceInfo($product);    
         
         //Set Statistics
-        $productStatistic = $this->registerProductStatistic($product);
+        //// Product Statistic Commented -> it has to be refacored as an request listener
+        //$productStatistic = $this->registerProductStatistic($product);
         $em->persist($productStatistic);
         $em->flush();
         //End Setting Statistics

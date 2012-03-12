@@ -51,7 +51,7 @@
 	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
 	color: #555;
 	background: #fff url(../images/fondo_arbol.png) repeat-x left top;
-	height: 20px;
+	height: 24px;
 	margin-bottom: 5px;
 	padding: 5px;
 	margin-top: 5px;
@@ -341,7 +341,7 @@
 }
 
 .btn_guardar_pedido{
-	height: 32px;
+	height: auto;
 	width: auto;
 	color: #fff;
 	padding: 10px;
@@ -349,7 +349,7 @@
 	line-height: 10px;
 	background-image: url(../images/fondo_franja_azul.png);
 	float: left;
-        font-weight: bold;
+	font-weight: bold;
 }
 
 .confirmar_pedido{
@@ -361,10 +361,10 @@
 	line-height: 10px;
 	background-image: url(../images/fondo_franja_verde.png);
 	float: right;
-        font-weight: bold;
+	font-weight: bold;
 }
 
-.btn_guardar_pedido :hover, .confirmar_pedido :hover{
+.btn_guardar_pedido:hover, .confirmar_pedido:hover{
 	text-decoration: underline;
 	border-color: #4e4e4e;
 }
@@ -405,20 +405,16 @@
 
 .estado_recibido{
 	color: #258cdb;
-	text-align: left;
-        
+	text-align: center;
 }
 .estado_en_proceso{
-        
 	color: #f87a15;
-	text-align: left;
-        
+	text-align: center;
 }
 
-.estado_enviado{        
+.estado_enviado{
 	color: #147842;
-	text-align: left;
-        
+	text-align: center;
 }
 
 .estado_editar a{
@@ -722,6 +718,14 @@
 
 .agregado_cesta{
         margin-left: 34px;
+}
+
+.titulo_prd_cesta_2lines{
+	float: left;
+	width: 295px;
+	height: auto;
+	line-height: 15px;
+	padding-top: 15px;
 }
 
 /* end modded by mario */

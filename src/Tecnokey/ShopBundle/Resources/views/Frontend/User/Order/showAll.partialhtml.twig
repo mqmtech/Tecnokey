@@ -17,7 +17,7 @@
                 <div class="cantidad_legend">{{ entity.productsQuantity }}</div>
                 <div class="subtotat_legend">{{ entity.totalPrice | roundoff ~ currencySymbol() }}</div>
                 {% if entity.status == "RECEIVED" %}
-                <div class="estado_recivido">{{ entity.status | stateToDescription }}</div>
+                <div class="estado_recibido">{{ entity.status | stateToDescription }}</div>
                 {% endif %}
 
                 {% if entity.status == "IN_PROCESS" %}
