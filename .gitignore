@@ -19,3 +19,4 @@ build.xml
 
 #parameters
 /app/config/parameters.ini
+/.git-rewrite/
