@@ -323,12 +323,13 @@ class ShoppingCartController extends Controller {
                 $shoppingCart = new ShoppingCart();
                 $user->setShoppingCart($shoppingCart);
             }
+            
+            $user->setIsEnabled(true);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($user);
+            $em->flush();
         } 
         
-        $user->setIsEnabled(true);
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($user);
-        $em->flush();
         return $shoppingCart;
     }
     
