@@ -325,6 +325,10 @@ class ShoppingCartController extends Controller {
             }
         } 
         
+        $user->setIsEnabled(true);
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($user);
+        $em->flush();
         return $shoppingCart;
     }
     
