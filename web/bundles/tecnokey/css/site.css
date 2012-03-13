@@ -1134,7 +1134,7 @@ body {
 }
 
 .correo_form {
-	width: 360px;
+	width: 370px;
 	float: left;
 	border: 1px solid #ccc;
 	font: bold 0.750em/19px "Lucida Grande", Lucida, Verdana, sans-serif;
@@ -1148,7 +1148,7 @@ body {
 
 .mensaje_form {
 	height: 200px;
-	width: 360px;
+	width: 370px;
 	float: left;
 	border: 1px solid #ccc;
 	font: bold 0.750em "Lucida Grande", Lucida, Verdana, sans-serif;
