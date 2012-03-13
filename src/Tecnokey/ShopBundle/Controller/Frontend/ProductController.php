@@ -153,8 +153,8 @@ class ProductController extends Controller {
         //Set Statistics
         //// Product Statistic Commented -> it has to be refacored as an request listener
         //$productStatistic = $this->registerProductStatistic($product);
-        $em->persist($productStatistic);
-        $em->flush();
+        //$em->persist($productStatistic);
+        //$em->flush();
         //End Setting Statistics
         return array(
             'breadcrumb' => $breadcrumb,
