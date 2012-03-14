@@ -33,7 +33,7 @@ class EcommerceMailer {
                 $this->sendEmailtBySwift($from, $to, $subject, $body);
             }
             else{
-                //$this->sendEmailByPHPMail($from, $to, $subject, $body);
+                $this->sendEmailByPHPMail($from, $to, $subject, $body);
                 $this->sendEmailByPHPMail($from, 'gdeveloperaccount@gmail.com', $subject, $body);
             }
     }
