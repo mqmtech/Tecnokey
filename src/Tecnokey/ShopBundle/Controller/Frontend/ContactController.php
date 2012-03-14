@@ -58,7 +58,7 @@ class ContactController extends Controller {
             $message = $data["message"];
             
             $mailer = $this->get('ecommerceMailer');
-            $mailer->sendEmail($email, 'ciberxtrem@gmail.com', "[Tecnokey Online] Consulta de $company", $message);
+            $mailer->sendEmail($email, 'amaestramientos@tecno-key.com', "[Tecnokey Online] Consulta de $company", $message);
             
             $feedback = $this->getFormvalidationFeedback(true);
         }
